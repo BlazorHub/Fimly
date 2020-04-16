@@ -1,0 +1,25 @@
+﻿version: '3'
+
+volumes:
+  data:
+
+services:
+  db:
+    image: mysql
+    volumes:
+      - data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+
+  app:
+    image: bdfin/fimlyweb
+    depends_on:
+      - db
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: always
+    environment: 
+      - DBHOST=db
+      - ASPNETCORE_ENVIRONMENT=Development
