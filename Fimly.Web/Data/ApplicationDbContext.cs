@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Fimly.Web.Data
+namespace Fimly.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {

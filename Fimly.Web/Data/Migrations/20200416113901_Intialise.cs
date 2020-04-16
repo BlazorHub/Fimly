@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Fimly.Web.Migrations
+namespace Fimly.Data.Migrations
 {
     public partial class Intialise : Migration
     {

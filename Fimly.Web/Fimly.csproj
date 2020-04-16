@@ -4,6 +4,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>aspnet-Fimly.Web-781B23CA-B33F-4B33-947F-7400F917FD41</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <AssemblyName>Fimly</AssemblyName>
+    <RootNamespace>Fimly</RootNamespace>
+    <Authors>Beau Findlay</Authors>
   </PropertyGroup>
 
   <ItemGroup>
