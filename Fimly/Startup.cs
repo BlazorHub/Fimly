@@ -8,27 +8,39 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Runtime.InteropServices;
 
 namespace Fimly
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            CurrentEnvironment = env;
         }
 
         public IConfiguration Configuration { get; }
+        private IHostEnvironment CurrentEnvironment { get; set; }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var host = Configuration["DBHOST"] ?? "localhost";
-            var port = Configuration["DBPORT"] ?? "3306";
-            var dbPassword = Configuration["DBPASSWORD"] ?? "secret";
+            // use default mysql settings if none are specified in docker environment variables
+            string host = Configuration["DB_HOST"] ?? "localhost";
+            string port = Configuration["DB_PORT"] ?? "3306";
+            string dbUser = Configuration["DB_USER"] ?? "fimly_user";
+            string dbPassword = Configuration["DB_PASSWORD"] ?? "fimly_secret";
+            string dbName = Configuration["DB_DATABASE"] ?? "fimly_db";
+
+            // use mysql dev server if in development
+            if (CurrentEnvironment.IsDevelopment())
+            {
+                host = "192.168.1.34";
+            }
 
             services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseMySql($"server={host}; userid=root; pwd={dbPassword}; port={port}; database=fimly_db",
+                options.UseMySql($"server={host}; userid={dbUser}; pwd={dbPassword}; port={port}; database={dbName}",
                     providerOptions => providerOptions.EnableRetryOnFailure()
                 );
             });
@@ -41,9 +53,10 @@ namespace Fimly
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationDbContext dbContext)
+        public void Configure(IApplicationBuilder app,
+            ApplicationDbContext dbContext)
         {
-            if (env.IsDevelopment())
+            if (CurrentEnvironment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();

@@ -10,10 +10,13 @@ services:
       - data:/var/lib/mysql
     restart: always
     environment:
+      MYSQL_USER: fimly_user
+      MYSQL_PASSWORD: fimly_secret
+      MYSQL_DATABASE: fimly_db
       MYSQL_ROOT_PASSWORD: secret
 
   app:
-    image: bdfin/fimlyweb
+    image: bdfin/fimly
     depends_on:
       - db
     ports:
@@ -21,5 +24,5 @@ services:
       - "443:443"
     restart: always
     environment: 
-      - DBHOST=db
+      - DB_HOST=db
       - ASPNETCORE_ENVIRONMENT=Development
