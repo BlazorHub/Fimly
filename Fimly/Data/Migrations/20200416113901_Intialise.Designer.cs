@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Fimly.Web.Migrations
+namespace Fimly.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20200416113901_Intialise")]
