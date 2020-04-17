@@ -1,7 +1,11 @@
 ﻿@page
+
+@using Fimly.Data
 @using Microsoft.AspNetCore.Identity
+
 @attribute [IgnoreAntiforgeryToken]
-@inject SignInManager<IdentityUser> SignInManager
+@inject SignInManager<AppUser> SignInManager
+
 @functions {
     public async Task<IActionResult> OnPost()
     {

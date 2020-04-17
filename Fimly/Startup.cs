@@ -1,6 +1,7 @@
 using Blazored.Toast;
 using Fimly.Areas.Identity;
 using Fimly.Data;
+using Fimly.Data.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -45,7 +46,7 @@ namespace Fimly
                 );
             });
 
-            services.AddDefaultIdentity<IdentityUser>()
+            services.AddDefaultIdentity<AppUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddRazorPages();
