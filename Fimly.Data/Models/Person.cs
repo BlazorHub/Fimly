@@ -17,6 +17,7 @@ namespace Fimly.Data.Models
         public string Name { get; set; }
 
         [DataType(DataType.Currency)]
+        [Column(TypeName = "decimal(18, 2)")]
         [Display(Name = "Monthly Income")]
         public decimal Income { get; set; }
 

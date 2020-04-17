@@ -23,6 +23,7 @@ namespace Fimly.Data.Models
         public string Name { get; set; }
 
         [DataType(DataType.Currency)]
+        [Column(TypeName = "decimal(18, 2)")]
         [Required]
         public decimal Cost { get; set; }
 
