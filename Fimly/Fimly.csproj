@@ -10,6 +10,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\Migrations\20200417161031_AddAppModelsAndSeedData.cs" />
+    <Compile Remove="Data\Migrations\20200417161031_AddAppModelsAndSeedData.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200417161303_AddAppModelsAndSeedData.cs" />
+    <Compile Remove="Data\Migrations\20200417161303_AddAppModelsAndSeedData.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200417161857_AddAppModelsAndSeedData.cs" />
+    <Compile Remove="Data\Migrations\20200417161857_AddAppModelsAndSeedData.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="compilerconfig.json" />
   </ItemGroup>
 
@@ -26,6 +35,10 @@
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.8" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Fimly.Data\Fimly.Data.csproj" />
   </ItemGroup>
 
 </Project>

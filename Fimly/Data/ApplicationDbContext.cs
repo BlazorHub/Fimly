@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Fimly.Data.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,5 +10,11 @@ namespace Fimly.Data
             : base(options)
         {
         }
+
+        public virtual DbSet<Config> Configs { get; set; }
+        public virtual DbSet<Currency> Currencies { get; set; }
+        public virtual DbSet<Expense> Expenses { get; set; }
+        public virtual DbSet<ExpenseType> ExpenseTypes { get; set; }
+        public virtual DbSet<Person> People { get; set; }
     }
 }
