@@ -1,3 +1,4 @@
+using Blazored.Toast;
 using Fimly.Areas.Identity;
 using Fimly.Data;
 using Microsoft.AspNetCore.Builder;
@@ -50,6 +51,7 @@ namespace Fimly
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
+            services.AddBlazoredToast();
         }
 
         public void Configure(IApplicationBuilder app,
