@@ -1,8 +1,5 @@
 ﻿@page "/"
 
-@inject AuthenticationStateProvider AuthenticationStateProvider
-@inject UserManager<AppUser> UserManager
-
 <div class="jumbotron jumbotron-fluid text-center shadow-sm fade fadein">
     <AuthorizeView>
         <Authorized>
@@ -27,15 +24,3 @@
         </NotAuthorized>
     </AuthorizeView>
 </div>
-
-@code {
-    private AppUser CurrentUser;
-
-    protected override async Task OnInitializedAsync()
-    {
-        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        var user = authState.User;
-
-        CurrentUser = await UserManager.GetUserAsync(user);
-    }
-}
