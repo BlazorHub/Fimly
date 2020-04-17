@@ -1,0 +1,54 @@
+﻿@import "_variables.scss";
+
+.btn {
+    border-radius: 2.3rem;
+}
+
+.btn-success {
+    background-color: $primary-colour !important;
+    border-color: $primary-colour !important;
+    color: black;
+}
+
+.btn-success:hover {
+    background-color: $dark-colour !important;
+    border-color: $dark-colour !important;
+}
+
+.btn-outline-success {
+    border-color: $primary-colour !important;
+}
+
+.btn-outline-success:hover {
+    background-color: $primary-colour !important;
+    border-color: $primary-colour !important;
+}
+
+.card {
+    border-radius: 2.25rem !important;
+}
+
+.card-header {
+    border-top-left-radius: 2.25rem !important;
+    border-top-right-radius: 2.25rem !important;
+}
+
+.card-body {
+    border-radius: 2.25rem !important;
+}
+
+.modal-header {
+    background-color: $primary-colour !important;
+    border-top-left-radius: 25px !important;
+    border-top-right-radius: 25px !important;
+    padding-left: 2rem !important;
+}
+
+.modal-content {
+    border-radius: 25px !important;
+}
+
+.modal-body {
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+}
