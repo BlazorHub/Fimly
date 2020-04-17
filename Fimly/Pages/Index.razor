@@ -1,5 +1,41 @@
 ﻿@page "/"
 
-<h1>Hello, world!</h1>
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject UserManager<AppUser> UserManager
 
-Welcome to your new app.
+<div class="jumbotron jumbotron-fluid text-center shadow-sm fade fadein">
+    <AuthorizeView>
+        <Authorized>
+            @if (CurrentUser is null)
+            {
+                <LoadingSpinner />
+            }
+            else
+            {
+                <h1 class="dark-font font-weight-light">Welcome back, @CurrentUser.FirstName!</h1>
+
+                // Todo:
+                // Add totals overview of expenditure, income, etc.
+            }
+        </Authorized>
+        <NotAuthorized>
+            <h1 class="dark-font font-weight-light">Welcome to Fimly.io</h1>
+
+            <p class="mt-4 mb-5 lead dark-font">A free budgeting and finance manager for the whole household.</p>
+
+            <p class="mb-4 dark-font">Please <a href="/login">login</a> or <a href="/register">register</a> for a free account to begin using the app.</p>
+        </NotAuthorized>
+    </AuthorizeView>
+</div>
+
+@code {
+    private AppUser CurrentUser;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        CurrentUser = await UserManager.GetUserAsync(user);
+    }
+}
