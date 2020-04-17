@@ -2,7 +2,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Fimly.Data
+namespace Fimly.Data.Models
 {
     public class AppUser : IdentityUser
     {
