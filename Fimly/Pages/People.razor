@@ -1,0 +1,56 @@
+﻿@page "/people"
+
+@if (PersonList is null)
+{
+    <LoadingSpinner />
+}
+else
+{
+    <div class="container-fluid fade fadein">
+        <div class="text-center">
+            <h1 class="dark-font mb-4">People</h1>
+        </div>
+
+        <hr class="mb-4" />
+
+        <CascadingValue Value="CurrentUser">
+            <CascadingValue Value="UserConfig">
+                <CascadingValue Value="PersonList">
+
+                    @if (PersonList.Count == 0)
+                    {
+                        <div class="text-center">
+                            <p class="lead dark-font mb-4">Get started by adding a person. Add more people to see total household income.</p>
+                        </div>
+
+                        <div class="text-center">
+                            <a href="/people/new" class="btn btn-success primary-font shadow-sm">
+                                New Person
+                                <span class="ml-1 oi oi-plus" aria-hidden="true"></span>
+                            </a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-center">
+                            <a href="/people/new" class="btn btn-success primary-font shadow-sm">
+                                New Person
+                                <span class="ml-1 oi oi-plus" aria-hidden="true"></span>
+                            </a>
+                        </div>
+
+                        <div class="row">
+
+                            @foreach (Person person in PersonList)
+                            {
+                                <PersonCard Person="person" StateChanged="StateChanged" />
+                            }
+
+                        </div>
+                    }
+
+                </CascadingValue>
+            </CascadingValue>
+        </CascadingValue>
+    </div>
+}

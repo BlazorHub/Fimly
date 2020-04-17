@@ -1,5 +1,6 @@
 ﻿@inherits LayoutComponentBase
 
+<BlazoredModal />
 <BlazoredToasts Position="ToastPosition.BottomRight" />
 
 <div class="sidebar">
@@ -12,12 +13,14 @@
     </div>
 
     <div class="content px-4">
-        @Body
+        <div class="jumbotron jumbotron-fluid shadow-sm fade fadein">
+            @Body
+        </div>
     </div>
 
     <footer class="footer">
         <div class="container-fluid pl-4">
-            <span class="dark-font"><a href="https://github.com/bdfin/Fimly" target="_blank">Fimly</a> © Beau Findlay</span>
+            <span class="dark-font"><a href="https://github.com/bdfin/Fimly" target="_blank">Fimly.io</a> © Beau Findlay @DateTime.UtcNow.Year</span>
         </div>
     </footer>
 </div>

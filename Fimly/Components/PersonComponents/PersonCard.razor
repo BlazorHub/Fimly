@@ -1,0 +1,84 @@
+﻿<div class="@CardColSizeCssClass mx-auto mt-4" style="max-width:40rem">
+    <div class="card shadow zoom">
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <button type="submit" class="close float-right" @onclick="(() => DeletePerson(Person))">
+                        <span aria-hidden="true" style="color:red">&times;</span>
+                    </button>
+                    <button type="submit" class="@EditButtonCssClass close float-left" @onclick="(() => OnEditClick())">
+                        <span class="oi oi-pencil" aria-hidden="true"></span>
+                        @if (IsEditing)
+                        {
+                            <small>Cancel</small>
+                        }
+                        else
+                        {
+                            <small>Edit</small>
+                        }
+                    </button>
+                </div>
+            </div>
+
+            <div class="mb-4 text-center dark-font">
+                @if (IsEditing)
+                {
+                    <EditForm Model="PersonToUpdate" OnValidSubmit="UpdatePersonAsync">
+                        <DataAnnotationsValidator />
+                        <ValidationSummary />
+
+                        <div class="form-group mt-3 mb-4">
+                            <label for="personName">Name</label>
+                            <InputText id="personName" class="form-control" @bind-Value="@Person.Name" style="text-align:center" />
+                        </div>
+
+                        <div class="card-text form-group">
+                            <label for="personIncome">Monthly Income</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">@UserConfig.Currency.Symbol</span>
+                                </div>
+                                <InputNumber id="personIncome" class="form-control" @bind-Value="@Person.Income" style="text-align:center" />
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col">
+                                <button type="submit" class="close float-right text-success">
+                                    <span class="oi oi-check" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </EditForm>
+                }
+                else
+                {
+                    <h3 class="card-title">
+                        @Person.Name
+                    </h3>
+                    <p class="card-text mt-4">
+                        <strong>Monthly Income:</strong>
+                        <br />
+                        @FinanceService.FormatToCurrency(UserConfig, Person.Income)
+                    </p>
+                    <p class="card-text">
+                        <strong>Monthly Expenses:</strong>
+                        <br />
+
+                        @if (Person.Expenses.Count == 0)
+                        {
+                            <span>No <a href="expenses">expenses</a> have been added for this person.</span>
+                        }
+                        else
+                        {
+                            <span>
+                                @FinanceService.FormatToCurrency(UserConfig, Person.Expenses.Sum(e => e.Cost))
+                            </span>
+                        }
+
+                    </p>
+                }
+            </div>
+        </div>
+    </div>
+</div>

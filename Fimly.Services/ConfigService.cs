@@ -1,5 +1,7 @@
 ﻿using Fimly.Data;
 using Fimly.Data.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Fimly.Services
@@ -13,7 +15,15 @@ namespace Fimly.Services
             _db = db;
         }
 
-        public async Task CreateUserConfig(string userId)
+        public async Task<Config> GetUserConfigAsync(string userId)
+        {
+            return await _db.Configs
+                .Include(c => c.Currency)
+                .Where(u => u.UserId == userId)
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task CreateUserConfigAsync(string userId)
         {
             Config userConfig = new Config
             {

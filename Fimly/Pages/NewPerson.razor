@@ -1,0 +1,45 @@
+﻿@page "/people/new"
+
+@if (UserConfig != null)
+{
+    <div class="container-fluid fade fadein">
+        <div class="text-center">
+            <h1 class="dark-font mb-4">New Person</h1>
+        </div>
+
+        <hr class="mb-4" />
+
+        <div class="mx-auto mt-4" style="max-width:40rem">
+            <div class="card shadow zoom">
+                <div class="card-body">
+                    <div class="row mt-4">
+                        <div class="col">
+                            <EditForm Model="Person" OnValidSubmit="HandleValidSubmitAsync">
+                                <DataAnnotationsValidator />
+                                <ValidationSummary />
+
+                                <div class="form-group text-center">
+                                    <label for="personName" class="dark-font">Name</label>
+                                    <InputText id="personName" class="form-control" @bind-Value="@Person.Name" />
+                                </div>
+                                <div class="form-group text-center">
+                                    <label for="personIncome" class="dark-font">Income (After Tax)</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">@UserConfig.Currency.Symbol</span>
+                                        </div>
+                                        <InputNumber id="personIncome" class="form-control" @bind-Value="@Person.Income" />
+                                    </div>
+                                </div>
+
+                                <div class="text-center mt-5">
+                                    <button type="submit" class="btn btn-success primary-font shadow-sm">Save</button>
+                                </div>
+                            </EditForm>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
