@@ -3,9 +3,9 @@
 @if (UserConfig != null)
 {
     <div class="container-fluid fade fadein">
-        <div class="text-center">
-            <h1 class="dark-font mb-4">New Person</h1>
-        </div>
+
+        <h2 class="dark-font">New Person</h2>
+        <p class="dark-font">Add a new person to the household.</p>
 
         <hr class="mb-4" />
 
@@ -23,7 +23,7 @@
                                     <InputText id="personName" class="form-control" @bind-Value="@Person.Name" />
                                 </div>
                                 <div class="form-group text-center">
-                                    <label for="personIncome" class="dark-font">Income (After Tax)</label>
+                                    <label for="personIncome" class="dark-font">Monthly Income (After Tax)</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">@UserConfig.Currency.Symbol</span>
