@@ -80,15 +80,14 @@ namespace Fimly.Areas.Identity.Pages.Account
                     await _userManager.UpdateAsync(user);
 
                     _logger.LogInformation("User logged in.");
+
                     return LocalRedirect(returnUrl);
                 }
-                if (result.RequiresTwoFactor)
-                {
-                    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
-                }
+
                 if (result.IsLockedOut)
                 {
                     _logger.LogWarning("User account locked out.");
+
                     return RedirectToPage("./Lockout");
                 }
                 else

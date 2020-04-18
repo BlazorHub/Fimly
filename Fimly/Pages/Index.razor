@@ -12,7 +12,7 @@
                 @if (CurrentUser.HasLoggedInBefore())
                 {
                     <h1 class="dark-font font-weight-light">Welcome back, @CurrentUser.FirstName!</h1>
-                    <p class="dark-font">Your last login was: @CurrentUser.LastLogin.Value.ToShortDateString()</p>
+                    <p class="dark-font">Your last login was: @CurrentUser.LastLogin.Value.ToLocalTime().ToShortDateString()</p>
                 }
                 else
                 {
