@@ -6,8 +6,10 @@
                     <button type="submit" class="close float-right" @onclick="(async () => await DeletePersonAsync(Person))">
                         <span aria-hidden="true" style="color:red">&times;</span>
                     </button>
+
                     <button type="submit" class="@EditButtonCssClass close float-left" @onclick="(() => OnEditClick())">
                         <span class="oi oi-pencil" aria-hidden="true"></span>
+
                         @if (IsEditing)
                         {
                             <small>Cancel</small>
@@ -16,6 +18,7 @@
                         {
                             <small>Edit</small>
                         }
+
                     </button>
                 </div>
             </div>

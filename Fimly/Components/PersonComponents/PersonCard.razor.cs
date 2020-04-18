@@ -1,5 +1,4 @@
-﻿using Blazored.Modal.Services;
-using Blazored.Toast.Services;
+﻿using Blazored.Toast.Services;
 using Fimly.Data.Models;
 using Fimly.Services;
 using Microsoft.AspNetCore.Components;

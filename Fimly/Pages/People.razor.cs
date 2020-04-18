@@ -1,7 +1,4 @@
-﻿using Blazored.Modal;
-using Blazored.Modal.Services;
-using Fimly.Components.PersonComponents;
-using Fimly.Data.Models;
+﻿using Fimly.Data.Models;
 using Fimly.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;

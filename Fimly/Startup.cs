@@ -1,4 +1,3 @@
-using Blazored.Modal;
 using Blazored.Toast;
 using Fimly.Areas.Identity;
 using Fimly.Data;
@@ -53,13 +52,13 @@ namespace Fimly
 
             services.AddRazorPages();
             services.AddServerSideBlazor();
+
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
 
             services.AddTransient<ConfigService>();
             services.AddTransient<ExpenseService>();
             services.AddTransient<PersonService>();
 
-            services.AddBlazoredModal();
             services.AddBlazoredToast();
         }
 
