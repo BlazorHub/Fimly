@@ -1,13 +1,13 @@
 ﻿version: '3'
 
 volumes:
-  data:
+  fimly_data:
 
 services:
-  db:
+  fimly_mysql:
     image: mysql
     volumes:
-      - data:/var/lib/mysql
+      - fimly_data:/var/lib/mysql
     restart: always
     environment:
       MYSQL_USER: fimly_user
@@ -15,14 +15,13 @@ services:
       MYSQL_DATABASE: fimly_db
       MYSQL_ROOT_PASSWORD: secret
 
-  app:
+  fimly_app:
     image: bdfin/fimly
     depends_on:
-      - db
+      - fimly_mysql
     ports:
       - "80:80"
       - "443:443"
     restart: always
     environment: 
-      - DB_HOST=db
-      - ASPNETCORE_ENVIRONMENT=Production
+      - DB_HOST=fimly_mysql
