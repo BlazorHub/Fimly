@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Fimly.Pages
+namespace Fimly.Pages.People
 {
     [Authorize]
     public partial class People : ComponentBase

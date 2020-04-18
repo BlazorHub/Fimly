@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 
-namespace Fimly.Pages
+namespace Fimly.Pages.People
 {
     [Authorize]
     public partial class NewPerson : ComponentBase
