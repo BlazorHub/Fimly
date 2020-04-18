@@ -1,6 +1,7 @@
 ﻿using Fimly.Data;
 using Fimly.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,10 +10,13 @@ namespace Fimly.Services
     public class ConfigService
     {
         private readonly ApplicationDbContext _db;
+        private readonly ILogger<ConfigService> _logger;
 
-        public ConfigService(ApplicationDbContext db)
+        public ConfigService(ApplicationDbContext db,
+            ILogger<ConfigService> logger)
         {
             _db = db;
+            _logger = logger;
         }
 
         public async Task<Config> GetUserConfigAsync(string userId)
@@ -23,7 +27,7 @@ namespace Fimly.Services
                 .FirstOrDefaultAsync();
         }
 
-        public async Task CreateUserConfigAsync(string userId)
+        public async Task CreateDefaultConfigAsync(string userId)
         {
             Config userConfig = new Config
             {
@@ -33,6 +37,8 @@ namespace Fimly.Services
 
             _db.Configs.Add(userConfig);
             await _db.SaveChangesAsync();
+
+            _logger.LogInformation("Created default config for a user account.");
         }
     }
 }

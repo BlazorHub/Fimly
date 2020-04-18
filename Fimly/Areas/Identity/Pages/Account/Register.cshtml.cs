@@ -95,7 +95,7 @@ namespace Fimly.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    await _configService.CreateUserConfigAsync(user.Id);
+                    await _configService.CreateDefaultConfigAsync(user.Id);
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {

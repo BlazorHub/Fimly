@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Timers;
 
 namespace Fimly.Components
 {
@@ -21,6 +17,7 @@ namespace Fimly.Components
                     StateHasChanged();
                 });
             }, null, 0, 1000);
+
             base.OnInitialized();
         }
     }
