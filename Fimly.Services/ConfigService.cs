@@ -40,5 +40,21 @@ namespace Fimly.Services
 
             _logger.LogInformation("Created default config for a user account.");
         }
+
+        public async Task UpdateConfigAsync(Config config)
+        {
+            _db.Entry(config).State = EntityState.Modified;
+
+            try
+            {
+                await _db.SaveChangesAsync();
+
+                _logger.LogInformation("Config settings updated.");
+            }
+            catch (DbUpdateConcurrencyException e)
+            {
+                _logger.LogError($"An error has occurred whilst trying to update app config: {e}");
+            }
+        }
     }
 }
