@@ -11,7 +11,7 @@ namespace Fimly.Components
         {
             var timer = new System.Threading.Timer((_) =>
             {
-                Time = DateTime.UtcNow.ToLocalTime().ToString();
+                Time = DateTime.UtcNow.ToLocalTime().ToString("g");
                 InvokeAsync(() =>
                 {
                     StateHasChanged();
