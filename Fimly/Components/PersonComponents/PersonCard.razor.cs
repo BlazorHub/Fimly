@@ -56,9 +56,12 @@ namespace Fimly.Components.PersonComponents
             StateChanged?.Invoke();
         }
 
-        private async void DeletePerson(Person person)
+        private async Task DeletePersonAsync(Person person)
         {
-            if (await Js.InvokeAsync<bool>("confirm", "Are you sure you want to delete this person? This will also remove all of their expenses and also any shared expenses on this account. This action cannot be undone."))
+            if (await Js.InvokeAsync<bool>("confirm",
+                "Are you sure you want to delete this person? " +
+                "This will also remove all of their expenses and also any shared expenses on this account. " +
+                "This action cannot be undone."))
             {
                 await PersonService.DeletePersonAsync(person.Id);
 
