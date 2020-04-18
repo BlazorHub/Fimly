@@ -17,9 +17,9 @@ namespace Fimly.Pages.People
         [Inject] ConfigService ConfigService { get; set; }
         [Inject] PersonService PersonService { get; set; }
 
-        protected AppUser CurrentUser;
-        protected Config UserConfig;
-        protected List<Person> PersonList;
+        private AppUser CurrentUser;
+        private Config UserConfig;
+        private List<Person> PersonList;
 
         protected override async Task OnInitializedAsync()
         {

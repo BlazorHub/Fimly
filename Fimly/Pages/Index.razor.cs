@@ -1,4 +1,5 @@
 ﻿using Fimly.Data.Models;
+using Fimly.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -10,8 +11,10 @@ namespace Fimly.Pages
     {
         [Inject] AuthenticationStateProvider AuthenticationStateProvider { get; set; }
         [Inject] UserManager<AppUser> UserManager { get; set; }
+        [Inject] PersonService PersonService { get; set; }
 
-        protected AppUser CurrentUser;
+        private AppUser CurrentUser;
+        private int peopleCount;
 
         protected override async Task OnInitializedAsync()
         {
@@ -19,6 +22,8 @@ namespace Fimly.Pages
             var user = authState.User;
 
             CurrentUser = await UserManager.GetUserAsync(user);
+
+            peopleCount = PersonService.GetPeopleCount(CurrentUser.Id);
         }
     }
 }

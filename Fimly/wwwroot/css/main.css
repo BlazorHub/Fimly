@@ -183,7 +183,7 @@ app {
   min-height: 83.5vh; }
 
 .content-wrap {
-  padding-bottom: 3.5rem; }
+  padding-bottom: 10rem; }
 
 .navbar-toggler {
   background-color: rgba(255, 255, 255, 0.1); }
@@ -288,3 +288,6 @@ hr {
   height: 1px;
   background: #333;
   background-image: linear-gradient(to right, #ccc, #393939, #ccc); }
+
+.household-icon {
+  font-size: 7rem; }

@@ -1,6 +1,6 @@
 ﻿@page "/"
 
-<div class="text-center fade fadein mt-5">
+<div class="fade fadein mt-5">
     <AuthorizeView>
         <Authorized>
             @if (CurrentUser is null)
@@ -9,15 +9,25 @@
             }
             else
             {
-                @if (CurrentUser.HasLoggedInBefore())
-                {
-                    <h1 class="dark-font font-weight-light">Welcome back, @CurrentUser.FirstName!</h1>
-                    <p class="dark-font">Your last login was: @CurrentUser.LastLogin.Value.ToLocalTime().ToShortDateString()</p>
-                }
-                else
-                {
-                    <h1 class="dark-font font-weight-light">Welcome to Fimly, @CurrentUser.FirstName!</h1>
-                }
+                <div class="text-center mb-5">
+                    @if (CurrentUser.HasLoggedInBefore())
+                    {
+                        <h1 class="dark-font font-weight-light">Welcome back, @CurrentUser.FirstName!</h1>
+                        <p class="dark-font">Your last login was: @CurrentUser.LastLogin.Value.ToLocalTime().ToShortDateString()</p>
+                    }
+                    else
+                    {
+                        <h1 class="dark-font font-weight-light">Welcome to Fimly, @CurrentUser.FirstName!</h1>
+                    }
+
+                    @if (peopleCount == 0)
+                    {
+                        <p class="dark-font lead mt-5">Get started by adding a <a href="/people/new">person</a>.</p>
+                    }
+
+                </div>
+
+                <HouseholdOverview />
 
                 // Todo:
                 // Add totals overview of expenditure, income, etc.

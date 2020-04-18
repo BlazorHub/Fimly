@@ -1,7 +1,9 @@
 ﻿using Fimly.Data;
+using Fimly.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,6 +19,11 @@ namespace Fimly.Services
         {
             _db = db;
             _logger = logger;
+        }
+
+        public async Task<List<Expense>> GetAllExpensesAsync(string userId)
+        {
+            return await _db.Expenses.Where(u => u.UserId == userId).ToListAsync();
         }
 
         public async Task DeleteAllPersonsExpenses(Guid personId)

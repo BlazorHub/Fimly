@@ -1,5 +1,6 @@
 ﻿using Fimly.Data.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Fimly.Services
 {
@@ -7,23 +8,19 @@ namespace Fimly.Services
     {
         public static decimal GetTotalMonthlyIncome(List<Person> people)
         {
-            decimal totalIncome = 0;
-
-            for (int i = 0; i < people.Count; i++)
-            {
-                totalIncome += people[i].Income;
-            }
-
-            return totalIncome;
+            return people.Sum(i => i.Income);
         }
 
         public static decimal GetTotalYearlyIncome(List<Person> people)
         {
             decimal monthlyIncome = GetTotalMonthlyIncome(people);
 
-            decimal yearlyIncome = monthlyIncome * 12;
+            return monthlyIncome * 12;
+        }
 
-            return yearlyIncome;
+        public static decimal GetTotalMonthlyExpenditure(List<Expense> expenses)
+        {
+            return expenses.Sum(i => i.Cost);
         }
 
         public static decimal GetApproxWeeklyIncome(decimal montlyIncome)

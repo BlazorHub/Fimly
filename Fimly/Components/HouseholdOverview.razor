@@ -1,0 +1,56 @@
+﻿<div class="container">
+    <div class="card">
+        <div class="card-body shadow">
+            <div class="row h-100">
+
+                @if (People is null)
+                {
+                    <LoadingSpinner />
+                }
+                else
+                {
+                    <div class="col-md-3 text-center mb-3 my-auto">
+                        <span class="oi oi-home household-icon dark-font"></span>
+                    </div>
+                    <div class="col-md-9 dark-font mt-3">
+                        <h3>Household Overview</h3>
+                        <p>Monthly</p>
+                        <div class="row mt-4">
+                            <div class="col-md-6">
+                                <p class="mb-0">
+                                    <strong>Income:</strong>
+                                </p>
+                                <p>@FinanceService.FormatToCurrency(UserConfig, monthlyIncome)</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="mb-0">
+                                    <strong>People:</strong>
+                                </p>
+                                <p>@People.Count</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="mb-0">
+                                    <strong>Expenditure:</strong>
+                                </p>
+                                <p>@FinanceService.FormatToCurrency(UserConfig, monthlyExpenditure)</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="mb-0">
+                                    <strong>Expenses:</strong>
+                                </p>
+                                <p>@Expenses.Count</p>
+                            </div>
+                            <div class="col">
+                                <p class="mb-0">
+                                    <strong>Net:</strong>
+                                </p>
+                                <p class="@spendingWarningCssClass">@FinanceService.FormatToCurrency(UserConfig, monthlyNet)</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -33,6 +33,11 @@ namespace Fimly.Services
                 .ToListAsync();
         }
 
+        public int GetPeopleCount(string userId)
+        {
+            return _db.People.Where(u => u.UserId == userId).Count();
+        }
+
         public async Task CreatePersonAsync(Person person)
         {
             _db.People.Add(person);
