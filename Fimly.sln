@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.29926.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fimly", "Fimly\Fimly.csproj", "{23C5D5BE-D995-4B48-B2C0-E468B55114D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fimly.Data", "Fimly.Data\Fimly.Data.csproj", "{3442C56A-8C63-4DB4-AFE0-41F8F6ADF0D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fimly.Data", "Fimly.Data\Fimly.Data.csproj", "{3442C56A-8C63-4DB4-AFE0-41F8F6ADF0D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fimly.Services", "Fimly.Services\Fimly.Services.csproj", "{68DC081B-EAB5-4E66-A8AC-B79D81BB1CBC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fimly.Services", "Fimly.Services\Fimly.Services.csproj", "{68DC081B-EAB5-4E66-A8AC-B79D81BB1CBC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

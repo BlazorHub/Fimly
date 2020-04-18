@@ -9,7 +9,15 @@
             }
             else
             {
-                <h1 class="dark-font font-weight-light">Welcome back, @CurrentUser.FirstName!</h1>
+                @if (CurrentUser.HasLoggedInBefore())
+                {
+                    <h1 class="dark-font font-weight-light">Welcome back, @CurrentUser.FirstName!</h1>
+                    <p class="dark-font">Your last login was: @CurrentUser.LastLogin.Value.ToShortDateString()</p>
+                }
+                else
+                {
+                    <h1 class="dark-font font-weight-light">Welcome to Fimly, @CurrentUser.FirstName!</h1>
+                }
 
                 // Todo:
                 // Add totals overview of expenditure, income, etc.

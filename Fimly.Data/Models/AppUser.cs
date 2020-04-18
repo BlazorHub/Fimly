@@ -15,5 +15,10 @@ namespace Fimly.Data.Models
 
         public DateTime? LastLogin { get; set; }
         public DateTime Registered { get; set; }
+
+        public bool HasLoggedInBefore()
+        {
+            return LastLogin.HasValue ? true : false;
+        }
     }
 }
