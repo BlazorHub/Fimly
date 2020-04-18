@@ -26,6 +26,16 @@ namespace Fimly.Services
             return yearlyIncome;
         }
 
+        public static decimal GetApproxWeeklyIncome(decimal montlyIncome)
+        {
+            return montlyIncome / 4;
+        }
+
+        public static decimal GetApproxYearlyIncome(decimal montlyIncome)
+        {
+            return montlyIncome * 12;
+        }
+
         public static string FormatToCurrency(Config userConfig, decimal currency)
         {
             return $"{ userConfig.Currency.Symbol }{ string.Format("{0:N}", currency) }";

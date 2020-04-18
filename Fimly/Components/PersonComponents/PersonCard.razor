@@ -61,6 +61,16 @@
                         <br />
                         @FinanceService.FormatToCurrency(UserConfig, Person.Income)
                     </p>
+                    <p class="card-text mt-4">
+                        <strong>Approx. Weekly Income:</strong>
+                        <br />
+                        @FinanceService.FormatToCurrency(UserConfig, FinanceService.GetApproxWeeklyIncome(Person.Income))
+                    </p>
+                    <p class="card-text mt-4">
+                        <strong>Approx. Yearly Income:</strong>
+                        <br />
+                        @FinanceService.FormatToCurrency(UserConfig, FinanceService.GetApproxYearlyIncome(Person.Income))
+                    </p>
                     <p class="card-text">
                         <strong>Monthly Expenses:</strong>
                         <br />
