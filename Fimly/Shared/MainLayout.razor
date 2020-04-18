@@ -1,4 +1,6 @@
-﻿@inherits LayoutComponentBase
+﻿@using System.Reflection
+
+@inherits LayoutComponentBase
 
 <BlazoredToasts Position="ToastPosition.BottomRight" />
 
@@ -21,8 +23,17 @@
     </div>
 
     <footer class="footer">
-        <div class="container-fluid pl-4">
-            <span class="dark-font"><a href="https://github.com/bdfin/Fimly" target="_blank">Fimly.io</a> | © Beau Findlay @DateTime.UtcNow.Year | <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU v3</a> or later</span>
+        <div class="container-fluid pl-4 dark-font">
+            <span>
+                <a href="https://github.com/bdfin/Fimly" target="_blank">Fimly.io</a>
+                | &copy; Beau Findlay @DateTime.UtcNow.Year
+                | <a href="https://www.gnu.org/licenses/gpl-3.0.en.html" target="_blank">GNU v3</a>
+            </span>
+            <span class="float-right">v.@appVersion</span>
         </div>
     </footer>
 </div>
+
+@code{
+    string appVersion = typeof(Program).Assembly.GetCustomAttribute<AssemblyFileVersionAttribute>().Version;
+}
