@@ -3,6 +3,7 @@ using Blazored.Toast.Services;
 using Fimly.Data.Models;
 using Fimly.Services;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace Fimly.Components.PersonComponents
 
         [Inject] PersonService PersonService { get; set; }
         [Inject] IToastService ToastService { get; set; }
-        [Inject] IModalService Modal { get; set; }
+        [Inject] IJSRuntime Js { get; set; }
 
         private Person PersonToUpdate;
 
@@ -45,7 +46,7 @@ namespace Fimly.Components.PersonComponents
             }
         }
 
-        async Task UpdatePersonAsync()
+        private async Task UpdatePersonAsync()
         {
             await PersonService.UpdatePersonAsync(PersonToUpdate);
 
@@ -55,9 +56,16 @@ namespace Fimly.Components.PersonComponents
             StateChanged?.Invoke();
         }
 
-        async void DeletePerson(Person person)
+        private async void DeletePerson(Person person)
         {
+            if (await Js.InvokeAsync<bool>("confirm", "Are you sure you want to delete this person? This will also remove all of their expenses and also any shared expenses on this account. This action cannot be undone."))
+            {
+                await PersonService.DeletePersonAsync(person.Id);
 
+                ToastService.ShowSuccess("A person and all of their expenses have been sucessfully deleted.", "Person Deleted");
+
+                StateChanged?.Invoke();
+            }
         }
     }
 }

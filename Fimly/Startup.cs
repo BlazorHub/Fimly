@@ -56,6 +56,7 @@ namespace Fimly
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
 
             services.AddTransient<ConfigService>();
+            services.AddTransient<ExpenseService>();
             services.AddTransient<PersonService>();
 
             services.AddBlazoredModal();

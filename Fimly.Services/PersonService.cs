@@ -2,6 +2,7 @@
 using Fimly.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,12 +13,15 @@ namespace Fimly.Services
     {
         private readonly ApplicationDbContext _db;
         private readonly ILogger<PersonService> _logger;
+        private readonly ExpenseService _expenseService;
 
         public PersonService(ApplicationDbContext db,
-            ILogger<PersonService> logger)
+            ILogger<PersonService> logger,
+            ExpenseService expenseService)
         {
             _db = db;
             _logger = logger;
+            _expenseService = expenseService;
         }
 
         public async Task<List<Person>> GetPeopleAsync(string userId)
@@ -51,6 +55,25 @@ namespace Fimly.Services
             {
                 _logger.LogError($"An error has occurred whilst trying to update a person: {e}");
             }
+        }
+
+        public async Task DeletePersonAsync(Guid id)
+        {
+            var person = await _db.People.FindAsync(id);
+
+            if (person == null)
+            {
+                _logger.LogError("Error deleting person: Person not found.");
+
+                return;
+            }
+
+            await _expenseService.DeleteAllPersonsExpenses(person.Id);
+
+            _db.People.Remove(person);
+            await _db.SaveChangesAsync();
+
+            _logger.LogInformation("A person has been deleted.");
         }
     }
 }
