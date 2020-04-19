@@ -24,9 +24,12 @@
 .sidebar .nav-item:last-of-type {
   padding-bottom: 1rem; }
 
+.middle-last-nav-item {
+  flex-grow: 1; }
+
 .sidebar .nav-item a {
   color: black;
-  border-radius: 4px;
+  border-radius: 2rem;
   height: 3rem;
   display: flex;
   align-items: center;
@@ -34,7 +37,7 @@
 
 .sidebar .nav-item a.active {
   background-color: rgba(255, 255, 255, 0.35);
-  color: black; }
+  color: black !important; }
 
 .sidebar .nav-item a:hover {
   background-color: rgba(255, 255, 255, 0.1);
