@@ -8,8 +8,21 @@ else
 {
     <div class="container-fluid fade fadein">
 
-        <h2 class="dark-font">People</h2>
-        <p class="dark-font">Manage people in your household.</p>
+        <div class="row h-100">
+            <div class="col">
+                <h2 class="dark-font">People</h2>
+                <p class="dark-font">Manage people in your household.</p>
+            </div>
+
+            <div class="col my-auto">
+                <div class="float-right">
+                    <a href="/people/new" class="btn btn-success primary-font shadow-sm">
+                        New Person
+                        <span class="ml-1 oi oi-plus" aria-hidden="true"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
 
         <hr class="mb-4" />
 
@@ -22,23 +35,9 @@ else
                         <div class="text-center">
                             <p class="lead dark-font mb-4">Get started by adding a person. Add more people to see total household income.</p>
                         </div>
-
-                        <div class="text-center">
-                            <a href="/people/new" class="btn btn-success primary-font shadow-sm">
-                                New Person
-                                <span class="ml-1 oi oi-plus" aria-hidden="true"></span>
-                            </a>
-                        </div>
                     }
                     else
                     {
-                        <div class="text-center">
-                            <a href="/people/new" class="btn btn-success primary-font shadow-sm">
-                                New Person
-                                <span class="ml-1 oi oi-plus" aria-hidden="true"></span>
-                            </a>
-                        </div>
-
                         <div class="row">
 
                             @foreach (Person person in PersonList)
