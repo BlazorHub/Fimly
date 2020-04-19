@@ -29,7 +29,6 @@ namespace Fimly.Components.PersonComponents
 
         private bool IsEditing = false;
         private string EditButtonCssClass => IsEditing ? "text-danger" : string.Empty;
-        private string CardColSizeCssClass => People.Count() > 1 ? "col-xl-6" : "col";
 
         private decimal WeeklyIncome => FinanceService.GetApproxWeeklyIncome(Person.Income);
         private decimal YearlyIncome => FinanceService.GetApproxYearlyIncome(Person.Income);

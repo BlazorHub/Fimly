@@ -6,12 +6,12 @@
 }
 else
 {
-    <div class="container-fluid fade fadein">
+    <div class="container-fluid">
 
         <div class="row h-100">
             <div class="col">
                 <h2 class="dark-font">People</h2>
-                <p class="dark-font">Manage people in your household.</p>
+                <p class="dark-font">Manage the people in your household.</p>
             </div>
 
             <div class="col my-auto">
@@ -42,8 +42,18 @@ else
 
                             @foreach (Person person in PersonList)
                             {
-                                <PersonCard Person="person" StateChanged="StateChanged" />
+                                <div class="@CardColSizeCssClass mx-auto mt-4" style="max-width:50rem">
+
+                                    <Animate Animation="Animations.FadeIn" Duration="TimeSpan.FromSeconds(0.5)" Delay="TimeSpan.FromSeconds(AnimationDelay)">
+                                        <PersonCard Person="person" StateChanged="StateChanged" />
+                                    </Animate>
+
+                                </div>
+
+                                AnimationDelay += 0.4;
                             }
+
+
 
                         </div>
                     }

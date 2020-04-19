@@ -1,6 +1,7 @@
 ﻿@page "/"
 
-<div class="fade fadein mt-5">
+<div class="mt-5">
+
     <AuthorizeView>
         <Authorized>
             @if (CurrentUser is null)
@@ -43,4 +44,5 @@
             </div>
         </NotAuthorized>
     </AuthorizeView>
+
 </div>

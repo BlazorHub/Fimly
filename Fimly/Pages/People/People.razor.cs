@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Fimly.Pages.People
@@ -20,6 +21,10 @@ namespace Fimly.Pages.People
         private AppUser CurrentUser;
         private Config UserConfig;
         private List<Person> PersonList;
+
+        private string CardColSizeCssClass => PersonList.Count() > 1 ? "col-xl-6" : "col";
+
+        private double AnimationDelay = 0.2;
 
         protected override async Task OnInitializedAsync()
         {
