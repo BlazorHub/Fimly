@@ -1,4 +1,4 @@
-﻿<div class="@CardColSizeCssClass mx-auto mt-4" style="max-width:40rem">
+﻿<div class="@CardColSizeCssClass mx-auto mt-4" style="max-width:50rem">
     <div class="card shadow zoom">
         <div class="card-body">
             <div class="row">
@@ -23,9 +23,10 @@
                 </div>
             </div>
 
-            <div class="mb-4 text-center dark-font">
-                @if (IsEditing)
-                {
+
+            @if (IsEditing)
+            {
+                <div class="mb-4 text-center dark-font">
                     <EditForm Model="PersonToUpdate" OnValidSubmit="UpdatePersonAsync">
                         <DataAnnotationsValidator />
                         <ValidationSummary />
@@ -53,45 +54,61 @@
                             </div>
                         </div>
                     </EditForm>
-                }
-                else
-                {
-                    <h3 class="card-title">
-                        @Person.Name
-                    </h3>
-                    <p class="card-text mt-4">
-                        <strong>Monthly Income:</strong>
-                        <br />
-                        @FinanceService.FormatToCurrency(UserConfig, Person.Income)
-                    </p>
-                    <p class="card-text mt-4">
-                        <strong>Approx. Weekly Income:</strong>
-                        <br />
-                        @FinanceService.FormatToCurrency(UserConfig, FinanceService.GetApproxWeeklyIncome(Person.Income))
-                    </p>
-                    <p class="card-text mt-4">
-                        <strong>Approx. Yearly Income:</strong>
-                        <br />
-                        @FinanceService.FormatToCurrency(UserConfig, FinanceService.GetApproxYearlyIncome(Person.Income))
-                    </p>
-                    <p class="card-text mt-4">
-                        <strong>Monthly Expenses:</strong>
-                        <br />
+                </div>
+            }
+            else
+            {
+                <div class="row h-100">
+                    <div class="col-md-3 text-center mb-3 my-auto">
+                        <span class="oi oi-person person-card-icon dark-font"></span>
+                    </div>
 
-                        @if (Person.Expenses.Count == 0)
-                        {
-                            <span>No <a href="expenses">expenses</a> have been added for this person.</span>
-                        }
-                        else
-                        {
-                            <span>
-                                @FinanceService.FormatToCurrency(UserConfig, Person.Expenses.Sum(e => e.Cost))
-                            </span>
-                        }
+                    <div class="col-md-9 dark-font mt-3">
+                        <h3>@Person.Name</h3>
 
-                    </p>
-                }
-            </div>
+                        <div class="row mt-4">
+                            <div class="col">
+                                <p class="mb-1"><strong>Income</strong></p>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-sm-4">
+                                <p class="mb-0">Weekly:</p>
+                                <p>@FinanceService.FormatToCurrency(UserConfig, WeeklyIncome)</p>
+                            </div>
+                            <div class="col-sm-4">
+                                <p class="mb-0">Monthly:</p>
+                                <p>@FinanceService.FormatToCurrency(UserConfig, Person.Income)</p>
+                            </div>
+                            <div class="col-sm-4">
+                                <p class="mb-0">Yearly:</p>
+                                <p>@FinanceService.FormatToCurrency(UserConfig, YearlyIncome)</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <p class="mb-0">
+                                    <strong>Monthly Expenses:</strong>
+                                </p>
+                                <p>
+                                    @if (Person.Expenses.Count == 0)
+                                    {
+                                        <span>No <a href="expenses">expenses</a> have been added for this person.</span>
+                                    }
+                                    else
+                                    {
+                                        <span>
+                                            @FinanceService.FormatToCurrency(UserConfig, Person.Expenses.Sum(e => e.Cost))
+                                        </span>
+                                    }
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
     </div>
 </div>

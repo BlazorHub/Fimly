@@ -21,12 +21,12 @@ namespace Fimly.Components
         private List<Person> People;
         private List<Expense> Expenses;
 
-        private decimal monthlyIncome;
-        private decimal monthlyExpenditure;
-        private decimal monthlyNet;
+        private decimal MonthlyIncome;
+        private decimal MonthlyExpenditure;
+        private decimal MonthlyNet;
 
-        private bool spendingWarning = false;
-        private string spendingWarningCssClass => spendingWarning ? "text-danger" : "text-success";
+        private bool SpendingWarning = false;
+        private string SpendingWarningCssClass => SpendingWarning ? "text-danger" : "text-success";
 
         protected override async Task OnInitializedAsync()
         {
@@ -38,14 +38,14 @@ namespace Fimly.Components
             Expenses = await ExpenseService.GetAllExpensesAsync(CurrentUser.Id);
             People = await PersonService.GetPeopleAsync(CurrentUser.Id);
 
-            monthlyIncome = FinanceService.GetTotalMonthlyIncome(People);
-            monthlyExpenditure = FinanceService.GetTotalMonthlyExpenditure(Expenses);
-            monthlyNet = monthlyIncome - monthlyExpenditure;
+            MonthlyIncome = FinanceService.GetTotalMonthlyIncome(People);
+            MonthlyExpenditure = FinanceService.GetTotalMonthlyExpenditure(Expenses);
+            MonthlyNet = MonthlyIncome - MonthlyExpenditure;
 
 
-            if (monthlyIncome <= monthlyExpenditure)
+            if (MonthlyIncome <= MonthlyExpenditure)
             {
-                spendingWarning = true;
+                SpendingWarning = true;
             }
         }
     }
