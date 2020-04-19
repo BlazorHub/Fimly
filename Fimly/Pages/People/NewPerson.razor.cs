@@ -1,4 +1,5 @@
-﻿using Fimly.Data.Models;
+﻿using Blazored.Toast.Services;
+using Fimly.Data.Models;
 using Fimly.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
@@ -16,6 +17,7 @@ namespace Fimly.Pages.People
         [Inject] ConfigService ConfigService { get; set; }
         [Inject] PersonService PersonService { get; set; }
         [Inject] NavigationManager NavigationManager { get; set; }
+        [Inject] IToastService ToastService { get; set; }
 
         protected AppUser CurrentUser;
         protected Config UserConfig;
@@ -36,6 +38,8 @@ namespace Fimly.Pages.People
             Person.UserId = CurrentUser.Id;
 
             await PersonService.CreatePersonAsync(Person);
+
+            ToastService.ShowSuccess($"{ Person.Name } has been added successfully.", "Person Added");
 
             NavigationManager.NavigateTo("people");
         }
