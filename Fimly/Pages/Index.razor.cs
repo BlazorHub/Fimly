@@ -23,7 +23,10 @@ namespace Fimly.Pages
 
             CurrentUser = await UserManager.GetUserAsync(user);
 
-            peopleCount = PersonService.GetPeopleCount(CurrentUser.Id);
+            if (CurrentUser != null)
+            {
+                peopleCount = PersonService.GetPeopleCount(CurrentUser.Id);
+            }
         }
     }
 }
