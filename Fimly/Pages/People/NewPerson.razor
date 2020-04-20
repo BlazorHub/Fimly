@@ -2,40 +2,64 @@
 
 @if (UserConfig != null)
 {
-    <div class="container-fluid">
+    <div class="jumbotron jumbotron-fluid shadow-sm pt-4">
+        <div class="container-fluid">
 
-        <h2 class="dark-font">New Person</h2>
-        <p class="dark-font">Add a new person to the household.</p>
+            <div class="row h-100">
+                <div class="col">
+                    <h2 class="dark-font">New Person</h2>
+                    <p class="dark-font">Add a new person to the household.</p>
+                </div>
 
-        <hr class="mb-4" />
+                <div class="col my-auto">
+                    <div class="float-right">
+                        <a href="/people/new" class="btn btn-success primary-font shadow-sm">
+                            New Person
+                            <span class="ml-1 oi oi-plus" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
 
-        <div class="mx-auto mt-4" style="max-width:40rem">
-            <div class="card shadow zoom">
-                <div class="card-body">
-                    <div class="row mt-4">
-                        <div class="col">
-                            <EditForm Model="Person" OnValidSubmit="HandleValidSubmitAsync">
-                                <DataAnnotationsValidator />
-                                <ValidationSummary />
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <NavLink class="breadcrumb-item" href="/">Home</NavLink>
+                    <NavLink class="breadcrumb-item" href="/people">People</NavLink>
+                    <NavLink class="breadcrumb-item" aria-current="page">New</NavLink>
+                </ol>
+            </nav>
 
-                                <div class="form-group text-center">
-                                    <label for="personName" class="dark-font">Name</label>
-                                    <InputText id="personName" class="form-control" @bind-Value="@Person.Name" />
-                                </div>
-                                <div class="form-group text-center">
-                                    <label for="personIncome" class="dark-font">Monthly Income (After Tax)</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">@UserConfig.Currency.Symbol</span>
-                                        </div>
-                                        <InputNumber id="personIncome" class="form-control" @bind-Value="@Person.Income" />
+            <hr class="mb-4" />
+
+
+            <div class="mx-auto mt-4" style="max-width:40rem">
+                <div class="card shadow zoom">
+                    <div class="card-body">
+                        <div class="row mt-4">
+                            <div class="col">
+                                <EditForm Model="Person" OnValidSubmit="HandleValidSubmitAsync">
+                                    <DataAnnotationsValidator />
+                                    <ValidationSummary />
+
+                                    <div class="form-group text-center">
+                                        <label for="personName" class="dark-font">Name</label>
+                                        <InputText id="personName" class="form-control" @bind-Value="@Person.Name" />
                                     </div>
-                                </div>
+                                    <div class="form-group text-center">
+                                        <label for="personIncome" class="dark-font">Monthly Income (After Tax)</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">@UserConfig.Currency.Symbol</span>
+                                            </div>
+                                            <InputNumber id="personIncome" class="form-control" @bind-Value="@Person.Income" />
+                                        </div>
+                                    </div>
 
-                                <div class="text-center mt-5">
-                                    <button type="submit" class="btn btn-success primary-font shadow-sm">Save</button>
-                                </div>
-                            </EditForm>
+                                    <div class="text-center mt-5">
+                                        <button type="submit" class="btn btn-success primary-font shadow-sm">Save</button>
+                                    </div>
+                                </EditForm>
+                            </div>
                         </div>
                     </div>
                 </div>

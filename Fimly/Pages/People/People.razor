@@ -6,60 +6,69 @@
 }
 else
 {
-    <div class="container-fluid">
+    <div class="jumbotron jumbotron-fluid shadow-sm pt-4">
+        <div class="container-fluid">
 
-        <div class="row h-100">
-            <div class="col">
-                <h2 class="dark-font">People</h2>
-                <p class="dark-font">Manage the people in your household.</p>
-            </div>
+            <div class="row h-100">
+                <div class="col">
+                    <h2 class="dark-font">People</h2>
+                    <p class="dark-font">Manage the people in your household.</p>
+                </div>
 
-            <div class="col my-auto">
-                <div class="float-right">
-                    <a href="/people/new" class="btn btn-success primary-font shadow-sm">
-                        New Person
-                        <span class="ml-1 oi oi-plus" aria-hidden="true"></span>
-                    </a>
+                <div class="col my-auto">
+                    <div class="float-right">
+                        <a href="/people/new" class="btn btn-success primary-font shadow-sm">
+                            New Person
+                            <span class="ml-1 oi oi-plus" aria-hidden="true"></span>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <hr class="mb-4" />
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <NavLink class="breadcrumb-item" href="/">Home</NavLink>
+                    <NavLink class="breadcrumb-item" aria-current="page">People</NavLink>
+                </ol>
+            </nav>
 
-        <CascadingValue Value="CurrentUser">
-            <CascadingValue Value="UserConfig">
-                <CascadingValue Value="PersonList">
+            <hr class="mb-4" />
 
-                    @if (PersonList.Count == 0)
-                    {
-                        <div class="text-center">
-                            <p class="lead dark-font mb-4">Get started by adding a person. Add more people to see total household income.</p>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="row">
+            <CascadingValue Value="CurrentUser">
+                <CascadingValue Value="UserConfig">
+                    <CascadingValue Value="PersonList">
 
-                            @foreach (Person person in PersonList)
-                            {
-                                <div class="@CardColSizeCssClass mx-auto mt-4" style="max-width:50rem">
+                        @if (PersonList.Count == 0)
+                        {
+                            <div class="text-center">
+                                <p class="lead dark-font mb-4">Get started by adding a person. Add more people to see total household income.</p>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="row">
 
-                                    <Animate Animation="Animations.FadeIn" Duration="TimeSpan.FromSeconds(0.5)" Delay="TimeSpan.FromSeconds(AnimationDelay)">
-                                        <PersonCard Person="person" StateChanged="StateChanged" />
-                                    </Animate>
+                                @foreach (Person person in PersonList)
+                                {
+                                    <div class="@CardColSizeCssClass mx-auto mt-4" style="max-width:50rem">
 
-                                </div>
+                                        <Animate Animation="Animations.FadeIn" Duration="TimeSpan.FromSeconds(0.5)" Delay="TimeSpan.FromSeconds(AnimationDelay)">
+                                            <PersonCard Person="person" StateChanged="StateChanged" />
+                                        </Animate>
 
-                                AnimationDelay += 0.4;
-                            }
+                                    </div>
+
+                                    AnimationDelay += 0.4;
+                                }
 
 
 
-                        </div>
-                    }
+                            </div>
+                        }
 
+                    </CascadingValue>
                 </CascadingValue>
             </CascadingValue>
-        </CascadingValue>
+        </div>
     </div>
 }

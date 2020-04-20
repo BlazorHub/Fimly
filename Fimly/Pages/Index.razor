@@ -1,15 +1,14 @@
 ﻿@page "/"
 
-<div class="mt-5">
-
-    <AuthorizeView>
-        <Authorized>
-            @if (CurrentUser is null)
-            {
-                <LoadingSpinner />
-            }
-            else
-            {
+<AuthorizeView>
+    <Authorized>
+        @if (CurrentUser is null)
+        {
+            <LoadingSpinner />
+        }
+        else
+        {
+            <div class="jumbotron jumbotron-fluid shadow-sm">
                 <div class="text-center mb-5">
                     @if (CurrentUser.HasLoggedInBefore())
                     {
@@ -30,11 +29,11 @@
 
                 <HouseholdOverview />
 
-                // Todo:
-                // Add totals overview of expenditure, income, etc.
-            }
-        </Authorized>
-        <NotAuthorized>
+            </div>
+        }
+    </Authorized>
+    <NotAuthorized>
+        <div class="jumbotron jumbotron-fluid shadow-sm">
             <div class="text-center mb-5">
                 <h1 class="dark-font font-weight-light">Welcome to Fimly.io</h1>
 
@@ -42,7 +41,6 @@
 
                 <p class="mb-4 dark-font">Please <a href="/login">login</a> or <a href="/register">register</a> for a free account to begin using the app.</p>
             </div>
-        </NotAuthorized>
-    </AuthorizeView>
-
-</div>
+        </div>
+    </NotAuthorized>
+</AuthorizeView>

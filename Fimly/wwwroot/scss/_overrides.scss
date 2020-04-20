@@ -63,3 +63,14 @@
     padding-right: 1.6rem !important;
     padding-left: 1.6rem !important;
 }
+
+.breadcrumb {
+    background-color: none !important;
+    background: rgba(109,109,109,.13) !important;
+    border-radius: 2rem;
+}
+
+.breadcrumb-item.active {
+    text-decoration: underline;
+    color: rgba(0,0,0,0.85) !important;
+}
