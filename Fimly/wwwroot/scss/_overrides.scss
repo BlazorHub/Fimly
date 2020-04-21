@@ -55,8 +55,10 @@
 
 .jumbotron {
     background: rgb(109, 109, 109);
-    background: rgba(109, 109, 109, 0.13);
+    background: rgba(109, 109, 109, 0.05);
     border-radius: 2rem !important;
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
 }
 
 .container-fluid {
@@ -66,7 +68,7 @@
 
 .breadcrumb {
     background-color: none !important;
-    background: rgba(109,109,109,.13) !important;
+    background: rgba(109,109,109,.07) !important;
     border-radius: 2rem;
 }
 
