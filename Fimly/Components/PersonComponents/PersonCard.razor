@@ -74,15 +74,15 @@
                     <div class="row mb-4">
                         <div class="col-sm-4">
                             <p class="mb-0">Weekly:</p>
-                            <p>@FinanceService.FormatToCurrency(UserConfig, WeeklyIncome)</p>
+                            <p>@FinanceService.FormatToConfigCurrency(UserConfig, WeeklyIncome)</p>
                         </div>
                         <div class="col-sm-4">
                             <p class="mb-0">Monthly:</p>
-                            <p>@FinanceService.FormatToCurrency(UserConfig, Person.Income)</p>
+                            <p>@FinanceService.FormatToConfigCurrency(UserConfig, Person.Income)</p>
                         </div>
                         <div class="col-sm-4">
                             <p class="mb-0">Yearly:</p>
-                            <p>@FinanceService.FormatToCurrency(UserConfig, YearlyIncome)</p>
+                            <p>@FinanceService.FormatToConfigCurrency(UserConfig, YearlyIncome)</p>
                         </div>
                     </div>
 
@@ -99,7 +99,7 @@
                                 else
                                 {
                                     <span>
-                                        @FinanceService.FormatToCurrency(UserConfig, Person.Expenses.Sum(e => e.Cost))
+                                        @FinanceService.FormatToConfigCurrency(UserConfig, Person.Expenses.Sum(e => e.Cost))
                                     </span>
                                 }
                             </p>

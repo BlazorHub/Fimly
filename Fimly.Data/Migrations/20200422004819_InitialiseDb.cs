@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Fimly.Data.Migrations
 {
-    public partial class Intialise : Migration
+    public partial class InitialiseDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -40,11 +40,55 @@ namespace Fimly.Data.Migrations
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false)
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    FirstName = table.Column<string>(maxLength: 50, nullable: false),
+                    LastName = table.Column<string>(maxLength: 50, nullable: true),
+                    LastLogin = table.Column<DateTime>(nullable: true),
+                    Registered = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Currencies",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Symbol = table.Column<string>(maxLength: 5, nullable: false),
+                    Name = table.Column<string>(maxLength: 5, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Currencies", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ExpenseTypes",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Name = table.Column<string>(maxLength: 100, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ExpenseTypes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "People",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    UserId = table.Column<string>(maxLength: 200, nullable: true),
+                    Name = table.Column<string>(maxLength: 25, nullable: false),
+                    Income = table.Column<decimal>(type: "decimal(18, 2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_People", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -153,6 +197,91 @@ namespace Fimly.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Configs",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    UserId = table.Column<string>(maxLength: 200, nullable: true),
+                    CurrencyId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Configs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Configs_Currencies_CurrencyId",
+                        column: x => x.CurrencyId,
+                        principalTable: "Currencies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Expenses",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    PersonIdString = table.Column<string>(nullable: true),
+                    PersonId = table.Column<Guid>(nullable: true),
+                    UserId = table.Column<string>(maxLength: 200, nullable: true),
+                    ExpenseTypeId = table.Column<Guid>(nullable: false),
+                    Name = table.Column<string>(maxLength: 25, nullable: false),
+                    Cost = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
+                    IsShared = table.Column<bool>(nullable: false),
+                    IsRecurring = table.Column<bool>(nullable: false),
+                    DateAdded = table.Column<DateTime>(nullable: false),
+                    DateDue = table.Column<DateTime>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Expenses", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Expenses_ExpenseTypes_ExpenseTypeId",
+                        column: x => x.ExpenseTypeId,
+                        principalTable: "ExpenseTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Expenses_People_PersonId",
+                        column: x => x.PersonId,
+                        principalTable: "People",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Currencies",
+                columns: new[] { "Id", "Name", "Symbol" },
+                values: new object[,]
+                {
+                    { 1, "GBP", "£" },
+                    { 2, "EUR", "€" },
+                    { 3, "USD", "$" },
+                    { 4, "JPY", "¥" },
+                    { 5, "KRW", "₩" },
+                    { 6, "SAR", "﷼" },
+                    { 7, "RUB", "₽" },
+                    { 8, "ZAR", "R" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ExpenseTypes",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { new Guid("d1ac592c-1aaa-4733-bcc3-bb44f1cb8485"), "Lifestyle" },
+                    { new Guid("677e5eec-68e6-4496-8f59-bec07c00fe05"), "General" },
+                    { new Guid("256a00fe-bf81-453b-bff4-d21999bdd68f"), "Family" },
+                    { new Guid("c970177c-a325-4d29-8301-f32a4e13381c"), "Eating Out" },
+                    { new Guid("dbb669c9-0dbb-43cf-9d1e-29980642e572"), "Entertainment" },
+                    { new Guid("c4f94fe6-c1a9-42e9-99ef-adf0fe06d6b3"), "Groceries" },
+                    { new Guid("6668f0d6-7d84-4e26-8759-76dc38ebb2c3"), "Transport" },
+                    { new Guid("f15b1f97-0edb-44a8-9e9d-bf2c1249426c"), "Shopping" },
+                    { new Guid("ce19230e-8024-4423-8c43-f8bb9aeec9f6"), "Bills & Services" },
+                    { new Guid("6e855919-2482-4521-a420-202a7b2bed8a"), "Home" },
+                    { new Guid("a797fbde-751b-45ae-a9d3-b324c4c6c274"), "Holidays" }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -189,6 +318,21 @@ namespace Fimly.Data.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Configs_CurrencyId",
+                table: "Configs",
+                column: "CurrencyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Expenses_ExpenseTypeId",
+                table: "Expenses",
+                column: "ExpenseTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Expenses_PersonId",
+                table: "Expenses",
+                column: "PersonId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -209,10 +353,25 @@ namespace Fimly.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Configs");
+
+            migrationBuilder.DropTable(
+                name: "Expenses");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Currencies");
+
+            migrationBuilder.DropTable(
+                name: "ExpenseTypes");
+
+            migrationBuilder.DropTable(
+                name: "People");
         }
     }
 }

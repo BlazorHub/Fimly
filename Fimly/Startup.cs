@@ -1,3 +1,4 @@
+using BlazorAnimate;
 using Blazored.Toast;
 using Fimly.Areas.Identity;
 using Fimly.Data;
@@ -11,6 +12,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
+using Pomelo.EntityFrameworkCore.MySql;
 
 namespace Fimly
 {
@@ -56,11 +59,18 @@ namespace Fimly
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
 
             services.AddTransient<ConfigService>();
-            services.AddScoped<CurrencyService>();
+            services.AddTransient<CurrencyService>();
             services.AddTransient<ExpenseService>();
+            services.AddTransient<ExpenseTypeService>();
             services.AddTransient<PersonService>();
 
             services.AddBlazoredToast();
+
+            services.Configure<AnimateOptions>(options =>
+            {
+                options.Animation = Animations.FadeIn;
+                options.Duration = TimeSpan.FromSeconds(0.5);
+            });
         }
 
         public void Configure(IApplicationBuilder app,

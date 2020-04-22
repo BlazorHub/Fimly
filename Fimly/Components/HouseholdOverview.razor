@@ -30,7 +30,7 @@
                                     <p class="mb-0">
                                         <strong>Income:</strong>
                                     </p>
-                                    <p>@FinanceService.FormatToCurrency(UserConfig, MonthlyIncome)</p>
+                                    <p>@FinanceService.FormatToConfigCurrency(UserConfig, MonthlyIncome)</p>
                                 </div>
                                 <div class="col-md-6">
                                     <p class="mb-0">
@@ -42,7 +42,7 @@
                                     <p class="mb-0">
                                         <strong>Expenditure:</strong>
                                     </p>
-                                    <p>@FinanceService.FormatToCurrency(UserConfig, MonthlyExpenditure)</p>
+                                    <p>@FinanceService.FormatToConfigCurrency(UserConfig, MonthlyExpenditure)</p>
                                 </div>
                                 <div class="col-md-6">
                                     <p class="mb-0">
@@ -54,7 +54,7 @@
                                     <p class="mb-0">
                                         <strong>Net:</strong>
                                     </p>
-                                    <p class="@SpendingWarningCssClass">@FinanceService.FormatToCurrency(UserConfig, MonthlyNet)</p>
+                                    <p class="@SpendingWarningCssClass">@FinanceService.FormatToConfigCurrency(UserConfig, MonthlyNet)</p>
                                 </div>
                             }
 

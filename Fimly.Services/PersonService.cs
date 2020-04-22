@@ -26,11 +26,23 @@ namespace Fimly.Services
 
         public async Task<List<Person>> GetPeopleAsync(string userId)
         {
-            return await _db.People
+            var people = await _db.People
                 .Where(u => u.UserId == userId)
                 .Include(e => e.Expenses)
                 .ThenInclude(t => t.ExpenseType)
                 .ToListAsync();
+
+            foreach (var person in people)
+            {
+                var expensesToRemove = person.Expenses.Where(e => e.IsShared).ToList();
+
+                foreach (var item in expensesToRemove)
+                {
+                    person.Expenses.Remove(item);
+                }
+            }
+
+            return people;
         }
 
         public int GetPeopleCount(string userId)

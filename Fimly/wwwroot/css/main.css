@@ -310,3 +310,6 @@ hr {
 
 .person-card-icon {
   font-size: 6rem; }
+
+.checkbox-col {
+  padding-top: 2rem !important; }

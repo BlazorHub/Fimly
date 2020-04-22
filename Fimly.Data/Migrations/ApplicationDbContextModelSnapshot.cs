@@ -98,7 +98,7 @@ namespace Fimly.Data.Migrations
 
             modelBuilder.Entity("Fimly.Data.Models.Config", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
@@ -189,7 +189,7 @@ namespace Fimly.Data.Migrations
 
             modelBuilder.Entity("Fimly.Data.Models.Expense", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
@@ -202,7 +202,8 @@ namespace Fimly.Data.Migrations
                     b.Property<DateTime?>("DateDue")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<Guid>("ExpenseTypeId")
+                    b.Property<string>("ExpenseTypeId")
+                        .IsRequired()
                         .HasColumnType("char(36)");
 
                     b.Property<bool>("IsRecurring")
@@ -216,8 +217,11 @@ namespace Fimly.Data.Migrations
                         .HasColumnType("varchar(25) CHARACTER SET utf8mb4")
                         .HasMaxLength(25);
 
-                    b.Property<Guid?>("PersonId")
+                    b.Property<string>("PersonId")
                         .HasColumnType("char(36)");
+
+                    b.Property<string>("PersonIdString")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("UserId")
                         .HasColumnType("varchar(200) CHARACTER SET utf8mb4")
@@ -234,7 +238,7 @@ namespace Fimly.Data.Migrations
 
             modelBuilder.Entity("Fimly.Data.Models.ExpenseType", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
@@ -250,64 +254,64 @@ namespace Fimly.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("6fd1aa9a-2fc4-445b-b41a-747e4a0d7d4e"),
+                            Id = new Guid("ce19230e-8024-4423-8c43-f8bb9aeec9f6"),
                             Name = "Bills & Services"
                         },
                         new
                         {
-                            Id = new Guid("c8ed231c-f712-46af-a5cd-2df3a6c25439"),
+                            Id = new Guid("dbb669c9-0dbb-43cf-9d1e-29980642e572"),
                             Name = "Entertainment"
                         },
                         new
                         {
-                            Id = new Guid("ed70f89a-0c4f-43af-ae56-841bf68bb90d"),
+                            Id = new Guid("6668f0d6-7d84-4e26-8759-76dc38ebb2c3"),
                             Name = "Transport"
                         },
                         new
                         {
-                            Id = new Guid("e2ea119f-e312-4f93-88ad-9d9c404c8d25"),
+                            Id = new Guid("c4f94fe6-c1a9-42e9-99ef-adf0fe06d6b3"),
                             Name = "Groceries"
                         },
                         new
                         {
-                            Id = new Guid("ab993559-3226-46a7-9e5e-9e3617b09c20"),
+                            Id = new Guid("6e855919-2482-4521-a420-202a7b2bed8a"),
                             Name = "Home"
                         },
                         new
                         {
-                            Id = new Guid("911d21d9-00a6-4296-ba5d-9bf2b93d4881"),
+                            Id = new Guid("c970177c-a325-4d29-8301-f32a4e13381c"),
                             Name = "Eating Out"
                         },
                         new
                         {
-                            Id = new Guid("d4a9ce3f-6492-41fd-a166-58e3f50a5f56"),
+                            Id = new Guid("256a00fe-bf81-453b-bff4-d21999bdd68f"),
                             Name = "Family"
                         },
                         new
                         {
-                            Id = new Guid("acc1f8f2-8494-4b58-9e5f-6ba31b4a333c"),
+                            Id = new Guid("677e5eec-68e6-4496-8f59-bec07c00fe05"),
                             Name = "General"
                         },
                         new
                         {
-                            Id = new Guid("9e5c02bd-967c-43e4-98f8-7b26c1703951"),
+                            Id = new Guid("d1ac592c-1aaa-4733-bcc3-bb44f1cb8485"),
                             Name = "Lifestyle"
                         },
                         new
                         {
-                            Id = new Guid("13da399c-6a9b-4ca6-87b4-3f1c2378de91"),
+                            Id = new Guid("f15b1f97-0edb-44a8-9e9d-bf2c1249426c"),
                             Name = "Shopping"
                         },
                         new
                         {
-                            Id = new Guid("6a1c2d39-55f0-4bf8-bd58-4eefdd5e279c"),
+                            Id = new Guid("a797fbde-751b-45ae-a9d3-b324c4c6c274"),
                             Name = "Holidays"
                         });
                 });
 
             modelBuilder.Entity("Fimly.Data.Models.Person", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 

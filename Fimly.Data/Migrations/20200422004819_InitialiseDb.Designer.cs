@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fimly.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200417165041_OverrideDefaultIdentityUser")]
-    partial class OverrideDefaultIdentityUser
+    [Migration("20200422004819_InitialiseDb")]
+    partial class InitialiseDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,7 +19,7 @@ namespace Fimly.Data.Migrations
                 .HasAnnotation("ProductVersion", "3.1.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("Fimly.Data.AppUser", b =>
+            modelBuilder.Entity("Fimly.Data.Models.AppUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
@@ -137,6 +137,56 @@ namespace Fimly.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Currencies");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "GBP",
+                            Symbol = "£"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "EUR",
+                            Symbol = "€"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "USD",
+                            Symbol = "$"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "JPY",
+                            Symbol = "¥"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "KRW",
+                            Symbol = "₩"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "SAR",
+                            Symbol = "﷼"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "RUB",
+                            Symbol = "₽"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "ZAR",
+                            Symbol = "R"
+                        });
                 });
 
             modelBuilder.Entity("Fimly.Data.Models.Expense", b =>
@@ -146,7 +196,7 @@ namespace Fimly.Data.Migrations
                         .HasColumnType("char(36)");
 
                     b.Property<decimal>("Cost")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<DateTime>("DateAdded")
                         .HasColumnType("datetime(6)");
@@ -170,6 +220,9 @@ namespace Fimly.Data.Migrations
 
                     b.Property<Guid?>("PersonId")
                         .HasColumnType("char(36)");
+
+                    b.Property<string>("PersonIdString")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("UserId")
                         .HasColumnType("varchar(200) CHARACTER SET utf8mb4")
@@ -198,6 +251,63 @@ namespace Fimly.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ExpenseTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("ce19230e-8024-4423-8c43-f8bb9aeec9f6"),
+                            Name = "Bills & Services"
+                        },
+                        new
+                        {
+                            Id = new Guid("dbb669c9-0dbb-43cf-9d1e-29980642e572"),
+                            Name = "Entertainment"
+                        },
+                        new
+                        {
+                            Id = new Guid("6668f0d6-7d84-4e26-8759-76dc38ebb2c3"),
+                            Name = "Transport"
+                        },
+                        new
+                        {
+                            Id = new Guid("c4f94fe6-c1a9-42e9-99ef-adf0fe06d6b3"),
+                            Name = "Groceries"
+                        },
+                        new
+                        {
+                            Id = new Guid("6e855919-2482-4521-a420-202a7b2bed8a"),
+                            Name = "Home"
+                        },
+                        new
+                        {
+                            Id = new Guid("c970177c-a325-4d29-8301-f32a4e13381c"),
+                            Name = "Eating Out"
+                        },
+                        new
+                        {
+                            Id = new Guid("256a00fe-bf81-453b-bff4-d21999bdd68f"),
+                            Name = "Family"
+                        },
+                        new
+                        {
+                            Id = new Guid("677e5eec-68e6-4496-8f59-bec07c00fe05"),
+                            Name = "General"
+                        },
+                        new
+                        {
+                            Id = new Guid("d1ac592c-1aaa-4733-bcc3-bb44f1cb8485"),
+                            Name = "Lifestyle"
+                        },
+                        new
+                        {
+                            Id = new Guid("f15b1f97-0edb-44a8-9e9d-bf2c1249426c"),
+                            Name = "Shopping"
+                        },
+                        new
+                        {
+                            Id = new Guid("a797fbde-751b-45ae-a9d3-b324c4c6c274"),
+                            Name = "Holidays"
+                        });
                 });
 
             modelBuilder.Entity("Fimly.Data.Models.Person", b =>
@@ -207,7 +317,7 @@ namespace Fimly.Data.Migrations
                         .HasColumnType("char(36)");
 
                     b.Property<decimal>("Income")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -388,7 +498,7 @@ namespace Fimly.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Fimly.Data.AppUser", null)
+                    b.HasOne("Fimly.Data.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -397,7 +507,7 @@ namespace Fimly.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Fimly.Data.AppUser", null)
+                    b.HasOne("Fimly.Data.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -412,7 +522,7 @@ namespace Fimly.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Fimly.Data.AppUser", null)
+                    b.HasOne("Fimly.Data.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -421,7 +531,7 @@ namespace Fimly.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Fimly.Data.AppUser", null)
+                    b.HasOne("Fimly.Data.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

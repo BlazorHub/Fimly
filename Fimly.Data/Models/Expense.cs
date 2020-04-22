@@ -8,21 +8,29 @@ namespace Fimly.Data.Models
     {
         public Guid Id { get; set; }
 
-        public Guid? PersonId { get; set; }
+
+        public string PersonIdString { get; set; }
+        public Guid? PersonId { get; set; } = null;
         public virtual Person Person { get; set; }
 
         [MaxLength(200)]
         public string UserId { get; set; }
 
+
         [Required]
-        public Guid ExpenseTypeId { get; set; }
+        public string ExpenseTypeIdString { get; set; }
+
+        public Guid ExpenseTypeId
+        {
+            get { return Guid.TryParse(ExpenseTypeIdString, out Guid g) ? g : default; }
+            set { ExpenseTypeIdString = Convert.ToString(value); }
+        }
         public virtual ExpenseType ExpenseType { get; set; }
 
         [Required]
         [MaxLength(25, ErrorMessage = "Please use a shorter name.")]
         public string Name { get; set; }
 
-        [DataType(DataType.Currency)]
         [Column(TypeName = "decimal(18, 2)")]
         [Required]
         public decimal Cost { get; set; }

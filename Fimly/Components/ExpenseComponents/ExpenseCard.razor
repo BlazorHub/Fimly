@@ -1,0 +1,101 @@
+﻿<div class="mx-auto mt-4">
+    <div class="card shadow zoom">
+
+        @if (Person is null)
+        {
+            <div class="card-header">
+                <h4 class="dark-font mt-2 ml-2">
+                    Shared Expenses
+                </h4>
+            </div>
+
+            <div class="card-body">
+                <div class="mb-4 dark-font">
+                    <div class="card-text mt-4">
+
+                        @if (SharedExpenses.Count == 0)
+                        {
+                            <div class="text-center">
+                                <p>There are no shared expenses for this household.</p>
+                                <p><a href="/expenses/new">Add a new expense.</a></p>
+                            </div>
+                        }
+                        else
+                        {
+                            <table class="table">
+                                <tbody>
+
+                                    @foreach (Expense expense in SharedExpenses)
+                                    {
+                                        <tr>
+                                            <td>@expense.Name</td>
+                                            <td>@FinanceService.FormatToConfigCurrency(UserConfig, expense.Cost)</td>
+                                            <td>@FinanceService.GetPercentageOfMonthlyExpenditure(expense, SharedExpenses)</td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                            <p class="text-center dark-font mt-4">
+                                <strong>Total:</strong>
+                                @FinanceService.FormatToConfigCurrency(UserConfig, SharedExpenses.Sum(e => e.Cost))
+                            </p>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="card-header">
+                <h4 class="dark-font mt-2 ml-2">
+                    @Person.Name's Expenses
+                </h4>
+            </div>
+
+            <div class="card-body">
+                <div class="mb-4 dark-font">
+                    <div class="card-text mt-4">
+                        @if (ExpenseTypes is null)
+                        {
+                            <p><em>Loading...</em></p>
+                        }
+                        else
+                        {
+                            @if (Person.Expenses.Count == 0)
+                            {
+                                <div class="text-center">
+                                    <p>This person dosen't have any individual expenses.</p>
+                                    <p><a href="/expenses/new">Add a new expense.</a></p>
+                                </div>
+                            }
+                            else
+                            {
+                                <p class="float-right">Showing @Person.Expenses.Count/@Person.Expenses.Count results.</p>
+
+                                <table class="table">
+                                    <tbody>
+                                        @foreach (Expense expense in Person.Expenses)
+                                        {
+                                            <tr>
+                                                <td>@expense.Name</td>
+                                                <td>@FinanceService.FormatToConfigCurrency(UserConfig, expense.Cost)</td>
+                                                <td>@FinanceService.GetPercentageOfMonthlyExpenditure(expense, Person.Expenses.ToList())</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                                <p class="text-center dark-font mt-4">
+                                    <strong>Total:</strong>
+                                    @FinanceService.FormatToConfigCurrency(UserConfig, Person.Expenses.Sum(e => e.Cost))
+                                </p>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

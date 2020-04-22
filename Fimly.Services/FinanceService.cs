@@ -23,6 +23,15 @@ namespace Fimly.Services
             return expenses.Sum(i => i.Cost);
         }
 
+        public static string GetPercentageOfMonthlyExpenditure(Expense expense, List<Expense> expenses)
+        {
+            decimal monthlyExpenditure = GetTotalMonthlyExpenditure(expenses);
+
+            decimal percentageOfMonthlyExpenditure = (expense.Cost / monthlyExpenditure) * 100;
+
+            return $"{ percentageOfMonthlyExpenditure }%";
+        }
+
         public static decimal GetApproxWeeklyIncome(decimal montlyIncome)
         {
             return montlyIncome / 4;
@@ -33,7 +42,7 @@ namespace Fimly.Services
             return montlyIncome * 12;
         }
 
-        public static string FormatToCurrency(Config userConfig, decimal currency)
+        public static string FormatToConfigCurrency(Config userConfig, decimal currency)
         {
             return $"{ userConfig.Currency.Symbol }{ string.Format("{0:N}", currency) }";
         }

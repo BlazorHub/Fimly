@@ -50,9 +50,9 @@ else
 
                                 @foreach (Person person in PersonList)
                                 {
-                                    <div class="@CardColSizeCssClass mx-auto mt-4" style="max-width:50rem">
+                                    <div class="@CardColSizeCssClass mx-auto mt-4" style="max-width:60rem">
 
-                                        <Animate Animation="Animations.FadeIn" Duration="TimeSpan.FromSeconds(0.5)" Delay="TimeSpan.FromSeconds(AnimationDelay)">
+                                        <Animate Delay="TimeSpan.FromSeconds(AnimationDelay)">
                                             <PersonCard Person="person" StateChanged="StateChanged" />
                                         </Animate>
 

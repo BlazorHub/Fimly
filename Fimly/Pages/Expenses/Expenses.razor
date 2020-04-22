@@ -1,0 +1,64 @@
+﻿@page "/expenses"
+
+@if (People is null)
+{
+    <LoadingSpinner />
+}
+else
+{
+    <div class="jumbotron jumbotron-fluid shadow-sm pt-4">
+        <div class="container-fluid">
+
+            <div class="row h-100">
+                <div class="col">
+                    <h2 class="dark-font">Expenses</h2>
+                    <p class="dark-font">Manage your individual or household expenses.</p>
+                </div>
+            </div>
+
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <NavLink class="breadcrumb-item" href="/">Home</NavLink>
+                    <NavLink class="breadcrumb-item" aria-current="page">Expenses</NavLink>
+                </ol>
+            </nav>
+
+            <hr class="mb-4" />
+
+            <CascadingValue Value="UserConfig">
+                <CascadingValue Value="ExpenseTypes">
+
+                    <div class="container">
+
+                        @if (People.Count == 0)
+                        {
+                            <p class="dark-font lead text-center mt-5">There are no people configured. <a href="/people/new">Add a person </a> to get started.</p>
+                        }
+                        else
+                        {
+                            @if (SharedExpenses.Count > 0)
+                            {
+                                <Animate Delay="TimeSpan.FromSeconds(AnimationDelay)">
+                                    <ExpenseCard SharedExpenses="SharedExpenses" StateChanged="StateChanged" />
+                                </Animate>
+
+                                AnimationDelay += 0.4;
+                            }
+
+                            @foreach (Person person in People)
+                            {
+                                <Animate Delay="TimeSpan.FromSeconds(AnimationDelay)">
+                                    <ExpenseCard Person="person" StateChanged="StateChanged" />
+                                </Animate>
+
+                                AnimationDelay += 0.4;
+                            }
+                        }
+
+                    </div>
+
+                </CascadingValue>
+            </CascadingValue>
+        </div>
+    </div>
+}
