@@ -3,14 +3,16 @@ using System;
 using Fimly.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Fimly.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200422203920_InitialiseDb")]
+    partial class InitialiseDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -247,57 +249,57 @@ namespace Fimly.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("502b08f4-9f76-4a27-9749-1a6cc9fe8b5b"),
+                            Id = new Guid("e8d751ee-3c3e-4432-8a38-2ddaec09a2eb"),
                             Name = "Bills & Services"
                         },
                         new
                         {
-                            Id = new Guid("0ea37fd8-d78f-42d9-86d0-33866600def3"),
+                            Id = new Guid("0f983319-e8de-4db6-bb96-4aedf988e543"),
                             Name = "Entertainment"
                         },
                         new
                         {
-                            Id = new Guid("412fc77e-cd38-4a55-85d6-713abed5547b"),
+                            Id = new Guid("e8679c34-17a1-4237-ac58-5cd41a19245b"),
                             Name = "Transport"
                         },
                         new
                         {
-                            Id = new Guid("4492e34d-39a3-40de-95be-1d379c2b03bd"),
+                            Id = new Guid("66cdb77b-3a4f-4741-9935-1b434f333839"),
                             Name = "Groceries"
                         },
                         new
                         {
-                            Id = new Guid("ab3ae1b6-45c6-43dd-8d24-acddfd785827"),
+                            Id = new Guid("a41ddee7-6395-41fc-8cec-4dc8c0b832bd"),
                             Name = "Home"
                         },
                         new
                         {
-                            Id = new Guid("ebd8cd85-bfee-4582-ac12-12911dccf6cb"),
+                            Id = new Guid("9d4f2eb3-2c32-4e8f-8487-e7764efe3acb"),
                             Name = "Eating Out"
                         },
                         new
                         {
-                            Id = new Guid("a1bdae84-eb27-420f-a84b-cb4c8cc6b747"),
+                            Id = new Guid("65cca374-9d2c-4139-a4ee-daa19a6a6ca9"),
                             Name = "Family"
                         },
                         new
                         {
-                            Id = new Guid("ffdf1d05-f040-4fad-8ea4-ede7568aa2bb"),
+                            Id = new Guid("632f2426-b4c7-4f86-8e3e-cdd2576c64cc"),
                             Name = "General"
                         },
                         new
                         {
-                            Id = new Guid("7dcb2af3-defe-4a81-ab40-13367121b470"),
+                            Id = new Guid("451c7750-44ad-4bfa-9703-6a87a0e915c5"),
                             Name = "Lifestyle"
                         },
                         new
                         {
-                            Id = new Guid("2e422edb-081e-4d73-8479-fbae390d296c"),
+                            Id = new Guid("45e6658d-3485-4e6f-8ab6-75715daffc15"),
                             Name = "Shopping"
                         },
                         new
                         {
-                            Id = new Guid("621188a9-2ba1-447c-8fc4-c0f39b4043ca"),
+                            Id = new Guid("90db6e6e-bb1a-4784-b6fd-e378b6be6885"),
                             Name = "Holidays"
                         });
                 });

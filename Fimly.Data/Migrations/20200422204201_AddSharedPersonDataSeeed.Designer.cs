@@ -3,14 +3,16 @@ using System;
 using Fimly.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Fimly.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200422204201_AddSharedPersonDataSeeed")]
+    partial class AddSharedPersonDataSeeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -247,57 +249,57 @@ namespace Fimly.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("502b08f4-9f76-4a27-9749-1a6cc9fe8b5b"),
+                            Id = new Guid("8298b104-24c3-4be9-83e5-7645d467a57b"),
                             Name = "Bills & Services"
                         },
                         new
                         {
-                            Id = new Guid("0ea37fd8-d78f-42d9-86d0-33866600def3"),
+                            Id = new Guid("b936cdb6-5130-4e18-9499-8236715aef6b"),
                             Name = "Entertainment"
                         },
                         new
                         {
-                            Id = new Guid("412fc77e-cd38-4a55-85d6-713abed5547b"),
+                            Id = new Guid("b4fd3454-312c-4d7b-b07f-d073d89da1e2"),
                             Name = "Transport"
                         },
                         new
                         {
-                            Id = new Guid("4492e34d-39a3-40de-95be-1d379c2b03bd"),
+                            Id = new Guid("22cdf1bb-d626-4bb6-bfbf-d515d4a1214a"),
                             Name = "Groceries"
                         },
                         new
                         {
-                            Id = new Guid("ab3ae1b6-45c6-43dd-8d24-acddfd785827"),
+                            Id = new Guid("2b571586-feac-4641-b494-544157a6a0f5"),
                             Name = "Home"
                         },
                         new
                         {
-                            Id = new Guid("ebd8cd85-bfee-4582-ac12-12911dccf6cb"),
+                            Id = new Guid("6efac255-c9c4-4140-9007-82e7fabc5d52"),
                             Name = "Eating Out"
                         },
                         new
                         {
-                            Id = new Guid("a1bdae84-eb27-420f-a84b-cb4c8cc6b747"),
+                            Id = new Guid("f33827d3-1f34-4984-bf30-6d5060b861a6"),
                             Name = "Family"
                         },
                         new
                         {
-                            Id = new Guid("ffdf1d05-f040-4fad-8ea4-ede7568aa2bb"),
+                            Id = new Guid("f2d059b3-8924-4c8a-9a45-cdce56c2bf81"),
                             Name = "General"
                         },
                         new
                         {
-                            Id = new Guid("7dcb2af3-defe-4a81-ab40-13367121b470"),
+                            Id = new Guid("6343a093-c98a-4db3-8af5-4e9407600b02"),
                             Name = "Lifestyle"
                         },
                         new
                         {
-                            Id = new Guid("2e422edb-081e-4d73-8479-fbae390d296c"),
+                            Id = new Guid("cb97c20c-5a8c-4bd0-83db-a67d88b7b2ee"),
                             Name = "Shopping"
                         },
                         new
                         {
-                            Id = new Guid("621188a9-2ba1-447c-8fc4-c0f39b4043ca"),
+                            Id = new Guid("cc3519ce-0df7-4e8e-adff-808f84d04bb5"),
                             Name = "Holidays"
                         });
                 });
@@ -326,6 +328,15 @@ namespace Fimly.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("People");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("10280c94-c89f-4fe7-8820-839b0f5db42a"),
+                            Income = 0m,
+                            IsSharedPerson = true,
+                            Name = "Shared"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

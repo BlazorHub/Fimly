@@ -22,7 +22,7 @@ namespace Fimly.Pages.People
         protected AppUser CurrentUser;
         protected Config UserConfig;
 
-        Person Person = new Person();
+        Person Person;
 
         protected override async Task OnInitializedAsync()
         {
@@ -31,12 +31,15 @@ namespace Fimly.Pages.People
 
             CurrentUser = await UserManager.GetUserAsync(user);
             UserConfig = await ConfigService.GetUserConfigAsync(CurrentUser.Id);
+
+            Person = new Person
+            {
+                UserId = CurrentUser.Id
+            };
         }
 
         private async void HandleValidSubmitAsync()
         {
-            Person.UserId = CurrentUser.Id;
-
             await PersonService.CreatePersonAsync(Person);
 
             ToastService.ShowSuccess($"{ Person.Name } has been added successfully.", "Person Added");

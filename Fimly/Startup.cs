@@ -70,6 +70,7 @@ namespace Fimly
             {
                 options.Animation = Animations.FadeIn;
                 options.Duration = TimeSpan.FromSeconds(0.5);
+                options.Once = true;
             });
         }
 

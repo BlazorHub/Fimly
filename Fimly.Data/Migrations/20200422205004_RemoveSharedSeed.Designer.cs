@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fimly.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200422004819_InitialiseDb")]
-    partial class InitialiseDb
+    [Migration("20200422205004_RemoveSharedSeed")]
+    partial class RemoveSharedSeed
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -210,9 +210,6 @@ namespace Fimly.Data.Migrations
                     b.Property<bool>("IsRecurring")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("IsShared")
-                        .HasColumnType("tinyint(1)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("varchar(25) CHARACTER SET utf8mb4")
@@ -220,9 +217,6 @@ namespace Fimly.Data.Migrations
 
                     b.Property<Guid?>("PersonId")
                         .HasColumnType("char(36)");
-
-                    b.Property<string>("PersonIdString")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("UserId")
                         .HasColumnType("varchar(200) CHARACTER SET utf8mb4")
@@ -255,57 +249,57 @@ namespace Fimly.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ce19230e-8024-4423-8c43-f8bb9aeec9f6"),
+                            Id = new Guid("502b08f4-9f76-4a27-9749-1a6cc9fe8b5b"),
                             Name = "Bills & Services"
                         },
                         new
                         {
-                            Id = new Guid("dbb669c9-0dbb-43cf-9d1e-29980642e572"),
+                            Id = new Guid("0ea37fd8-d78f-42d9-86d0-33866600def3"),
                             Name = "Entertainment"
                         },
                         new
                         {
-                            Id = new Guid("6668f0d6-7d84-4e26-8759-76dc38ebb2c3"),
+                            Id = new Guid("412fc77e-cd38-4a55-85d6-713abed5547b"),
                             Name = "Transport"
                         },
                         new
                         {
-                            Id = new Guid("c4f94fe6-c1a9-42e9-99ef-adf0fe06d6b3"),
+                            Id = new Guid("4492e34d-39a3-40de-95be-1d379c2b03bd"),
                             Name = "Groceries"
                         },
                         new
                         {
-                            Id = new Guid("6e855919-2482-4521-a420-202a7b2bed8a"),
+                            Id = new Guid("ab3ae1b6-45c6-43dd-8d24-acddfd785827"),
                             Name = "Home"
                         },
                         new
                         {
-                            Id = new Guid("c970177c-a325-4d29-8301-f32a4e13381c"),
+                            Id = new Guid("ebd8cd85-bfee-4582-ac12-12911dccf6cb"),
                             Name = "Eating Out"
                         },
                         new
                         {
-                            Id = new Guid("256a00fe-bf81-453b-bff4-d21999bdd68f"),
+                            Id = new Guid("a1bdae84-eb27-420f-a84b-cb4c8cc6b747"),
                             Name = "Family"
                         },
                         new
                         {
-                            Id = new Guid("677e5eec-68e6-4496-8f59-bec07c00fe05"),
+                            Id = new Guid("ffdf1d05-f040-4fad-8ea4-ede7568aa2bb"),
                             Name = "General"
                         },
                         new
                         {
-                            Id = new Guid("d1ac592c-1aaa-4733-bcc3-bb44f1cb8485"),
+                            Id = new Guid("7dcb2af3-defe-4a81-ab40-13367121b470"),
                             Name = "Lifestyle"
                         },
                         new
                         {
-                            Id = new Guid("f15b1f97-0edb-44a8-9e9d-bf2c1249426c"),
+                            Id = new Guid("2e422edb-081e-4d73-8479-fbae390d296c"),
                             Name = "Shopping"
                         },
                         new
                         {
-                            Id = new Guid("a797fbde-751b-45ae-a9d3-b324c4c6c274"),
+                            Id = new Guid("621188a9-2ba1-447c-8fc4-c0f39b4043ca"),
                             Name = "Holidays"
                         });
                 });
@@ -318,6 +312,9 @@ namespace Fimly.Data.Migrations
 
                     b.Property<decimal>("Income")
                         .HasColumnType("decimal(18, 2)");
+
+                    b.Property<bool>("IsSharedPerson")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Name")
                         .IsRequired()

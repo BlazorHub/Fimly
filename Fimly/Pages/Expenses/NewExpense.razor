@@ -62,18 +62,14 @@ else
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="dark-font">Expense Type</label>
-                                        <InputSelect class="form-control" @bind-Value="Expense.ExpenseTypeIdString">
-                                            <option value="">Select Expense Type</option>
+                                        <select class="form-control" @bind="Expense.ExpenseTypeId">
                                             @foreach (var expenseType in ExpenseTypes)
-                                                {
+                                            {
                                                 <option value="@expenseType.Id">
                                                     @expenseType.Name
                                                 </option>
-                                                }
-                                            /**/
-                                            /**/
-                                            /**/
-                                        </InputSelect>
+                                            }
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6 my-auto checkbox-col">
@@ -84,17 +80,10 @@ else
                                 </div>
                             </div>
 
-                            @if (People.Count > 1)
+                            @if (People.Count > 2)
                             {
                                 <div class="row h-100">
-                                    <div class="col-md-6 my-auto checkbox-col">
-                                        <div class="form-group form-check">
-                                            <input type="checkbox" @onchange="TogglePersonSelect" id="shared" class="form-check-input" />
-                                            <label for="shared" class="dark-font">Shared expense?</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 @PersonSelectCssClass">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="person" class="dark-font">Select Person</label>
                                             <select id="person" class="form-control" @bind="Expense.PersonId">

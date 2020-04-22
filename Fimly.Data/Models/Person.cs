@@ -21,6 +21,8 @@ namespace Fimly.Data.Models
         [Display(Name = "Monthly Income")]
         public decimal Income { get; set; }
 
+        public bool IsSharedPerson { get; set; }
+
         public ICollection<Expense> Expenses { get; set; }
     }
 }

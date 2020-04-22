@@ -84,7 +84,8 @@ namespace Fimly.Data.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     UserId = table.Column<string>(maxLength: 200, nullable: true),
                     Name = table.Column<string>(maxLength: 25, nullable: false),
-                    Income = table.Column<decimal>(type: "decimal(18, 2)", nullable: false)
+                    Income = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
+                    IsSharedPerson = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -221,13 +222,11 @@ namespace Fimly.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    PersonIdString = table.Column<string>(nullable: true),
                     PersonId = table.Column<Guid>(nullable: true),
                     UserId = table.Column<string>(maxLength: 200, nullable: true),
                     ExpenseTypeId = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(maxLength: 25, nullable: false),
                     Cost = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    IsShared = table.Column<bool>(nullable: false),
                     IsRecurring = table.Column<bool>(nullable: false),
                     DateAdded = table.Column<DateTime>(nullable: false),
                     DateDue = table.Column<DateTime>(nullable: true)
@@ -269,17 +268,17 @@ namespace Fimly.Data.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("d1ac592c-1aaa-4733-bcc3-bb44f1cb8485"), "Lifestyle" },
-                    { new Guid("677e5eec-68e6-4496-8f59-bec07c00fe05"), "General" },
-                    { new Guid("256a00fe-bf81-453b-bff4-d21999bdd68f"), "Family" },
-                    { new Guid("c970177c-a325-4d29-8301-f32a4e13381c"), "Eating Out" },
-                    { new Guid("dbb669c9-0dbb-43cf-9d1e-29980642e572"), "Entertainment" },
-                    { new Guid("c4f94fe6-c1a9-42e9-99ef-adf0fe06d6b3"), "Groceries" },
-                    { new Guid("6668f0d6-7d84-4e26-8759-76dc38ebb2c3"), "Transport" },
-                    { new Guid("f15b1f97-0edb-44a8-9e9d-bf2c1249426c"), "Shopping" },
-                    { new Guid("ce19230e-8024-4423-8c43-f8bb9aeec9f6"), "Bills & Services" },
-                    { new Guid("6e855919-2482-4521-a420-202a7b2bed8a"), "Home" },
-                    { new Guid("a797fbde-751b-45ae-a9d3-b324c4c6c274"), "Holidays" }
+                    { new Guid("451c7750-44ad-4bfa-9703-6a87a0e915c5"), "Lifestyle" },
+                    { new Guid("632f2426-b4c7-4f86-8e3e-cdd2576c64cc"), "General" },
+                    { new Guid("65cca374-9d2c-4139-a4ee-daa19a6a6ca9"), "Family" },
+                    { new Guid("9d4f2eb3-2c32-4e8f-8487-e7764efe3acb"), "Eating Out" },
+                    { new Guid("0f983319-e8de-4db6-bb96-4aedf988e543"), "Entertainment" },
+                    { new Guid("66cdb77b-3a4f-4741-9935-1b434f333839"), "Groceries" },
+                    { new Guid("e8679c34-17a1-4237-ac58-5cd41a19245b"), "Transport" },
+                    { new Guid("45e6658d-3485-4e6f-8ab6-75715daffc15"), "Shopping" },
+                    { new Guid("e8d751ee-3c3e-4432-8a38-2ddaec09a2eb"), "Bills & Services" },
+                    { new Guid("a41ddee7-6395-41fc-8cec-4dc8c0b832bd"), "Home" },
+                    { new Guid("90db6e6e-bb1a-4784-b6fd-e378b6be6885"), "Holidays" }
                 });
 
             migrationBuilder.CreateIndex(

@@ -14,6 +14,15 @@ else
                     <h2 class="dark-font">Expenses</h2>
                     <p class="dark-font">Manage your individual or household expenses.</p>
                 </div>
+
+                <div class="col my-auto">
+                    <div class="float-right">
+                        <a href="/expenses/new" class="btn btn-success primary-font shadow-sm">
+                            New Expense
+                            <span class="ml-1 oi oi-plus" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                </div>
             </div>
 
             <nav aria-label="breadcrumb">
@@ -36,16 +45,7 @@ else
                         }
                         else
                         {
-                            @if (SharedExpenses.Count > 0)
-                            {
-                                <Animate Delay="TimeSpan.FromSeconds(AnimationDelay)">
-                                    <ExpenseCard SharedExpenses="SharedExpenses" StateChanged="StateChanged" />
-                                </Animate>
-
-                                AnimationDelay += 0.4;
-                            }
-
-                            @foreach (Person person in People)
+                            foreach (Person person in People)
                             {
                                 <Animate Delay="TimeSpan.FromSeconds(AnimationDelay)">
                                     <ExpenseCard Person="person" StateChanged="StateChanged" />

@@ -37,7 +37,7 @@ namespace Fimly.Components
             CurrentUser = await UserManager.GetUserAsync(user);
             UserConfig = await ConfigService.GetUserConfigAsync(CurrentUser.Id);
             Expenses = await ExpenseService.GetAllExpensesAsync(CurrentUser.Id);
-            People = await PersonService.GetPeopleAsync(CurrentUser.Id);
+            People = await PersonService.GetPeopleAndSharedAsync(CurrentUser.Id);
 
             MonthlyIncome = FinanceService.GetTotalMonthlyIncome(People);
             MonthlyExpenditure = FinanceService.GetTotalMonthlyExpenditure(Expenses);

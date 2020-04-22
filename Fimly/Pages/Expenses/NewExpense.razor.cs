@@ -29,10 +29,7 @@ namespace Fimly.Pages.Expenses
         private List<ExpenseType> ExpenseTypes;
         private List<Person> People;
 
-        Expense Expense = new Expense();
-
-        private bool ShowPersonSelect = true;
-        private string PersonSelectCssClass => ShowPersonSelect ? null : "d-none";
+        Expense Expense;
 
         protected override async Task OnInitializedAsync()
         {
@@ -41,40 +38,27 @@ namespace Fimly.Pages.Expenses
 
             CurrentUser = await UserManager.GetUserAsync(user);
             UserConfig = await ConfigService.GetUserConfigAsync(CurrentUser.Id);
-            People = await PersonService.GetPeopleAsync(CurrentUser.Id);
+            People = await PersonService.GetPeopleAndSharedAsync(CurrentUser.Id);
             ExpenseTypes = await ExpenseTypeService.GetExpenseTypesAsync();
 
-            Expense.IsRecurring = true;
+            Expense = new Expense
+            {
+                IsRecurring = true,
+                ExpenseTypeId = ExpenseTypes.FirstOrDefault(e => e.Name == "General").Id,
+                PersonId = People.Count > 2 ? People.FirstOrDefault(p => p.Name == "Shared").Id : People.FirstOrDefault(p => p.Name != "Shared").Id,
+                UserId = CurrentUser.Id
+            };
         }
 
         private async void HandleValidSubmitAsync()
         {
-            if (People.Count == 1)
-            {
-                Expense.PersonId = People.FirstOrDefault().Id;
-            }
-
             Expense.DateAdded = DateTime.UtcNow;
-            Expense.UserId = CurrentUser.Id;
 
             await ExpenseService.CreateExpenseAsync(Expense);
 
-            ToastService.ShowSuccess($"Expense has been added successfully.", "Expense Added");
+            ToastService.ShowSuccess($"The { Expense.Name } expense has been added for { Expense.Person.Name } successfully.", "Expense Added");
 
             NavigationManager.NavigateTo("expenses");
-        }
-
-        private void TogglePersonSelect(ChangeEventArgs e)
-        {
-            if ((bool)e.Value == true)
-            {
-                Expense.IsShared = true;
-                ShowPersonSelect = false;
-            }
-            else
-            {
-                ShowPersonSelect = true;
-            }
         }
     }
 }

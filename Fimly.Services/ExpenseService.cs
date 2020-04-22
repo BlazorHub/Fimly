@@ -26,11 +26,6 @@ namespace Fimly.Services
             return await _db.Expenses.Where(u => u.UserId == userId).ToListAsync();
         }
 
-        public async Task<List<Expense>> GetSharedExpenses(string userId)
-        {
-            return await _db.Expenses.Where(u => u.UserId == userId && u.IsShared == true).ToListAsync();
-        }
-
         public async Task CreateExpenseAsync(Expense expense)
         {
             _db.Expenses.Add(expense);
@@ -41,7 +36,7 @@ namespace Fimly.Services
 
         public async Task DeleteAllPersonsExpenses(Guid personId)
         {
-            var expeneses = await _db.Expenses.Where(p => p.PersonId == personId || p.IsShared == true).ToListAsync();
+            var expeneses = await _db.Expenses.Where(p => p.PersonId == personId).ToListAsync();
 
             _db.Expenses.RemoveRange(expeneses);
             await _db.SaveChangesAsync();

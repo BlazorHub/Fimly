@@ -1,4 +1,5 @@
 ﻿using Fimly.Data.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -29,7 +30,7 @@ namespace Fimly.Services
 
             decimal percentageOfMonthlyExpenditure = (expense.Cost / monthlyExpenditure) * 100;
 
-            return $"{ percentageOfMonthlyExpenditure }%";
+            return $"{ Math.Round(percentageOfMonthlyExpenditure, 1) }%";
         }
 
         public static decimal GetApproxWeeklyIncome(decimal montlyIncome)

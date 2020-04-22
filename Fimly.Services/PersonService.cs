@@ -26,23 +26,20 @@ namespace Fimly.Services
 
         public async Task<List<Person>> GetPeopleAsync(string userId)
         {
-            var people = await _db.People
+            return await _db.People
+                .Where(u => u.UserId == userId && !u.IsSharedPerson)
+                .Include(e => e.Expenses)
+                .ThenInclude(t => t.ExpenseType)
+                .ToListAsync();
+        }
+
+        public async Task<List<Person>> GetPeopleAndSharedAsync(string userId)
+        {
+            return await _db.People
                 .Where(u => u.UserId == userId)
                 .Include(e => e.Expenses)
                 .ThenInclude(t => t.ExpenseType)
                 .ToListAsync();
-
-            foreach (var person in people)
-            {
-                var expensesToRemove = person.Expenses.Where(e => e.IsShared).ToList();
-
-                foreach (var item in expensesToRemove)
-                {
-                    person.Expenses.Remove(item);
-                }
-            }
-
-            return people;
         }
 
         public int GetPeopleCount(string userId)
@@ -56,6 +53,19 @@ namespace Fimly.Services
             await _db.SaveChangesAsync();
 
             _logger.LogInformation("A new person has been created.");
+        }
+
+        public async Task CreateSharedExpensesPerson(string userId)
+        {
+            Person sharedExpensesPerson = new Person
+            {
+                Name = "Shared",
+                IsSharedPerson = true,
+                UserId = userId
+            };
+
+            _db.People.Add(sharedExpensesPerson);
+            await _db.SaveChangesAsync();
         }
 
         public async Task UpdatePersonAsync(Person person)

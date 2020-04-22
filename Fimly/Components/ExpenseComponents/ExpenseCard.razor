@@ -1,101 +1,97 @@
 ﻿<div class="mx-auto mt-4">
     <div class="card shadow zoom">
 
-        @if (Person is null)
-        {
-            <div class="card-header">
-                <h4 class="dark-font mt-2 ml-2">
-                    Shared Expenses
-                </h4>
-            </div>
+        <div class="card-header">
+            <h4 class="dark-font mt-2 ml-2">
+                @if (Person.IsSharedPerson)
+                {
+                    <span>Shared Expenses</span>
+                }
+                else
+                {
+                    <span>@Person.Name's Expenses</span>
+                }
+            </h4>
+        </div>
 
-            <div class="card-body">
-                <div class="mb-4 dark-font">
-                    <div class="card-text mt-4">
-
-                        @if (SharedExpenses.Count == 0)
+        <div class="card-body">
+            <div class="mb-4 dark-font">
+                <div class="card-text mt-4">
+                    @if (ExpenseTypes is null)
+                    {
+                        <p><em>Loading...</em></p>
+                    }
+                    else
+                    {
+                        @if (Expenses.Count == 0)
                         {
                             <div class="text-center">
-                                <p>There are no shared expenses for this household.</p>
+                                @if (Person.IsSharedPerson)
+                                {
+                                    <p>There are no shared expenses for this household.</p>
+                                }
+                                else
+                                {
+                                    <p>This person dosen't have any individual expenses.</p>
+                                }
+
                                 <p><a href="/expenses/new">Add a new expense.</a></p>
                             </div>
                         }
                         else
                         {
-                            <table class="table">
-                                <tbody>
+                            <div class="text-center dark-font mt-4 mb-4">
+                                @if (Person.IsSharedPerson)
+                                {
+                                    <p>
+                                        There are <strong>@FinanceService.FormatToConfigCurrency(UserConfig, Person.Expenses.Sum(e => e.Cost))</strong> shared expenses in @CurrentMonth.
+                                    </p>
+                                }
+                                else
+                                {
+                                    <p>
+                                        This person will spend <strong>@FinanceService.FormatToConfigCurrency(UserConfig, Person.Expenses.Sum(e => e.Cost))</strong> in @CurrentMonth.
+                                    </p>
+                                }
+                            </div>
 
-                                    @foreach (Expense expense in SharedExpenses)
-                                    {
-                                        <tr>
-                                            <td>@expense.Name</td>
-                                            <td>@FinanceService.FormatToConfigCurrency(UserConfig, expense.Cost)</td>
-                                            <td>@FinanceService.GetPercentageOfMonthlyExpenditure(expense, SharedExpenses)</td>
-                                        </tr>
-                                    }
-
-                                </tbody>
-                            </table>
-                            <p class="text-center dark-font mt-4">
-                                <strong>Total:</strong>
-                                @FinanceService.FormatToConfigCurrency(UserConfig, SharedExpenses.Sum(e => e.Cost))
-                            </p>
+                            <div class="mb-4">
+                                <TabControl>
+                                    <TabPage Text="Expenses">
+                                        <table class="table">
+                                            <tbody>
+                                                @foreach (Expense expense in Expenses)
+                                                {
+                                                    <tr>
+                                                        <td>@expense.Name</td>
+                                                        <td>@FinanceService.GetPercentageOfMonthlyExpenditure(expense, Expenses)</td>
+                                                        <td>@FinanceService.FormatToConfigCurrency(UserConfig, expense.Cost)</td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </TabPage>
+                                    <TabPage Text="Categories">
+                                        <table class="table">
+                                            <tbody>
+                                                @foreach (Expense expense in ExpensesByCategory)
+                                                {
+                                                    <tr>
+                                                        <td>@expense.Name</td>
+                                                        <td>@FinanceService.GetPercentageOfMonthlyExpenditure(expense, Expenses)</td>
+                                                        <td>@FinanceService.FormatToConfigCurrency(UserConfig, expense.Cost)</td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </TabPage>
+                                </TabControl>
+                            </div>
                         }
-
-                    </div>
+                    }
                 </div>
             </div>
-        }
-        else
-        {
-            <div class="card-header">
-                <h4 class="dark-font mt-2 ml-2">
-                    @Person.Name's Expenses
-                </h4>
-            </div>
-
-            <div class="card-body">
-                <div class="mb-4 dark-font">
-                    <div class="card-text mt-4">
-                        @if (ExpenseTypes is null)
-                        {
-                            <p><em>Loading...</em></p>
-                        }
-                        else
-                        {
-                            @if (Person.Expenses.Count == 0)
-                            {
-                                <div class="text-center">
-                                    <p>This person dosen't have any individual expenses.</p>
-                                    <p><a href="/expenses/new">Add a new expense.</a></p>
-                                </div>
-                            }
-                            else
-                            {
-                                <p class="float-right">Showing @Person.Expenses.Count/@Person.Expenses.Count results.</p>
-
-                                <table class="table">
-                                    <tbody>
-                                        @foreach (Expense expense in Person.Expenses)
-                                        {
-                                            <tr>
-                                                <td>@expense.Name</td>
-                                                <td>@FinanceService.FormatToConfigCurrency(UserConfig, expense.Cost)</td>
-                                                <td>@FinanceService.GetPercentageOfMonthlyExpenditure(expense, Person.Expenses.ToList())</td>
-                                            </tr>
-                                        }
-                                    </tbody>
-                                </table>
-                                <p class="text-center dark-font mt-4">
-                                    <strong>Total:</strong>
-                                    @FinanceService.FormatToConfigCurrency(UserConfig, Person.Expenses.Sum(e => e.Cost))
-                                </p>
-                            }
-                        }
-                    </div>
-                </div>
-            </div>
-        }
+        </div>
 
     </div>
 </div>

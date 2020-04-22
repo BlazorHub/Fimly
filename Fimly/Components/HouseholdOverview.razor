@@ -18,7 +18,7 @@
 
                         <div class="row mt-4">
 
-                            @if (People.Count == 0)
+                            @if (People.Count == 1)
                             {
                                 <div class="col">
                                     <p class="dark-font">As you add people and expenses, this section will be populated with total household statistics.</p>
@@ -36,7 +36,7 @@
                                     <p class="mb-0">
                                         <strong>People:</strong>
                                     </p>
-                                    <p>@People.Count</p>
+                                    <p>@(People.Count - 1)</p>
                                 </div>
                                 <div class="col-md-6">
                                     <p class="mb-0">
