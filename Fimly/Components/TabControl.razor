@@ -1,16 +1,14 @@
 ﻿
 <CascadingValue Value="this">
     <div class="text-center mb-4">
-        <div class="btn-group" role="group">
-            @foreach (TabPage tabPage in Pages)
-            {
-                <button type="button"
-                        class="btn @GetButtonClass(tabPage)"
-                        @onclick=@( () => ActivatePage(tabPage) )>
-                    @tabPage.Text
-                </button>
-            }
-        </div>
+        @foreach (TabPage tabPage in Pages)
+        {
+            <button type="button"
+                    class="btn @GetButtonClass(tabPage) shadow mt-3"
+                    @onclick=@( () => ActivatePage(tabPage) )>
+                @tabPage.Text
+            </button>
+        }
     </div>
 
     @ChildContent
