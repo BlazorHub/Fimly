@@ -1,10 +1,8 @@
 ﻿using Fimly.Data.Models;
-using Fimly.Services;
 using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Fimly.Components.ExpenseComponents
 {
@@ -28,7 +26,8 @@ namespace Fimly.Components.ExpenseComponents
              select new Expense
              {
                  Name = category.Select(ex => ex.ExpenseType.Name).FirstOrDefault(),
-                 Cost = category.Sum(ex => ex.Cost)
+                 Cost = category.Sum(ex => ex.Cost),
+                 Icon = category.Select(ex => ex.ExpenseType.Icon).FirstOrDefault()
              }).ToList();
 
         string CurrentMonth => DateTime.Now.ToString("MMMM");

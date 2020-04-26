@@ -50,7 +50,7 @@
                                 else
                                 {
                                     <p>
-                                        This person will spend <strong>@FinanceService.FormatToConfigCurrency(UserConfig, Person.Expenses.Sum(e => e.Cost))</strong> in @CurrentMonth.
+                                        @Person.Name will spend <strong>@FinanceService.FormatToConfigCurrency(UserConfig, Person.Expenses.Sum(e => e.Cost))</strong> in @CurrentMonth.
                                     </p>
                                 }
                             </div>
@@ -63,6 +63,11 @@
                                                 @foreach (Expense expense in Expenses)
                                                 {
                                                     <tr>
+                                                        <td>
+                                                            <p class="text-center dark-font mb-0">
+                                                                <i class="@expense.Icon expense-icon"></i>
+                                                            </p>
+                                                        </td>
                                                         <td>@expense.Name</td>
                                                         <td>@FinanceService.GetPercentageOfMonthlyExpenditure(expense, Expenses)</td>
                                                         <td>@FinanceService.FormatToConfigCurrency(UserConfig, expense.Cost)</td>
@@ -77,6 +82,11 @@
                                                 @foreach (Expense expense in ExpensesByCategory)
                                                 {
                                                     <tr>
+                                                        <td>
+                                                            <p class="text-center dark-font mb-0">
+                                                                <i class="@expense.Icon expense-icon"></i>
+                                                            </p>
+                                                        </td>
                                                         <td>@expense.Name</td>
                                                         <td>@FinanceService.GetPercentageOfMonthlyExpenditure(expense, Expenses)</td>
                                                         <td>@FinanceService.FormatToConfigCurrency(UserConfig, expense.Cost)</td>

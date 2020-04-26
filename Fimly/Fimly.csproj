@@ -35,4 +35,8 @@
     <ProjectReference Include="..\Fimly.Services\Fimly.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\fontawesome\" />
+  </ItemGroup>
+
 </Project>

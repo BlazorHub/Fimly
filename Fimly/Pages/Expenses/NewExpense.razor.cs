@@ -24,11 +24,10 @@ namespace Fimly.Pages.Expenses
         [Inject] NavigationManager NavigationManager { get; set; }
         [Inject] IToastService ToastService { get; set; }
 
-        private AppUser CurrentUser;
-        private Config UserConfig;
-        private List<ExpenseType> ExpenseTypes;
-        private List<Person> People;
-
+        AppUser CurrentUser;
+        Config UserConfig;
+        List<ExpenseType> ExpenseTypes;
+        List<Person> People;
         Expense Expense;
 
         protected override async Task OnInitializedAsync()
@@ -43,6 +42,7 @@ namespace Fimly.Pages.Expenses
 
             Expense = new Expense
             {
+                Name = "",
                 IsRecurring = true,
                 ExpenseTypeId = ExpenseTypes.FirstOrDefault(e => e.Name == "General").Id,
                 PersonId = People.Count > 2 ? People.FirstOrDefault(p => p.Name == "Shared").Id : People.FirstOrDefault(p => p.Name != "Shared").Id,
@@ -53,6 +53,7 @@ namespace Fimly.Pages.Expenses
         private async void HandleValidSubmitAsync()
         {
             Expense.DateAdded = DateTime.UtcNow;
+            Expense.Icon = IconService.GuessExpenseIcon(Expense.Name);
 
             await ExpenseService.CreateExpenseAsync(Expense);
 

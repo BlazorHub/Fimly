@@ -29,5 +29,8 @@ namespace Fimly.Data.Models
         public bool IsRecurring { get; set; }
         public DateTime DateAdded { get; set; }
         public DateTime? DateDue { get; set; }
+
+        [MaxLength(50)]
+        public string Icon { get; set; }
     }
 }

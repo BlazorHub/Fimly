@@ -4,7 +4,7 @@
         @foreach (TabPage tabPage in Pages)
         {
             <button type="button"
-                    class="btn @GetButtonClass(tabPage) shadow mt-3"
+                    class="btn @GetButtonClass(tabPage) shadow-sm mt-3"
                     @onclick=@( () => ActivatePage(tabPage) )>
                 @tabPage.Text
             </button>

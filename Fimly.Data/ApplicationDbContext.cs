@@ -26,17 +26,17 @@ namespace Fimly.Data
             );
 
             modelBuilder.Entity<ExpenseType>().HasData(
-                new ExpenseType { Id = Guid.NewGuid(), Name = "Bills & Services" },
-                new ExpenseType { Id = Guid.NewGuid(), Name = "Entertainment" },
-                new ExpenseType { Id = Guid.NewGuid(), Name = "Transport" },
-                new ExpenseType { Id = Guid.NewGuid(), Name = "Groceries" },
-                new ExpenseType { Id = Guid.NewGuid(), Name = "Home" },
-                new ExpenseType { Id = Guid.NewGuid(), Name = "Eating Out" },
-                new ExpenseType { Id = Guid.NewGuid(), Name = "Family" },
-                new ExpenseType { Id = Guid.NewGuid(), Name = "General" },
-                new ExpenseType { Id = Guid.NewGuid(), Name = "Lifestyle" },
-                new ExpenseType { Id = Guid.NewGuid(), Name = "Shopping" },
-                new ExpenseType { Id = Guid.NewGuid(), Name = "Holidays" }
+                new ExpenseType { Id = Guid.NewGuid(), Name = "Bills & Services", Icon = "fas fa-money-bill-wave" },
+                new ExpenseType { Id = Guid.NewGuid(), Name = "Entertainment", Icon = "fas fa-glass-cheers" },
+                new ExpenseType { Id = Guid.NewGuid(), Name = "Transport", Icon = "fas fa-bus-alt" },
+                new ExpenseType { Id = Guid.NewGuid(), Name = "Groceries", Icon = "fas fa-utensils" },
+                new ExpenseType { Id = Guid.NewGuid(), Name = "Home", Icon = "fas fa-home" },
+                new ExpenseType { Id = Guid.NewGuid(), Name = "Eating Out", Icon = "fas fa-pizza-slice" },
+                new ExpenseType { Id = Guid.NewGuid(), Name = "Family", Icon = "fas fa-users" },
+                new ExpenseType { Id = Guid.NewGuid(), Name = "General", Icon = "fas fa-money-check" },
+                new ExpenseType { Id = Guid.NewGuid(), Name = "Lifestyle", Icon = "fas fa-heartbeat" },
+                new ExpenseType { Id = Guid.NewGuid(), Name = "Shopping", Icon = "fas fa-shopping-basket" },
+                new ExpenseType { Id = Guid.NewGuid(), Name = "Holidays", Icon = "fas fa-plane" }
             );
 
             base.OnModelCreating(modelBuilder);

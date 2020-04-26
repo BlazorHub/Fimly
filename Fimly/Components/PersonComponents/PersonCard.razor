@@ -7,7 +7,7 @@
                 </button>
 
                 <button type="submit" class="@EditButtonCssClass close float-left" @onclick="(() => OnEditClick())">
-                    <span class="oi oi-pencil" aria-hidden="true"></span>
+                    <i class="far fa-edit"></i>
 
                     @if (IsEditing)
                     {
@@ -48,7 +48,7 @@
                     <div class="row mt-4">
                         <div class="col">
                             <button type="submit" class="close float-right text-success">
-                                <span class="oi oi-check" aria-hidden="true"></span>
+                                <i class="fas fa-check"></i>
                             </button>
                         </div>
                     </div>
@@ -58,8 +58,8 @@
         else
         {
             <div class="row h-100">
-                <div class="col-md-3 text-center mb-3 my-auto">
-                    <span class="oi oi-person person-card-icon dark-font"></span>
+                <div class="col-md-3 text-center mb-3 my-auto dark-font">
+                    <i class="far fa-user person-card-icon"></i>
                 </div>
 
                 <div class="col-md-9 dark-font mt-3">

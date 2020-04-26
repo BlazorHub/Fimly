@@ -3,14 +3,16 @@ using System;
 using Fimly.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Fimly.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200426214040_UpdateIconLength")]
+    partial class UpdateIconLength
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -239,10 +241,6 @@ namespace Fimly.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<string>("Icon")
-                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
-                        .HasMaxLength(50);
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("varchar(100) CHARACTER SET utf8mb4")
@@ -255,68 +253,57 @@ namespace Fimly.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("02ee3adc-23f0-4b58-a2ce-b04c4b45a46c"),
-                            Icon = "fas fa-money-bill-wave",
+                            Id = new Guid("a9143be6-e0a1-451f-b5f6-0887b6e316d6"),
                             Name = "Bills & Services"
                         },
                         new
                         {
-                            Id = new Guid("5bbe46e7-5bba-4106-8542-7ccf5ea2deba"),
-                            Icon = "fas fa-glass-cheers",
+                            Id = new Guid("8b2b3b73-b2fb-4c9e-93ca-c004a1a8dee4"),
                             Name = "Entertainment"
                         },
                         new
                         {
-                            Id = new Guid("f02ed8c0-0e2f-40ec-8a1e-d76238aaf912"),
-                            Icon = "fas fa-bus-alt",
+                            Id = new Guid("8afa7835-1ebb-4bbb-a0a1-f1ab3962883f"),
                             Name = "Transport"
                         },
                         new
                         {
-                            Id = new Guid("7d259015-f216-4f6e-89e9-524d72dfd0ae"),
-                            Icon = "fas fa-utensils",
+                            Id = new Guid("f1beaaab-af0b-42d3-8d1c-521da5b85760"),
                             Name = "Groceries"
                         },
                         new
                         {
-                            Id = new Guid("42038d52-b386-4d75-9de4-727b50c39b15"),
-                            Icon = "fas fa-home",
+                            Id = new Guid("4f75952a-b550-45bd-b7c4-32713585c3d8"),
                             Name = "Home"
                         },
                         new
                         {
-                            Id = new Guid("ef24a264-8b0f-4b98-be71-154ef02dd69a"),
-                            Icon = "fas fa-pizza-slice",
+                            Id = new Guid("1b3a3996-fe46-43e1-b279-99ef11544cc9"),
                             Name = "Eating Out"
                         },
                         new
                         {
-                            Id = new Guid("501cc4aa-6643-4344-b51e-ca920fc2eab3"),
-                            Icon = "fas fa-users",
+                            Id = new Guid("b5c3bfa4-bf1c-4052-8ca3-f3e6e457eb4a"),
                             Name = "Family"
                         },
                         new
                         {
-                            Id = new Guid("b7dbd109-fa4f-4fbe-931f-83c5eb90b924"),
-                            Icon = "fas fa-money-check",
+                            Id = new Guid("352fe506-e7e2-4a05-966a-7494dfdd6dc8"),
                             Name = "General"
                         },
                         new
                         {
-                            Id = new Guid("2fee3146-a43b-4029-ab9d-05961e766499"),
-                            Icon = "fas fa-heartbeat",
+                            Id = new Guid("cb668287-3c92-4901-9fde-7615a3108e5f"),
                             Name = "Lifestyle"
                         },
                         new
                         {
-                            Id = new Guid("fe648741-de4d-4588-8ef1-bff391e1b4d1"),
-                            Icon = "fas fa-shopping-basket",
+                            Id = new Guid("e29f9ef4-0123-469b-a180-119c9c567790"),
                             Name = "Shopping"
                         },
                         new
                         {
-                            Id = new Guid("1f940484-dd20-4fc9-8f70-649812dfa491"),
-                            Icon = "fas fa-plane",
+                            Id = new Guid("94c8bf83-0921-4e73-9d47-e75784002c05"),
                             Name = "Holidays"
                         });
                 });
