@@ -7,40 +7,51 @@ namespace Fimly.Services
     {
         private static readonly Dictionary<string, string> _expenseIcons =
             new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-        {
-            { "phone", "fa-mobile-alt" },
-            { "mobile", "fa-mobile-alt" },
-            { "rent", "fa-home" },
-            { "mortgage", "fa-home" },
-            { "house", "fa-home" },
-            { "flat", "fa-home" },
-            { "apartment", "fa-home" },
-            { "gas","fa-burn" },
-            { "util", "fa-burn" },
-            { "electric", "fa-bolt" },
-            { "power", "fa-bolt" },
-            { "diesel", "fa-gas-pump" },
-            { "fuel", "fa-gas-pump" },
-            { "petrol", "fa-gas-pump" },
-            { "food", "fa-utensils" },
-            { "groceries", "fa-utensils" },
-            { "eat", "fa-utensils" },
-            { "takeaway","fa-utensils" },
-            { "takeaways","fa-utensils" },
-            { "takeout", "fa-utensils" },
-            { "takeouts", "fa-utensils" },
-            { "water", "fa-shower" },
-            { "car", "fa-car" },
-            { "van", "fa-car" },
-            { "internet", "fa-wifi" },
-            { "network", "fa-wifi" },
-            { "spotify", "fa-spotify" },
-            { "bus", "fa-bus" },
-            { "coach", "fa-bus" },
-            { "charity", "fa-hand-holding-heart" },
-            { "donation", "fa-hand-holding-heart" },
-            { "aws", "fa-aws" }
-        };
+            {
+                { "phone", "fas fa-mobile-alt" },
+                { "mobile", "fas fa-mobile-alt" },
+                { "rent", "fas fa-home" },
+                { "mortgage", "fas fa-home" },
+                { "house", "fas fa-home" },
+                { "flat", "fas fa-home" },
+                { "apartment", "fas fa-home" },
+                { "gas","fas fa-burn" },
+                { "util", "fas fa-burn" },
+                { "electric", "fas fa-bolt" },
+                { "power", "fas fa-bolt" },
+                { "diesel", "fas fa-gas-pump" },
+                { "fuel", "fas fa-gas-pump" },
+                { "petrol", "fas fa-gas-pump" },
+                { "food", "fas fa-utensils" },
+                { "groceries", "fas fa-utensils" },
+                { "eat", "fas fa-utensils" },
+                { "takeaway","fas fa-utensils" },
+                { "takeaways","fas fa-utensils" },
+                { "takeout", "fas fa-utensils" },
+                { "takeouts", "fas fa-utensils" },
+                { "water", "fas fa-shower" },
+                { "car", "fas fa-car" },
+                { "van", "fas fa-car" },
+                { "internet", "fas fa-wifi" },
+                { "network", "fas fa-wifi" },
+                { "spotify", "fas fa-spotify" },
+                { "bus", "fas fa-bus" },
+                { "coach", "fas fa-bus" },
+                { "charity", "fas fa-hand-holding-heart" },
+                { "donation", "fas fa-hand-holding-heart" },
+                { "aws", "fas fa-aws" },
+                { "amazon", "fab fa-amazon" },
+                { "plex", "fas fa-film" },
+                { "video", "fas fa-film" },
+                { "movies", "fas fa-film" },
+                { "server", "fas fa-server" },
+                { "union", "fas fa-briefcase" },
+                { "microsoft", "fab fa-microsoft" },
+                { "github", "fab fa-github" },
+                { "xbox", "fab fa-xbox" },
+                { "playstation", "fab fa-playstation" },
+                { "ps4", "fab fa-playstation" }
+            };
 
         public static string GuessExpenseIcon(string input)
         {
@@ -50,7 +61,7 @@ namespace Fimly.Services
             {
                 if (_expenseIcons.TryGetValue(word, out string expenseIcon))
                 {
-                    return $"fas { expenseIcon }";
+                    return expenseIcon;
                 }
             }
 
