@@ -1,70 +1,52 @@
-﻿namespace Fimly.Services
+﻿using System;
+using System.Collections.Generic;
+
+namespace Fimly.Services
 {
     public static class IconService
     {
+        private static readonly Dictionary<string, string> _expenseIcons = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+        {
+            { "phone", "fa-mobile-alt" },
+            { "mobile", "fa-mobile-alt" },
+            { "rent", "fa-home" },
+            { "mortgage", "fa-home" },
+            { "house", "fa-home" },
+            { "flat", "fa-home" },
+            { "apartment", "fa-home" },
+            { "gas","fa-burn" },
+            { "util", "fa-burn" },
+            { "electric", "fa-bolt" },
+            { "power", "fa-bolt" },
+            { "diesel", "fa-gas-pump"},
+            { "fuel", "fa-gas-pump"},
+            { "petrol", "fa-gas-pump"},
+            { "food", "fa-utensils"},
+            { "groceries", "fa-utensils"},
+            { "eat", "fa-utensils"},
+            { "takeaway","fa-utensils" },
+            { "takeout", "fa-utensils"},
+            { "water", "fa-shower" },
+            { "car", "fa-car" },
+            { "van", "fa-car" },
+            { "internet", "fa-wifi" },
+            { "network", "fa-wifi" },
+            { "spotify", "fa-spotify" },
+            { "bus", "fa-bus" },
+            { "coach", "fa-bus" },
+            { "charity", "fa-hand-holding-heart" },
+            { "donation", "fa-hand-holding-heart" },
+            { "aws", "fa-aws" }
+        };
+
         public static string GuessExpenseIcon(string input)
         {
-            string expenseName = input.ToLower();
-            string expenseIcon;
-
-            switch (expenseName)
+            if (_expenseIcons.TryGetValue(input, out string expenseIcon))
             {
-                case string a when a.Contains("phone"):
-                case string b when b.Contains("mobile"):
-                    expenseIcon = "fas fa-mobile-alt";
-                    break;
-
-                case string a when a.Contains("rent"):
-                case string b when b.Contains("mortgage"):
-                case string c when c.Contains("house"):
-                case string d when d.Contains("flat"):
-                case string e when e.Contains("apartment"):
-                    expenseIcon = "fas fa-home";
-                    break;
-
-                case string a when a.Contains("gas"):
-                case string b when b.Contains("util"):
-                    expenseIcon = "fas fa-burn";
-                    break;
-
-                case string a when a.Contains("electric"):
-                case string b when b.Contains("power"):
-                    expenseIcon = "fas fa-bolt";
-                    break;
-
-                case string a when a.Contains("petrol"):
-                case string b when b.Contains("diesel"):
-                case string c when c.Contains("fuel"):
-                    expenseIcon = "fas fa-gas-pump";
-                    break;
-
-                case string a when a.Contains("food"):
-                case string b when b.Contains("groceries"):
-                case string c when c.Contains("eat"):
-                case string d when d.Contains("take"):
-                    expenseIcon = "fas fa-utensils";
-                    break;
-
-                case string a when a.Contains("water"):
-                    expenseIcon = "fas fa-shower";
-                    break;
-
-                case string a when a.Contains("car"):
-                case string b when b.Contains("van"):
-                    expenseIcon = "fas fa-car";
-                    break;
-
-                case string a when a.Contains("internet"):
-                case string b when b.Contains("network"):
-                    expenseIcon = "fas fa-wifi";
-                    break;
-
-                default:
-                    expenseIcon = "fas fa-money-bill-alt";
-                    break;
+                return $"fas {expenseIcon}";
             }
 
-            return expenseIcon;
+            return "fas fa-money-bill-alt";
         }
     }
 }
