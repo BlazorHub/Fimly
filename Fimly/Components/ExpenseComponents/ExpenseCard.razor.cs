@@ -24,6 +24,7 @@ namespace Fimly.Components.ExpenseComponents
         [Inject] ExpenseService ExpenseService { get; set; }
         [Inject] IToastService ToastService { get; set; }
         [Inject] IJSRuntime Js { get; set; }
+        [Inject] NavigationManager NavigationManager { get; set; }
 
         List<Expense> Expenses => Person.Expenses.OrderByDescending(e => e.Cost).ToList();
 
@@ -40,6 +41,11 @@ namespace Fimly.Components.ExpenseComponents
 
         string CurrentMonth => DateTime.Now.ToString("MMMM");
 
+        private void EditExpense(Guid expenseId)
+        {
+            NavigationManager.NavigateTo($"expenses/edit/{ expenseId }");
+        }
+
         private async Task DeleteExpenseAsync(Expense expense)
         {
             if (await Js.InvokeAsync<bool>("confirm",
@@ -48,7 +54,7 @@ namespace Fimly.Components.ExpenseComponents
             {
                 await ExpenseService.DeleteExpense(expense.Id);
 
-                ToastService.ShowSuccess($"The { expense.Name } expense has been sucessfully deleted.", "Expense Deleted");
+                ToastService.ShowSuccess($"The '{ expense.Name }' expense has been sucessfully deleted.", "Expense Deleted");
 
                 StateChanged?.Invoke();
             }

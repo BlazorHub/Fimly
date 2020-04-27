@@ -76,9 +76,14 @@
                                                         <td>@FinanceService.GetPercentageOfMonthlyExpenditure(expense, Expenses)</td>
                                                         <td>@FinanceService.FormatToConfigCurrency(UserConfig, expense.Cost)</td>
                                                         <td>
-                                                            <button type="submit" class="delete-button" @onclick="(async () => await DeleteExpenseAsync(expense))">
-                                                                <i class="far fa-trash-alt delete-icon"></i>
-                                                            </button>
+                                                            <div class="float-right">
+                                                                <button type="submit" class="edit-button mr-2" @onclick="(() => EditExpense(expense.Id))">
+                                                                    <i class="far fa-edit edit-icon dark-font"></i>
+                                                                </button>
+                                                                <button type="submit" class="delete-button" @onclick="(async () => await DeleteExpenseAsync(expense))">
+                                                                    <i class="far fa-trash-alt delete-icon"></i>
+                                                                </button>
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                 }
@@ -111,6 +116,5 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>

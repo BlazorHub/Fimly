@@ -26,12 +26,33 @@ namespace Fimly.Services
             return await _db.Expenses.Where(u => u.UserId == userId).ToListAsync();
         }
 
+        public async Task<Expense> GetExpenseAsync(Guid expenseId)
+        {
+            return await _db.Expenses.FirstOrDefaultAsync(e => e.Id == expenseId);
+        }
+
         public async Task CreateExpenseAsync(Expense expense)
         {
             _db.Expenses.Add(expense);
             await _db.SaveChangesAsync();
 
             _logger.LogInformation("A new expense has been created.");
+        }
+
+        public async Task UpdateExpenseAsync(Expense expense)
+        {
+            _db.Entry(expense).State = EntityState.Modified;
+
+            try
+            {
+                await _db.SaveChangesAsync();
+
+                _logger.LogInformation("An expense has been updated.");
+            }
+            catch (DbUpdateConcurrencyException e)
+            {
+                _logger.LogError($"An error has occurred whilst trying to update an expense: {e}");
+            }
         }
 
         public async Task DeleteAllPersonsExpenses(Guid personId)

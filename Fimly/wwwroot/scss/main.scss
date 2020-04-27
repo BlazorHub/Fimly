@@ -217,8 +217,6 @@ hr {
 }
 
 .delete-button {
-    display: block;
-    margin: auto;
     padding: 0;
     background-color: transparent;
     border: 0;
@@ -231,5 +229,20 @@ hr {
 }
 
 .delete-icon:hover {
+    opacity: .75;
+}
+
+.edit-button {
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    -webkit-appearance: none;
+}
+
+.edit-icon {
+    font-size: 1.3rem;
+}
+
+.edit-icon:hover {
     opacity: .75;
 }
