@@ -38,10 +38,31 @@ namespace Fimly.Services
         {
             var expeneses = await _db.Expenses.Where(p => p.PersonId == personId).ToListAsync();
 
+            if (expeneses.Count is 0)
+            {
+                return;
+            }
+
             _db.Expenses.RemoveRange(expeneses);
             await _db.SaveChangesAsync();
 
             _logger.LogInformation("All expenses for a person have been deleted.");
+        }
+
+        public async Task DeleteExpense(Guid id)
+        {
+            var expense = await _db.Expenses.FindAsync(id);
+
+            if (expense is null)
+            {
+                _logger.LogError("Error deleting expense: Expense not found.");
+                return;
+            }
+
+            _db.Expenses.Remove(expense);
+            await _db.SaveChangesAsync();
+
+            _logger.LogInformation("An expense has been deleted.");
         }
     }
 }

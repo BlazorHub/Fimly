@@ -57,7 +57,14 @@ namespace Fimly.Pages.Expenses
 
             await ExpenseService.CreateExpenseAsync(Expense);
 
-            ToastService.ShowSuccess($"The { Expense.Name } expense has been added for { Expense.Person.Name } successfully.", "Expense Added");
+            if (Expense.Person.IsSharedPerson)
+            {
+                ToastService.ShowSuccess($"The shared expense '{ Expense.Name }' has been added successfully.", "Expense Added");
+            }
+            else
+            {
+                ToastService.ShowSuccess($"The '{ Expense.Name }' expense for { Expense.Person.Name } has been added successfully.", "Expense Added");
+            }
 
             NavigationManager.NavigateTo("expenses");
         }

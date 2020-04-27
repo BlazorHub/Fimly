@@ -88,10 +88,9 @@ namespace Fimly.Services
         {
             var person = await _db.People.FindAsync(id);
 
-            if (person == null)
+            if (person is null)
             {
                 _logger.LogError("Error deleting person: Person not found.");
-
                 return;
             }
 

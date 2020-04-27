@@ -32,10 +32,14 @@
                                 }
                                 else
                                 {
-                                    <p>This person dosen't have any individual expenses.</p>
+                                    <p>@Person.Name dosen't have any individual expenses yet.</p>
                                 }
 
-                                <p><a href="/expenses/new">Add a new expense.</a></p>
+                                <a href="/expenses/new" class="btn btn-success primary-font shadow-sm mt-3">
+                                    New Expense
+                                    <i class="fas fa-plus ml-1"></i>
+                                </a>
+
                             </div>
                         }
                         else
@@ -71,6 +75,11 @@
                                                         <td>@expense.Name</td>
                                                         <td>@FinanceService.GetPercentageOfMonthlyExpenditure(expense, Expenses)</td>
                                                         <td>@FinanceService.FormatToConfigCurrency(UserConfig, expense.Cost)</td>
+                                                        <td>
+                                                            <button type="submit" class="delete-button" @onclick="(async () => await DeleteExpenseAsync(expense))">
+                                                                <i class="far fa-trash-alt delete-icon"></i>
+                                                            </button>
+                                                        </td>
                                                     </tr>
                                                 }
                                             </tbody>
