@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fimly.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200426215946_AddIconStringToExpenseType")]
-    partial class AddIconStringToExpenseType
+    [Migration("20200427235824_InitialiseDb")]
+    partial class InitialiseDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -250,66 +250,14 @@ namespace Fimly.Data.Migrations
                         .HasColumnType("varchar(100) CHARACTER SET utf8mb4")
                         .HasMaxLength(100);
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("varchar(200) CHARACTER SET utf8mb4")
+                        .HasMaxLength(200);
+
                     b.HasKey("Id");
 
                     b.ToTable("ExpenseTypes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("6fa19252-ee8a-4adf-9812-c91c23af3dfe"),
-                            Name = "Bills & Services"
-                        },
-                        new
-                        {
-                            Id = new Guid("3b5f8a03-8fb8-44bb-bba5-c1edaa32d5a8"),
-                            Name = "Entertainment"
-                        },
-                        new
-                        {
-                            Id = new Guid("e71abd2c-58f9-4fdd-b11f-7cc61d311ae3"),
-                            Name = "Transport"
-                        },
-                        new
-                        {
-                            Id = new Guid("2e3728eb-1f4a-42d3-b9d9-ee06be18194f"),
-                            Name = "Groceries"
-                        },
-                        new
-                        {
-                            Id = new Guid("63f61c36-4a68-4502-ba73-b70e1c8ed49b"),
-                            Name = "Home"
-                        },
-                        new
-                        {
-                            Id = new Guid("a577019e-7a06-4370-b38a-0d18d3e04aad"),
-                            Name = "Eating Out"
-                        },
-                        new
-                        {
-                            Id = new Guid("20f39efe-5dbb-4890-baf6-eac8035d38fc"),
-                            Name = "Family"
-                        },
-                        new
-                        {
-                            Id = new Guid("92de237c-0a45-4515-b431-bf80f7b89ca7"),
-                            Name = "General"
-                        },
-                        new
-                        {
-                            Id = new Guid("1131d46e-7865-49e6-8016-6e86927b1cc7"),
-                            Name = "Lifestyle"
-                        },
-                        new
-                        {
-                            Id = new Guid("4f1f9c31-ddf4-4188-8484-c63fbc44f897"),
-                            Name = "Shopping"
-                        },
-                        new
-                        {
-                            Id = new Guid("1c02667a-a957-428f-a82d-29ec1f3ef27c"),
-                            Name = "Holidays"
-                        });
                 });
 
             modelBuilder.Entity("Fimly.Data.Models.Person", b =>

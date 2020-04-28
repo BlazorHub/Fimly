@@ -248,77 +248,14 @@ namespace Fimly.Data.Migrations
                         .HasColumnType("varchar(100) CHARACTER SET utf8mb4")
                         .HasMaxLength(100);
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("varchar(200) CHARACTER SET utf8mb4")
+                        .HasMaxLength(200);
+
                     b.HasKey("Id");
 
                     b.ToTable("ExpenseTypes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("02ee3adc-23f0-4b58-a2ce-b04c4b45a46c"),
-                            Icon = "fas fa-money-bill-wave",
-                            Name = "Bills & Services"
-                        },
-                        new
-                        {
-                            Id = new Guid("5bbe46e7-5bba-4106-8542-7ccf5ea2deba"),
-                            Icon = "fas fa-glass-cheers",
-                            Name = "Entertainment"
-                        },
-                        new
-                        {
-                            Id = new Guid("f02ed8c0-0e2f-40ec-8a1e-d76238aaf912"),
-                            Icon = "fas fa-bus-alt",
-                            Name = "Transport"
-                        },
-                        new
-                        {
-                            Id = new Guid("7d259015-f216-4f6e-89e9-524d72dfd0ae"),
-                            Icon = "fas fa-utensils",
-                            Name = "Groceries"
-                        },
-                        new
-                        {
-                            Id = new Guid("42038d52-b386-4d75-9de4-727b50c39b15"),
-                            Icon = "fas fa-home",
-                            Name = "Home"
-                        },
-                        new
-                        {
-                            Id = new Guid("ef24a264-8b0f-4b98-be71-154ef02dd69a"),
-                            Icon = "fas fa-pizza-slice",
-                            Name = "Eating Out"
-                        },
-                        new
-                        {
-                            Id = new Guid("501cc4aa-6643-4344-b51e-ca920fc2eab3"),
-                            Icon = "fas fa-users",
-                            Name = "Family"
-                        },
-                        new
-                        {
-                            Id = new Guid("b7dbd109-fa4f-4fbe-931f-83c5eb90b924"),
-                            Icon = "fas fa-money-check",
-                            Name = "General"
-                        },
-                        new
-                        {
-                            Id = new Guid("2fee3146-a43b-4029-ab9d-05961e766499"),
-                            Icon = "fas fa-heartbeat",
-                            Name = "Lifestyle"
-                        },
-                        new
-                        {
-                            Id = new Guid("fe648741-de4d-4588-8ef1-bff391e1b4d1"),
-                            Icon = "fas fa-shopping-basket",
-                            Name = "Shopping"
-                        },
-                        new
-                        {
-                            Id = new Guid("1f940484-dd20-4fc9-8f70-649812dfa491"),
-                            Icon = "fas fa-plane",
-                            Name = "Holidays"
-                        });
                 });
 
             modelBuilder.Entity("Fimly.Data.Models.Person", b =>

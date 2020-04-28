@@ -70,7 +70,9 @@ namespace Fimly.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    Name = table.Column<string>(maxLength: 100, nullable: false)
+                    UserId = table.Column<string>(maxLength: 200, nullable: false),
+                    Name = table.Column<string>(maxLength: 100, nullable: false),
+                    Icon = table.Column<string>(maxLength: 50, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -229,7 +231,8 @@ namespace Fimly.Data.Migrations
                     Cost = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
                     IsRecurring = table.Column<bool>(nullable: false),
                     DateAdded = table.Column<DateTime>(nullable: false),
-                    DateDue = table.Column<DateTime>(nullable: true)
+                    DateDue = table.Column<DateTime>(nullable: true),
+                    Icon = table.Column<string>(maxLength: 50, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -261,24 +264,6 @@ namespace Fimly.Data.Migrations
                     { 6, "SAR", "﷼" },
                     { 7, "RUB", "₽" },
                     { 8, "ZAR", "R" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "ExpenseTypes",
-                columns: new[] { "Id", "Name" },
-                values: new object[,]
-                {
-                    { new Guid("451c7750-44ad-4bfa-9703-6a87a0e915c5"), "Lifestyle" },
-                    { new Guid("632f2426-b4c7-4f86-8e3e-cdd2576c64cc"), "General" },
-                    { new Guid("65cca374-9d2c-4139-a4ee-daa19a6a6ca9"), "Family" },
-                    { new Guid("9d4f2eb3-2c32-4e8f-8487-e7764efe3acb"), "Eating Out" },
-                    { new Guid("0f983319-e8de-4db6-bb96-4aedf988e543"), "Entertainment" },
-                    { new Guid("66cdb77b-3a4f-4741-9935-1b434f333839"), "Groceries" },
-                    { new Guid("e8679c34-17a1-4237-ac58-5cd41a19245b"), "Transport" },
-                    { new Guid("45e6658d-3485-4e6f-8ab6-75715daffc15"), "Shopping" },
-                    { new Guid("e8d751ee-3c3e-4432-8a38-2ddaec09a2eb"), "Bills & Services" },
-                    { new Guid("a41ddee7-6395-41fc-8cec-4dc8c0b832bd"), "Home" },
-                    { new Guid("90db6e6e-bb1a-4784-b6fd-e378b6be6885"), "Holidays" }
                 });
 
             migrationBuilder.CreateIndex(
