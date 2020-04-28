@@ -2,7 +2,7 @@
     <div class="card shadow zoom">
 
         <div class="card-header">
-            <h4 class="dark-font mt-2 ml-2">
+            <h5 class="dark-font mt-2 ml-2">
                 @if (Person.IsSharedPerson)
                 {
                     <span>Shared Expenses</span>
@@ -11,7 +11,7 @@
                 {
                     <span>@Person.Name's Expenses</span>
                 }
-            </h4>
+            </h5>
         </div>
 
         <div class="card-body">
@@ -75,7 +75,7 @@
                                                         <td>@expense.Name</td>
                                                         <td>@FinanceService.GetPercentageOfMonthlyExpenditure(expense, Expenses)</td>
                                                         <td>@FinanceService.FormatToConfigCurrency(UserConfig, expense.Cost)</td>
-                                                        <td>
+                                                        <td style="white-space:nowrap; width: 1%">
                                                             <div class="float-right">
                                                                 <button type="submit" class="edit-button mr-2" @onclick="(() => EditExpense(expense.Id))">
                                                                     <i class="far fa-edit edit-icon dark-font"></i>

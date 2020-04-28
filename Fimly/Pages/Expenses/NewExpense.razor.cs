@@ -40,6 +40,11 @@ namespace Fimly.Pages.Expenses
             People = await PersonService.GetPeopleAndSharedAsync(CurrentUser.Id);
             ExpenseTypes = await ExpenseTypeService.GetExpenseTypesAsync();
 
+            if (People.Count <= 1)
+            {
+                NavigationManager.NavigateTo("expenses");
+            }
+
             Expense = new Expense
             {
                 Name = "",

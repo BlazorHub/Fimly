@@ -15,14 +15,17 @@ else
                     <p class="dark-font">Manage your individual or household expenses.</p>
                 </div>
 
-                <div class="col my-auto">
-                    <div class="float-right">
-                        <a href="/expenses/new" class="btn btn-success primary-font shadow-sm">
-                            New Expense
-                            <i class="fas fa-plus ml-1"></i>
-                        </a>
+                @if (People.Count != 0)
+                {
+                    <div class="col my-auto">
+                        <div class="float-right">
+                            <a href="/expenses/new" class="btn btn-success primary-font shadow-sm">
+                                New Expense
+                                <i class="fas fa-plus ml-1"></i>
+                            </a>
+                        </div>
                     </div>
-                </div>
+                }
             </div>
 
             <nav aria-label="breadcrumb">

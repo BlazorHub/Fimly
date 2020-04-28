@@ -45,6 +45,11 @@ namespace Fimly.Pages.Expenses
         {
             People = await PersonService.GetPeopleAndSharedAsync(CurrentUser.Id);
 
+            if (People.Count <= 2)
+            {
+                People.RemoveAll(p => p.IsSharedPerson);
+            }
+
             StateHasChanged();
         }
     }
