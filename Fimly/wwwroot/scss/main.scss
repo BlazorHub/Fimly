@@ -1,8 +1,6 @@
 ﻿@import "_animations.scss";
-@import "_variables.scss";
-@import "_sidebar.scss";
 @import "_overrides.scss";
-@import "_expenseCard.scss";
+@import "components.scss";
 
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap');
 
@@ -165,15 +163,6 @@ app {
 
 .height-70 {
     height: 73vh !important;
-}
-
-.sort-column {
-    cursor: pointer;
-    color: #007bff;
-}
-
-.sort-column:hover {
-    text-decoration: underline;
 }
 
 .footer {

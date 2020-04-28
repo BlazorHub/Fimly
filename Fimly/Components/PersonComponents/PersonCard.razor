@@ -2,12 +2,12 @@
     <div class="card-body">
         <div class="row">
             <div class="col">
-                <button type="submit" class="close float-right" @onclick="(async () => await DeletePersonAsync(Person))">
-                    <span aria-hidden="true" style="color:red">&times;</span>
+                <button type="submit" class="delete-button float-right" @onclick="(async () => await DeletePersonAsync(Person))">
+                    <i class="far fa-trash-alt delete-icon"></i>
                 </button>
 
-                <button type="submit" class="@EditButtonCssClass close float-left" @onclick="(() => OnEditClick())">
-                    <i class="far fa-edit"></i>
+                <button type="submit" class="@EditButtonCssClass edit-button float-left" @onclick="(() => OnEditClick())">
+                    <i class="far fa-edit edit-icon"></i>
 
                     @if (IsEditing)
                     {

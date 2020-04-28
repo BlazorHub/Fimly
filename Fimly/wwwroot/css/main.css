@@ -44,55 +44,6 @@
   to {
     opacity: 1; } }
 
-.sidebar {
-  background-color: #424242; }
-
-.sidebar .top-row {
-  background-color: rgba(0, 0, 0, 0.4); }
-
-.sidebar .navbar-brand {
-  font-size: 1.1rem; }
-
-.sidebar .oi {
-  width: 2rem;
-  font-size: 1.1rem;
-  vertical-align: text-top;
-  top: -2px; }
-
-.sidebar .nav-item {
-  font-size: 0.9rem;
-  padding-bottom: 0.5rem; }
-
-.sidebar .nav-item:first-of-type {
-  padding-top: 1rem; }
-
-.sidebar .nav-item:last-of-type {
-  padding-bottom: 1rem; }
-
-.middle-last-nav-item {
-  flex-grow: 1; }
-
-.sidebar .nav-item a {
-  color: black;
-  border-radius: 2rem;
-  height: 3rem;
-  display: flex;
-  align-items: center;
-  line-height: 3rem; }
-
-.sidebar .nav-item a.active {
-  background-color: rgba(255, 255, 255, 0.35);
-  color: rgba(0, 0, 0, 0.85) !important;
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important; }
-
-.sidebar .nav-item a:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.9) !important;
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important; }
-
-.nav-icon {
-  font-size: 1.3rem; }
-
 .btn {
   border-radius: 2.3rem; }
 
@@ -186,11 +137,60 @@
   border: 0;
   -webkit-appearance: none; }
 
+.edit-button:hover {
+  opacity: .75; }
+
 .edit-icon {
   font-size: 1.3rem; }
 
-.edit-icon:hover {
-  opacity: .75; }
+.sidebar {
+  background-color: #424242; }
+
+.sidebar .top-row {
+  background-color: rgba(0, 0, 0, 0.4); }
+
+.sidebar .navbar-brand {
+  font-size: 1.1rem; }
+
+.sidebar .oi {
+  width: 2rem;
+  font-size: 1.1rem;
+  vertical-align: text-top;
+  top: -2px; }
+
+.sidebar .nav-item {
+  font-size: 0.9rem;
+  padding-bottom: 0.5rem; }
+
+.sidebar .nav-item:first-of-type {
+  padding-top: 1rem; }
+
+.sidebar .nav-item:last-of-type {
+  padding-bottom: 1rem; }
+
+.middle-last-nav-item {
+  flex-grow: 1; }
+
+.sidebar .nav-item a {
+  color: black;
+  border-radius: 2rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  line-height: 3rem; }
+
+.sidebar .nav-item a.active {
+  background-color: rgba(255, 255, 255, 0.35);
+  color: rgba(0, 0, 0, 0.85) !important;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important; }
+
+.sidebar .nav-item a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9) !important;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important; }
+
+.nav-icon {
+  font-size: 1.3rem; }
 
 * {
   -webkit-font-smoothing: antialiased;
@@ -315,13 +315,6 @@ app {
 
 .height-70 {
   height: 73vh !important; }
-
-.sort-column {
-  cursor: pointer;
-  color: #007bff; }
-
-.sort-column:hover {
-  text-decoration: underline; }
 
 .footer {
   position: absolute;

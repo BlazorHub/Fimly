@@ -72,7 +72,7 @@
                                                         <td>@FinanceService.FormatToConfigCurrency(UserConfig, expense.Cost)</td>
                                                         <td class="@HidePercentage(expense.Id)">@FinanceService.GetPercentageOfMonthlyExpenditure(expense, Expenses)</td>
 
-                                                        <td class="expense-crud-buttons @GetButtonCss(expense.Id)">
+                                                        <td class="@GetButtonCss(expense.Id)">
                                                             <div class="float-right">
                                                                 <button type="submit" class="edit-button mr-2" @onclick="(() => EditExpense(expense.Id))">
                                                                     <i class="far fa-edit edit-icon dark-font"></i>
