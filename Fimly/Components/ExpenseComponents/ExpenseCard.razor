@@ -58,7 +58,7 @@
                             <div class="mb-4">
                                 <TabControl>
                                     <TabPage Text="Expenses">
-                                        <table class="table">
+                                        <table class="table expense-table">
                                             <tbody>
                                                 @foreach (Expense expense in Expenses)
                                                 {
@@ -99,8 +99,8 @@
                                                             </p>
                                                         </td>
                                                         <td>@expense.Name</td>
-                                                        <td>@FinanceService.GetPercentageOfMonthlyExpenditure(expense, Expenses)</td>
                                                         <td>@FinanceService.FormatToConfigCurrency(UserConfig, expense.Cost)</td>
+                                                        <td>@FinanceService.GetPercentageOfMonthlyExpenditure(expense, Expenses)</td>
                                                     </tr>
                                                 }
                                             </tbody>
