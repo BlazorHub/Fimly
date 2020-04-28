@@ -44,11 +44,10 @@ namespace Fimly
             }
 
             services.AddDbContext<ApplicationDbContext>(options =>
-            {
                 options.UseMySql($"server={host}; userid={dbUser}; pwd={dbPassword}; port={port}; database={dbName}",
-                    providerOptions => providerOptions.EnableRetryOnFailure()
-                );
-            });
+                    providerOptions => providerOptions.EnableRetryOnFailure()),
+                ServiceLifetime.Transient
+            );
 
             services.AddDefaultIdentity<AppUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();

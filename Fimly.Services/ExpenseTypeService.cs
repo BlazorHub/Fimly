@@ -1,6 +1,7 @@
 ﻿using Fimly.Data;
 using Fimly.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -11,19 +12,22 @@ namespace Fimly.Services
 {
     public class ExpenseTypeService
     {
-        private readonly ApplicationDbContext _db;
+        private readonly IServiceProvider _serviceProvider;
         private readonly ILogger<ExpenseTypeService> _logger;
 
-        public ExpenseTypeService(ApplicationDbContext db,
+        public ExpenseTypeService(IServiceProvider serviceProvider,
             ILogger<ExpenseTypeService> logger)
         {
-            _db = db;
+            _serviceProvider = serviceProvider;
             _logger = logger;
         }
 
         public async Task<List<ExpenseType>> GetExpenseTypesAsync()
         {
-            return await _db.ExpenseTypes.OrderBy(e => e.Name).ToListAsync();
+            using (var context = _serviceProvider.GetRequiredService<ApplicationDbContext>())
+            {
+                return await context.ExpenseTypes.OrderBy(e => e.Name).ToListAsync();
+            }
         }
 
         public async Task SeedDefaultExpenseTypesAsync(string userId)
@@ -43,10 +47,13 @@ namespace Fimly.Services
                 new ExpenseType { Id = Guid.NewGuid(), UserId = userId, Name = "Holidays", Icon = "fas fa-plane" }
             };
 
-            _db.ExpenseTypes.AddRange(seedExpenseTypes);
-            await _db.SaveChangesAsync();
+            using (var context = _serviceProvider.GetRequiredService<ApplicationDbContext>())
+            {
+                context.ExpenseTypes.AddRange(seedExpenseTypes);
+                await context.SaveChangesAsync();
 
-            _logger.LogInformation("Default expense types seeded.");
+                _logger.LogInformation("Default expense types seeded.");
+            }
         }
     }
 }
