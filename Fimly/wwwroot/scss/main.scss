@@ -2,6 +2,7 @@
 @import "_variables.scss";
 @import "_sidebar.scss";
 @import "_overrides.scss";
+@import "_expenseCard.scss";
 
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap');
 
@@ -210,39 +211,4 @@ hr {
 
 .checkbox-col {
     padding-top: 2rem !important;
-}
-
-.expense-icon {
-    font-size: 1.5rem;
-}
-
-.delete-button {
-    padding: 0;
-    background-color: transparent;
-    border: 0;
-    -webkit-appearance: none;
-}
-
-.delete-icon {
-    font-size: 1.3rem;
-    color: red;
-}
-
-.delete-icon:hover {
-    opacity: .75;
-}
-
-.edit-button {
-    padding: 0;
-    background-color: transparent;
-    border: 0;
-    -webkit-appearance: none;
-}
-
-.edit-icon {
-    font-size: 1.3rem;
-}
-
-.edit-icon:hover {
-    opacity: .75;
 }

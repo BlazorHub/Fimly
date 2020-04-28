@@ -47,15 +47,11 @@
                             <div class="text-center dark-font mt-4 mb-4">
                                 @if (Person.IsSharedPerson)
                                 {
-                                    <p>
-                                        There are <strong>@FinanceService.FormatToConfigCurrency(UserConfig, Person.Expenses.Sum(e => e.Cost))</strong> shared expenses in @CurrentMonth.
-                                    </p>
+                                    <p>There are <strong>@FinanceService.FormatToConfigCurrency(UserConfig, Person.Expenses.Sum(e => e.Cost))</strong> shared expenses in @CurrentMonth.</p>
                                 }
                                 else
                                 {
-                                    <p>
-                                        @Person.Name will spend <strong>@FinanceService.FormatToConfigCurrency(UserConfig, Person.Expenses.Sum(e => e.Cost))</strong> in @CurrentMonth.
-                                    </p>
+                                    <p>@Person.Name will spend <strong>@FinanceService.FormatToConfigCurrency(UserConfig, Person.Expenses.Sum(e => e.Cost))</strong> in @CurrentMonth.</p>
                                 }
                             </div>
 
@@ -66,16 +62,17 @@
                                             <tbody>
                                                 @foreach (Expense expense in Expenses)
                                                 {
-                                                    <tr>
+                                                    <tr class="expense-row" @onmouseover="(() => ShowButtons(expense.Id))" @onmouseout="(() => HideButtons())">
                                                         <td>
                                                             <p class="text-center dark-font mb-0">
                                                                 <i class="@expense.Icon expense-icon"></i>
                                                             </p>
                                                         </td>
                                                         <td>@expense.Name</td>
-                                                        <td>@FinanceService.GetPercentageOfMonthlyExpenditure(expense, Expenses)</td>
                                                         <td>@FinanceService.FormatToConfigCurrency(UserConfig, expense.Cost)</td>
-                                                        <td style="white-space:nowrap; width: 1%">
+                                                        <td class="@HidePercentage(expense.Id)">@FinanceService.GetPercentageOfMonthlyExpenditure(expense, Expenses)</td>
+
+                                                        <td class="expense-crud-buttons @GetButtonCss(expense.Id)">
                                                             <div class="float-right">
                                                                 <button type="submit" class="edit-button mr-2" @onclick="(() => EditExpense(expense.Id))">
                                                                     <i class="far fa-edit edit-icon dark-font"></i>

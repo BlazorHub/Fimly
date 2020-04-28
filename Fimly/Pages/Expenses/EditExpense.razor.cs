@@ -4,6 +4,7 @@ using Fimly.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,7 @@ namespace Fimly.Pages.Expenses
         [Inject] PersonService PersonService { get; set; }
         [Inject] IToastService ToastService { get; set; }
         [Inject] NavigationManager NavigationManager { get; set; }
+        [Inject] IJSRuntime Js { get; set; }
 
         AppUser CurrentUser;
         Config UserConfig;
@@ -59,6 +61,20 @@ namespace Fimly.Pages.Expenses
             catch
             {
                 ToastService.ShowError($"Something went wrong updating the '{ Expense.Name }' expense.", "Update Error");
+            }
+        }
+
+        private async Task DeleteExpenseAsync()
+        {
+            if (await Js.InvokeAsync<bool>("confirm",
+                "Are you sure you want to delete this expense? " +
+                "This action cannot be undone."))
+            {
+                await ExpenseService.DeleteExpense(Expense.Id);
+
+                ToastService.ShowSuccess($"The '{ Expense.Name }' expense has been sucessfully deleted.", "Expense Deleted");
+
+                NavigationManager.NavigateTo("expenses");
             }
         }
     }

@@ -2,6 +2,7 @@
 using Fimly.Data.Models;
 using Fimly.Services;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
@@ -41,9 +42,45 @@ namespace Fimly.Components.ExpenseComponents
 
         string CurrentMonth => DateTime.Now.ToString("MMMM");
 
+        Guid ExpenseRowId;
+
+        private void ShowButtons(Guid expenseId)
+        {
+            ExpenseRowId = expenseId;
+        }
+
+        private void HideButtons()
+        {
+            ExpenseRowId = Guid.Empty;
+        }
+
+        private string GetButtonCss(Guid expenseId)
+        {
+            if (ExpenseRowId == expenseId)
+            {
+                return string.Empty;
+            }
+            else
+            {
+                return "d-none";
+            }
+        }
+
+        private string HidePercentage(Guid expenseId)
+        {
+            if (ExpenseRowId == expenseId)
+            {
+                return "d-none";
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
+
         private void EditExpense(Guid expenseId)
         {
-            NavigationManager.NavigateTo($"expenses/edit/{ expenseId }");
+            NavigationManager.NavigateTo($"expenses/edit/{expenseId}");
         }
 
         private async Task DeleteExpenseAsync(Expense expense)
