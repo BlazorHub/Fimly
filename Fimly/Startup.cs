@@ -58,6 +58,7 @@ namespace Fimly
 
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
 
+            services.AddTransient<AccountService>();
             services.AddTransient<ConfigService>();
             services.AddTransient<CurrencyService>();
             services.AddTransient<ExpenseService>();

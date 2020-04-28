@@ -21,24 +21,18 @@ namespace Fimly.Areas.Identity.Pages.Account
         private readonly SignInManager<AppUser> _signInManager;
         private readonly UserManager<AppUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
-        private readonly IEmailSender _emailSender;
-        private readonly ConfigService _configService;
-        private readonly PersonService _personService;
+        private readonly AccountService _accountService;
 
         public RegisterModel(
             UserManager<AppUser> userManager,
             SignInManager<AppUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender,
-            ConfigService configService,
-            PersonService personService)
+            AccountService accountService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
-            _emailSender = emailSender;
-            _configService = configService;
-            _personService = personService;
+            _accountService = accountService;
         }
 
         [BindProperty]
@@ -98,8 +92,7 @@ namespace Fimly.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account.");
 
-                    await _configService.CreateDefaultConfigAsync(user.Id);
-                    await _personService.CreateSharedExpensesPerson(user.Id);
+                    await _accountService.InitialiseAccount(user.Id);
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
