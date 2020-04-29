@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Fimly.Pages.Expenses
@@ -17,21 +16,21 @@ namespace Fimly.Pages.Expenses
         [Parameter]
         public string ExpenseId { get; set; }
 
-        [Inject] AuthenticationStateProvider AuthenticationStateProvider { get; set; }
-        [Inject] UserManager<AppUser> UserManager { get; set; }
-        [Inject] ConfigService ConfigService { get; set; }
-        [Inject] ExpenseService ExpenseService { get; set; }
-        [Inject] ExpenseTypeService ExpenseTypeService { get; set; }
-        [Inject] PersonService PersonService { get; set; }
-        [Inject] IToastService ToastService { get; set; }
-        [Inject] NavigationManager NavigationManager { get; set; }
-        [Inject] IJSRuntime Js { get; set; }
+        [Inject] private AuthenticationStateProvider AuthenticationStateProvider { get; set; }
+        [Inject] private UserManager<AppUser> UserManager { get; set; }
+        [Inject] private ConfigService ConfigService { get; set; }
+        [Inject] private ExpenseService ExpenseService { get; set; }
+        [Inject] private ExpenseTypeService ExpenseTypeService { get; set; }
+        [Inject] private PersonService PersonService { get; set; }
+        [Inject] private IToastService ToastService { get; set; }
+        [Inject] private NavigationManager NavigationManager { get; set; }
+        [Inject] private IJSRuntime Js { get; set; }
 
-        AppUser CurrentUser;
-        Config UserConfig;
-        List<ExpenseType> ExpenseTypes;
-        List<Person> People;
-        Expense Expense;
+        private AppUser CurrentUser;
+        private Config UserConfig;
+        private List<ExpenseType> ExpenseTypes;
+        private List<Person> People;
+        private Expense Expense;
 
         protected override async Task OnInitializedAsync()
         {

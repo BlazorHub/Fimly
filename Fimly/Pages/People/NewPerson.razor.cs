@@ -12,17 +12,16 @@ namespace Fimly.Pages.People
     [Authorize]
     public partial class NewPerson : ComponentBase
     {
-        [Inject] AuthenticationStateProvider AuthenticationStateProvider { get; set; }
-        [Inject] UserManager<AppUser> UserManager { get; set; }
-        [Inject] ConfigService ConfigService { get; set; }
-        [Inject] PersonService PersonService { get; set; }
-        [Inject] NavigationManager NavigationManager { get; set; }
-        [Inject] IToastService ToastService { get; set; }
+        [Inject] private AuthenticationStateProvider AuthenticationStateProvider { get; set; }
+        [Inject] private UserManager<AppUser> UserManager { get; set; }
+        [Inject] private ConfigService ConfigService { get; set; }
+        [Inject] private PersonService PersonService { get; set; }
+        [Inject] private NavigationManager NavigationManager { get; set; }
+        [Inject] private IToastService ToastService { get; set; }
 
         protected AppUser CurrentUser;
         protected Config UserConfig;
-
-        Person Person;
+        private Person Person;
 
         protected override async Task OnInitializedAsync()
         {

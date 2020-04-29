@@ -13,10 +13,10 @@ namespace Fimly.Pages.People
     [Authorize]
     public partial class People : ComponentBase
     {
-        [Inject] AuthenticationStateProvider AuthenticationStateProvider { get; set; }
-        [Inject] UserManager<AppUser> UserManager { get; set; }
-        [Inject] ConfigService ConfigService { get; set; }
-        [Inject] PersonService PersonService { get; set; }
+        [Inject] private AuthenticationStateProvider AuthenticationStateProvider { get; set; }
+        [Inject] private UserManager<AppUser> UserManager { get; set; }
+        [Inject] private ConfigService ConfigService { get; set; }
+        [Inject] private PersonService PersonService { get; set; }
 
         private AppUser CurrentUser;
         private Config UserConfig;

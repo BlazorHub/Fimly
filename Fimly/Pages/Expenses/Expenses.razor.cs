@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Threading.Tasks;
 
 namespace Fimly.Pages.Expenses
@@ -12,18 +14,19 @@ namespace Fimly.Pages.Expenses
     [Authorize]
     public partial class Expenses : ComponentBase
     {
-        [Inject] AuthenticationStateProvider AuthenticationStateProvider { get; set; }
-        [Inject] UserManager<AppUser> UserManager { get; set; }
-        [Inject] ConfigService ConfigService { get; set; }
-        [Inject] PersonService PersonService { get; set; }
-        [Inject] ExpenseTypeService ExpenseTypeService { get; set; }
+        [Inject] private AuthenticationStateProvider AuthenticationStateProvider { get; set; }
+        [Inject] private UserManager<AppUser> UserManager { get; set; }
+        [Inject] private ConfigService ConfigService { get; set; }
+        [Inject] private PersonService PersonService { get; set; }
+        [Inject] private ExpenseTypeService ExpenseTypeService { get; set; }
 
         private AppUser CurrentUser;
         private Config UserConfig;
         private List<Person> People;
         private List<ExpenseType> ExpenseTypes;
-
         private double AnimationDelay = 0.2;
+        private string[] Months = DateTimeFormatInfo.CurrentInfo.MonthNames;
+        private string FilterMonth;
 
         protected override async Task OnInitializedAsync()
         {
@@ -34,6 +37,7 @@ namespace Fimly.Pages.Expenses
             UserConfig = await ConfigService.GetUserConfigAsync(CurrentUser.Id);
             People = await PersonService.GetPeopleAndSharedAsync(CurrentUser.Id);
             ExpenseTypes = await ExpenseTypeService.GetExpenseTypesAsync();
+            FilterMonth = DateTime.UtcNow.ToString("MMMM");
 
             if (People.Count <= 2)
             {

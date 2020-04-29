@@ -48,6 +48,25 @@ else
                         }
                         else
                         {
+                            <div class="dropdown">
+                                <button class="btn btn-success primary-font dropdown-toggle" type="button" id="monthSelection" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    @FilterMonth
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="monthSelection">
+                                    @for (int i = 0; i < Months.Length; i++)
+                                    {
+                                        @if (Months[i] == FilterMonth)
+                                        {
+                                            <a class="dropdown-item active-dropdown primary-font" href="#">@Months[i]</a>
+                                        }
+                                        else
+                                        {
+                                            <a class="dropdown-item" href="#">@Months[i]</a>
+                                        }
+                                    }
+                                </div>
+                            </div>
+
                             foreach (Person person in People)
                             {
                                 <Animate Delay="TimeSpan.FromSeconds(AnimationDelay)">

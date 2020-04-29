@@ -3,7 +3,6 @@ using Fimly.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -11,11 +10,11 @@ namespace Fimly.Components
 {
     public partial class HouseholdOverview : ComponentBase
     {
-        [Inject] AuthenticationStateProvider AuthenticationStateProvider { get; set; }
-        [Inject] UserManager<AppUser> UserManager { get; set; }
-        [Inject] ConfigService ConfigService { get; set; }
-        [Inject] ExpenseService ExpenseService { get; set; }
-        [Inject] PersonService PersonService { get; set; }
+        [Inject] private AuthenticationStateProvider AuthenticationStateProvider { get; set; }
+        [Inject] private UserManager<AppUser> UserManager { get; set; }
+        [Inject] private ConfigService ConfigService { get; set; }
+        [Inject] private ExpenseService ExpenseService { get; set; }
+        [Inject] private PersonService PersonService { get; set; }
 
         private AppUser CurrentUser;
         private Config UserConfig;
