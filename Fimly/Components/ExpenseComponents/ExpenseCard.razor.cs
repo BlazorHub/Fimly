@@ -2,7 +2,6 @@
 using Fimly.Data.Models;
 using Fimly.Services;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
@@ -13,8 +12,8 @@ namespace Fimly.Components.ExpenseComponents
 {
     public partial class ExpenseCard : ComponentBase
     {
-        [CascadingParameter] Config UserConfig { get; set; }
-        [CascadingParameter] List<ExpenseType> ExpenseTypes { get; set; }
+        [CascadingParameter] private Config UserConfig { get; set; }
+        [CascadingParameter] private List<ExpenseType> ExpenseTypes { get; set; }
 
         [Parameter]
         public Person Person { get; set; }
@@ -22,14 +21,14 @@ namespace Fimly.Components.ExpenseComponents
         [Parameter]
         public Action StateChanged { get; set; }
 
-        [Inject] ExpenseService ExpenseService { get; set; }
-        [Inject] IToastService ToastService { get; set; }
-        [Inject] IJSRuntime Js { get; set; }
-        [Inject] NavigationManager NavigationManager { get; set; }
+        [Inject] private ExpenseService ExpenseService { get; set; }
+        [Inject] private IToastService ToastService { get; set; }
+        [Inject] private IJSRuntime Js { get; set; }
+        [Inject] private NavigationManager NavigationManager { get; set; }
 
-        List<Expense> Expenses => Person.Expenses.OrderByDescending(e => e.Cost).ToList();
+        private List<Expense> Expenses;
 
-        List<Expense> ExpensesByCategory =>
+        private List<Expense> ExpensesByCategory =>
             (from ol in Person.Expenses
              group ol by ol.ExpenseType.Name
                 into category
@@ -40,9 +39,14 @@ namespace Fimly.Components.ExpenseComponents
                  Icon = category.Select(ex => ex.ExpenseType.Icon).FirstOrDefault()
              }).OrderByDescending(e => e.Cost).ToList();
 
-        string CurrentMonth => DateTime.Now.ToString("MMMM");
+        private string CurrentMonth => DateTime.Now.ToString("MMMM");
 
-        Guid ExpenseRowId;
+        private Guid ExpenseRowId;
+
+        protected override async Task OnInitializedAsync()
+        {
+            Expenses = await ExpenseService.GetPersonsExpensesByMonth(Person.Id, CurrentMonth);
+        }
 
         private void ShowButtons(Guid expenseId)
         {
@@ -93,7 +97,7 @@ namespace Fimly.Components.ExpenseComponents
 
                 ToastService.ShowSuccess($"The '{ expense.Name }' expense has been sucessfully deleted.", "Expense Deleted");
 
-                StateChanged?.Invoke();
+                Expenses.Remove(expense);
             }
         }
     }

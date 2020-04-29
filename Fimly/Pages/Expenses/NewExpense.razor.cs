@@ -15,20 +15,20 @@ namespace Fimly.Pages.Expenses
     [Authorize]
     public partial class NewExpense : ComponentBase
     {
-        [Inject] AuthenticationStateProvider AuthenticationStateProvider { get; set; }
-        [Inject] UserManager<AppUser> UserManager { get; set; }
-        [Inject] ConfigService ConfigService { get; set; }
-        [Inject] ExpenseService ExpenseService { get; set; }
-        [Inject] ExpenseTypeService ExpenseTypeService { get; set; }
-        [Inject] PersonService PersonService { get; set; }
-        [Inject] NavigationManager NavigationManager { get; set; }
-        [Inject] IToastService ToastService { get; set; }
+        [Inject] private AuthenticationStateProvider AuthenticationStateProvider { get; set; }
+        [Inject] private UserManager<AppUser> UserManager { get; set; }
+        [Inject] private ConfigService ConfigService { get; set; }
+        [Inject] private ExpenseService ExpenseService { get; set; }
+        [Inject] private ExpenseTypeService ExpenseTypeService { get; set; }
+        [Inject] private PersonService PersonService { get; set; }
+        [Inject] private NavigationManager NavigationManager { get; set; }
+        [Inject] private IToastService ToastService { get; set; }
 
-        AppUser CurrentUser;
-        Config UserConfig;
-        List<ExpenseType> ExpenseTypes;
-        List<Person> People;
-        Expense Expense;
+        private AppUser CurrentUser;
+        private Config UserConfig;
+        private List<ExpenseType> ExpenseTypes;
+        private List<Person> People;
+        private Expense Expense;
 
         protected override async Task OnInitializedAsync()
         {
@@ -62,14 +62,7 @@ namespace Fimly.Pages.Expenses
 
             await ExpenseService.CreateExpenseAsync(Expense);
 
-            if (Expense.Person.IsSharedPerson)
-            {
-                ToastService.ShowSuccess($"The shared expense '{ Expense.Name }' has been added successfully.", "Expense Added");
-            }
-            else
-            {
-                ToastService.ShowSuccess($"The '{ Expense.Name }' expense for { Expense.Person.Name } has been added successfully.", "Expense Added");
-            }
+            ToastService.ShowSuccess($"The '{ Expense.Name }' expense has been added successfully.", "Expense Added");
 
             NavigationManager.NavigateTo("expenses");
         }
