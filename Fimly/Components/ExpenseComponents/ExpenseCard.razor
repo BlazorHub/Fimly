@@ -28,11 +28,11 @@
                             <div class="text-center">
                                 @if (Person.IsSharedPerson)
                                 {
-                                    <p>There are no shared expenses for this household.</p>
+                                    <p>There are no shared expenses for @SelectedMonth.</p>
                                 }
                                 else
                                 {
-                                    <p>@Person.Name dosen't have any individual expenses yet.</p>
+                                    <p>@Person.Name dosen't have any individual expenses for @SelectedMonth.</p>
                                 }
 
                                 <a href="/expenses/new" class="btn btn-success primary-font shadow-sm mt-3">
@@ -47,11 +47,11 @@
                             <div class="text-center dark-font mt-4 mb-4">
                                 @if (Person.IsSharedPerson)
                                 {
-                                    <p>There are <strong>@FinanceService.FormatToConfigCurrency(UserConfig, Person.Expenses.Sum(e => e.Cost))</strong> shared expenses in @CurrentMonth.</p>
+                                    <p>There are <strong>@FinanceService.FormatToConfigCurrency(UserConfig, Person.Expenses.Sum(e => e.Cost))</strong> shared expenses in @SelectedMonth.</p>
                                 }
                                 else
                                 {
-                                    <p>@Person.Name will spend <strong>@FinanceService.FormatToConfigCurrency(UserConfig, Person.Expenses.Sum(e => e.Cost))</strong> in @CurrentMonth.</p>
+                                    <p>@Person.Name will spend <strong>@FinanceService.FormatToConfigCurrency(UserConfig, Person.Expenses.Sum(e => e.Cost))</strong> in @SelectedMonth.</p>
                                 }
                             </div>
 

@@ -49,28 +49,30 @@ else
                         else
                         {
                             <div class="dropdown">
-                                <button class="btn btn-success primary-font dropdown-toggle" type="button" id="monthSelection" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    @FilterMonth
+                                <button class="btn btn-lg btn-success primary-font dropdown-toggle shadow-sm" type="button" id="monthSelection" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <strong>Month:</strong> @FilterMonth
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="monthSelection">
-                                    @for (int i = 0; i < Months.Length; i++)
+
+                                    @foreach (var month in Months)
                                     {
-                                        @if (Months[i] == FilterMonth)
+                                        @if (month == FilterMonth)
                                         {
-                                            <a class="dropdown-item active-dropdown primary-font" href="#">@Months[i]</a>
+                                            <button type="button" class="dropdown-item active-dropdown primary-font">@month</button>
                                         }
                                         else
                                         {
-                                            <a class="dropdown-item" href="#">@Months[i]</a>
+                                            <button type="button" class="dropdown-item" @onclick="(() => FilterByMonthAsync(month))">@month</button>
                                         }
                                     }
+
                                 </div>
                             </div>
 
                             foreach (Person person in People)
                             {
                                 <Animate Delay="TimeSpan.FromSeconds(AnimationDelay)">
-                                    <ExpenseCard Person="person" StateChanged="StateChanged" />
+                                    <ExpenseCard Person="person" SelectedMonth="@FilterMonth" StateChanged="StateChanged" />
                                 </Animate>
 
                                 AnimationDelay += 0.4;
