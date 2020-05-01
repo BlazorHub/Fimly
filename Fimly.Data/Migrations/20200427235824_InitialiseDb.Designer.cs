@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fimly.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200417165041_OverrideDefaultIdentityUser")]
-    partial class OverrideDefaultIdentityUser
+    [Migration("20200427235824_InitialiseDb")]
+    partial class InitialiseDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,7 +19,7 @@ namespace Fimly.Data.Migrations
                 .HasAnnotation("ProductVersion", "3.1.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("Fimly.Data.AppUser", b =>
+            modelBuilder.Entity("Fimly.Data.Models.AppUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
@@ -137,6 +137,56 @@ namespace Fimly.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Currencies");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "GBP",
+                            Symbol = "£"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "EUR",
+                            Symbol = "€"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "USD",
+                            Symbol = "$"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "JPY",
+                            Symbol = "¥"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "KRW",
+                            Symbol = "₩"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "SAR",
+                            Symbol = "﷼"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "RUB",
+                            Symbol = "₽"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "ZAR",
+                            Symbol = "R"
+                        });
                 });
 
             modelBuilder.Entity("Fimly.Data.Models.Expense", b =>
@@ -146,7 +196,7 @@ namespace Fimly.Data.Migrations
                         .HasColumnType("char(36)");
 
                     b.Property<decimal>("Cost")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<DateTime>("DateAdded")
                         .HasColumnType("datetime(6)");
@@ -157,10 +207,11 @@ namespace Fimly.Data.Migrations
                     b.Property<Guid>("ExpenseTypeId")
                         .HasColumnType("char(36)");
 
-                    b.Property<bool>("IsRecurring")
-                        .HasColumnType("tinyint(1)");
+                    b.Property<string>("Icon")
+                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
+                        .HasMaxLength(50);
 
-                    b.Property<bool>("IsShared")
+                    b.Property<bool>("IsRecurring")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Name")
@@ -190,10 +241,19 @@ namespace Fimly.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
+                    b.Property<string>("Icon")
+                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
+                        .HasMaxLength(50);
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("varchar(100) CHARACTER SET utf8mb4")
                         .HasMaxLength(100);
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("varchar(200) CHARACTER SET utf8mb4")
+                        .HasMaxLength(200);
 
                     b.HasKey("Id");
 
@@ -207,7 +267,10 @@ namespace Fimly.Data.Migrations
                         .HasColumnType("char(36)");
 
                     b.Property<decimal>("Income")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<bool>("IsSharedPerson")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -388,7 +451,7 @@ namespace Fimly.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Fimly.Data.AppUser", null)
+                    b.HasOne("Fimly.Data.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -397,7 +460,7 @@ namespace Fimly.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Fimly.Data.AppUser", null)
+                    b.HasOne("Fimly.Data.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -412,7 +475,7 @@ namespace Fimly.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Fimly.Data.AppUser", null)
+                    b.HasOne("Fimly.Data.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -421,7 +484,7 @@ namespace Fimly.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Fimly.Data.AppUser", null)
+                    b.HasOne("Fimly.Data.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

@@ -1,0 +1,119 @@
+﻿@page "/expenses/edit/{ExpenseId}"
+
+@if (Expense is null)
+{
+    <LoadingSpinner />
+}
+else
+{
+    <div class="jumbotron jumbotron-fluid shadow-sm pt-4">
+        <div class="container-fluid">
+
+            <div class="row h-100">
+                <div class="col">
+                    <h2 class="dark-font">Edit Expense</h2>
+                    <p class="dark-font">Update an expense.</p>
+                </div>
+            </div>
+
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <NavLink class="breadcrumb-item" href="/">Home</NavLink>
+                    <NavLink class="breadcrumb-item" href="/expenses">Expenses</NavLink>
+                    <NavLink class="breadcrumb-item" aria-current="page">Edit</NavLink>
+                </ol>
+            </nav>
+
+            <hr class="mb-4" />
+
+
+            <div class="mx-auto mt-5" style="max-width:40rem">
+                <div class="card shadow zoom">
+                    <div class="card-header text-center">
+                        <h5 class="dark-font mt-2">Expense Details</h5>
+                    </div>
+                    <div class="card-body">
+
+                        <EditForm Model="Expense" OnValidSubmit="HandleValidSubmitAsync">
+                            <DataAnnotationsValidator />
+                            <ValidationSummary />
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="personName" class="dark-font">Name</label>
+                                        <InputText id="personName" class="form-control" @bind-Value="@Expense.Name" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="personIncome" class="dark-font">Cost</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">@UserConfig.Currency.Symbol</span>
+                                            </div>
+                                            <InputNumber id="personIncome" class="form-control" @bind-Value="@Expense.Cost" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row h-100">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="dark-font">Expense Type</label>
+                                        <select class="form-control" @bind="Expense.ExpenseTypeId">
+                                            @foreach (var expenseType in ExpenseTypes)
+                                            {
+                                                <option value="@expenseType.Id">
+                                                    @expenseType.Name
+                                                </option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 my-auto checkbox-col">
+                                    <div class="form-group form-check">
+                                        <InputCheckbox @bind-Value="Expense.IsRecurring" class="form-check-input" />
+                                        <label for="recurring" class="dark-font">Is this a monthly expense?</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @if (People.Count > 2)
+                            {
+                                <div class="row h-100">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="person" class="dark-font">Select Person</label>
+                                            <select id="person" class="form-control" @bind="Expense.PersonId">
+                                                @foreach (var person in People)
+                                                {
+                                                    <option value="@person.Id">
+                                                        @person.Name
+                                                    </option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+
+                            <div class="text-center mt-5">
+                                <button type="submit" class="btn btn-success primary-font shadow-sm">
+                                    Save
+                                    <i class="fas fa-save ml-1"></i>
+                                </button>
+                            </div>
+                            <button type="button" class="delete-button float-right" @onclick="(async () => await DeleteExpenseAsync())">
+                                <i class="far fa-trash-alt delete-icon"></i>
+                            </button>
+                        </EditForm>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

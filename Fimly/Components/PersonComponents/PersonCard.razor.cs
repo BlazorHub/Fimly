@@ -5,15 +5,14 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Fimly.Components.PersonComponents
 {
     public partial class PersonCard : ComponentBase
     {
-        [CascadingParameter] List<Person> People { get; set; }
-        [CascadingParameter] Config UserConfig { get; set; }
+        [CascadingParameter] private List<Person> People { get; set; }
+        [CascadingParameter] private Config UserConfig { get; set; }
 
         [Parameter]
         public Person Person { get; set; }
@@ -21,20 +20,19 @@ namespace Fimly.Components.PersonComponents
         [Parameter]
         public Action StateChanged { get; set; }
 
-        [Inject] PersonService PersonService { get; set; }
-        [Inject] IToastService ToastService { get; set; }
-        [Inject] IJSRuntime Js { get; set; }
+        [Inject] private PersonService PersonService { get; set; }
+        [Inject] private IToastService ToastService { get; set; }
+        [Inject] private IJSRuntime Js { get; set; }
 
         private Person PersonToUpdate;
 
         private bool IsEditing = false;
         private string EditButtonCssClass => IsEditing ? "text-danger" : string.Empty;
-        private string CardColSizeCssClass => People.Count() > 1 ? "col-xl-6" : "col";
 
         private decimal WeeklyIncome => FinanceService.GetApproxWeeklyIncome(Person.Income);
         private decimal YearlyIncome => FinanceService.GetApproxYearlyIncome(Person.Income);
 
-        void OnEditClick()
+        private void OnEditClick()
         {
             if (IsEditing)
             {

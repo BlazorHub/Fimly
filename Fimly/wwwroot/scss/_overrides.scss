@@ -22,6 +22,7 @@
 .btn-outline-success:hover {
     background-color: $primary-colour !important;
     border-color: $primary-colour !important;
+    color: white !important;
 }
 
 .card {
@@ -55,11 +56,24 @@
 
 .jumbotron {
     background: rgb(109, 109, 109);
-    background: rgba(109, 109, 109, 0.13);
+    background: rgba(109, 109, 109, 0.05);
     border-radius: 2rem !important;
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
 }
 
 .container-fluid {
     padding-right: 1.6rem !important;
     padding-left: 1.6rem !important;
+}
+
+.breadcrumb {
+    background-color: none !important;
+    background: rgba(109,109,109,.07) !important;
+    border-radius: 2rem;
+}
+
+.breadcrumb-item.active {
+    text-decoration: underline;
+    color: rgba(0,0,0,0.85) !important;
 }

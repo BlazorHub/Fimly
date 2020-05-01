@@ -1,7 +1,6 @@
-﻿@import "_variables.scss";
-@import "_sidebar.scss";
-@import "_animations.scss";
+﻿@import "_animations.scss";
 @import "_overrides.scss";
+@import "components.scss";
 
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap');
 
@@ -166,15 +165,6 @@ app {
     height: 73vh !important;
 }
 
-.sort-column {
-    cursor: pointer;
-    color: #007bff;
-}
-
-.sort-column:hover {
-    text-decoration: underline;
-}
-
 .footer {
     position: absolute;
     bottom: 0;
@@ -206,4 +196,12 @@ hr {
 
 .person-card-icon {
     font-size: 6rem;
+}
+
+.checkbox-col {
+    padding-top: 2rem !important;
+}
+
+.active-dropdown {
+    background-color: #424242 !important;
 }

@@ -1,3 +1,4 @@
+using BlazorAnimate;
 using Blazored.Toast;
 using Fimly.Areas.Identity;
 using Fimly.Data;
@@ -11,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace Fimly
 {
@@ -41,11 +43,10 @@ namespace Fimly
             }
 
             services.AddDbContext<ApplicationDbContext>(options =>
-            {
                 options.UseMySql($"server={host}; userid={dbUser}; pwd={dbPassword}; port={port}; database={dbName}",
-                    providerOptions => providerOptions.EnableRetryOnFailure()
-                );
-            });
+                    providerOptions => providerOptions.EnableRetryOnFailure()),
+                ServiceLifetime.Transient
+            );
 
             services.AddDefaultIdentity<AppUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -55,12 +56,21 @@ namespace Fimly
 
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
 
+            services.AddTransient<AccountService>();
             services.AddTransient<ConfigService>();
-            services.AddScoped<CurrencyService>();
+            services.AddTransient<CurrencyService>();
             services.AddTransient<ExpenseService>();
+            services.AddTransient<ExpenseTypeService>();
             services.AddTransient<PersonService>();
 
             services.AddBlazoredToast();
+
+            services.Configure<AnimateOptions>(options =>
+            {
+                options.Animation = Animations.FadeIn;
+                options.Duration = TimeSpan.FromSeconds(0.5);
+                options.Once = true;
+            });
         }
 
         public void Configure(IApplicationBuilder app,

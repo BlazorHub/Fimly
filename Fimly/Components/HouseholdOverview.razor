@@ -5,48 +5,59 @@
 
                 @if (People is null)
                 {
-                    <LoadingSpinner />
+
                 }
                 else
                 {
                     <div class="col-md-3 text-center mb-3 my-auto">
-                        <span class="oi oi-home household-icon dark-font"></span>
+                        <i class="fas fa-home household-icon dark-font"></i>
                     </div>
                     <div class="col-md-9 dark-font mt-3">
                         <h3>Household Overview</h3>
                         <p>Monthly</p>
 
                         <div class="row mt-4">
-                            <div class="col-md-6">
-                                <p class="mb-0">
-                                    <strong>Income:</strong>
-                                </p>
-                                <p>@FinanceService.FormatToCurrency(UserConfig, MonthlyIncome)</p>
-                            </div>
-                            <div class="col-md-6">
-                                <p class="mb-0">
-                                    <strong>People:</strong>
-                                </p>
-                                <p>@People.Count</p>
-                            </div>
-                            <div class="col-md-6">
-                                <p class="mb-0">
-                                    <strong>Expenditure:</strong>
-                                </p>
-                                <p>@FinanceService.FormatToCurrency(UserConfig, MonthlyExpenditure)</p>
-                            </div>
-                            <div class="col-md-6">
-                                <p class="mb-0">
-                                    <strong>Expenses:</strong>
-                                </p>
-                                <p>@Expenses.Count</p>
-                            </div>
-                            <div class="col">
-                                <p class="mb-0">
-                                    <strong>Net:</strong>
-                                </p>
-                                <p class="@SpendingWarningCssClass">@FinanceService.FormatToCurrency(UserConfig, MonthlyNet)</p>
-                            </div>
+
+                            @if (People.Count == 1)
+                            {
+                                <div class="col">
+                                    <p class="dark-font">As you add people and expenses, this section will be populated with total household statistics.</p>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-md-6">
+                                    <p class="mb-0">
+                                        <strong>Income:</strong>
+                                    </p>
+                                    <p>@FinanceService.FormatToConfigCurrency(UserConfig, MonthlyIncome)</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="mb-0">
+                                        <strong>People:</strong>
+                                    </p>
+                                    <p>@(People.Count - 1)</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="mb-0">
+                                        <strong>Expenditure:</strong>
+                                    </p>
+                                    <p>@FinanceService.FormatToConfigCurrency(UserConfig, MonthlyExpenditure)</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="mb-0">
+                                        <strong>Expenses:</strong>
+                                    </p>
+                                    <p>@Expenses.Count</p>
+                                </div>
+                                <div class="col">
+                                    <p class="mb-0">
+                                        <strong>Net:</strong>
+                                    </p>
+                                    <p class="@SpendingWarningCssClass">@FinanceService.FormatToConfigCurrency(UserConfig, MonthlyNet)</p>
+                                </div>
+                            }
+
                         </div>
                     </div>
                 }

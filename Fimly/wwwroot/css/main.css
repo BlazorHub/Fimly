@@ -1,45 +1,4 @@
 ﻿@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap");
-.sidebar {
-  background-color: #424242; }
-
-.sidebar .top-row {
-  background-color: rgba(0, 0, 0, 0.4); }
-
-.sidebar .navbar-brand {
-  font-size: 1.1rem; }
-
-.sidebar .oi {
-  width: 2rem;
-  font-size: 1.1rem;
-  vertical-align: text-top;
-  top: -2px; }
-
-.sidebar .nav-item {
-  font-size: 0.9rem;
-  padding-bottom: 0.5rem; }
-
-.sidebar .nav-item:first-of-type {
-  padding-top: 1rem; }
-
-.sidebar .nav-item:last-of-type {
-  padding-bottom: 1rem; }
-
-.sidebar .nav-item a {
-  color: black;
-  border-radius: 4px;
-  height: 3rem;
-  display: flex;
-  align-items: center;
-  line-height: 3rem; }
-
-.sidebar .nav-item a.active {
-  background-color: rgba(255, 255, 255, 0.35);
-  color: black; }
-
-.sidebar .nav-item a:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: black; }
-
 .fade {
   -webkit-animation: fadein 1s forwards;
   /* Safari, Chrome and Opera > 12.1 */
@@ -102,7 +61,8 @@
 
 .btn-outline-success:hover {
   background-color: #424242 !important;
-  border-color: #424242 !important; }
+  border-color: #424242 !important;
+  color: white !important; }
 
 .card {
   border-radius: 2.25rem !important; }
@@ -129,12 +89,108 @@
 
 .jumbotron {
   background: #6d6d6d;
-  background: rgba(109, 109, 109, 0.13);
-  border-radius: 2rem !important; }
+  background: rgba(109, 109, 109, 0.05);
+  border-radius: 2rem !important;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px); }
 
 .container-fluid {
   padding-right: 1.6rem !important;
   padding-left: 1.6rem !important; }
+
+.breadcrumb {
+  background-color: none !important;
+  background: rgba(109, 109, 109, 0.07) !important;
+  border-radius: 2rem; }
+
+.breadcrumb-item.active {
+  text-decoration: underline;
+  color: rgba(0, 0, 0, 0.85) !important; }
+
+.expense-row:hover {
+  -webkit-box-shadow: inset 1px 0 0 #dadce0, inset -1px 0 0 #dadce0, 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+  box-shadow: inset 1px 0 0 #dadce0, inset -1px 0 0 #dadce0, 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+  z-index: 1; }
+
+.expense-table td {
+  width: 25%; }
+
+.expense-icon {
+  font-size: 1.5rem; }
+
+.delete-button {
+  padding: 0;
+  background-color: transparent;
+  border: 0;
+  -webkit-appearance: none; }
+
+.delete-icon {
+  font-size: 1.3rem;
+  color: red; }
+
+.delete-icon:hover {
+  opacity: .75; }
+
+.edit-button {
+  padding: 0;
+  background-color: transparent;
+  border: 0;
+  -webkit-appearance: none; }
+
+.edit-button:hover {
+  opacity: .75; }
+
+.edit-icon {
+  font-size: 1.3rem; }
+
+.sidebar {
+  background-color: #424242; }
+
+.sidebar .top-row {
+  background-color: rgba(0, 0, 0, 0.4); }
+
+.sidebar .navbar-brand {
+  font-size: 1.1rem; }
+
+.sidebar .oi {
+  width: 2rem;
+  font-size: 1.1rem;
+  vertical-align: text-top;
+  top: -2px; }
+
+.sidebar .nav-item {
+  font-size: 0.9rem;
+  padding-bottom: 0.5rem; }
+
+.sidebar .nav-item:first-of-type {
+  padding-top: 1rem; }
+
+.sidebar .nav-item:last-of-type {
+  padding-bottom: 1rem; }
+
+.middle-last-nav-item {
+  flex-grow: 1; }
+
+.sidebar .nav-item a {
+  color: black;
+  border-radius: 2rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  line-height: 3rem; }
+
+.sidebar .nav-item a.active {
+  background-color: rgba(255, 255, 255, 0.35);
+  color: rgba(0, 0, 0, 0.85) !important;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important; }
+
+.sidebar .nav-item a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9) !important;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important; }
+
+.nav-icon {
+  font-size: 1.3rem; }
 
 * {
   -webkit-font-smoothing: antialiased;
@@ -260,13 +316,6 @@ app {
 .height-70 {
   height: 73vh !important; }
 
-.sort-column {
-  cursor: pointer;
-  color: #007bff; }
-
-.sort-column:hover {
-  text-decoration: underline; }
-
 .footer {
   position: absolute;
   bottom: 0;
@@ -294,3 +343,9 @@ hr {
 
 .person-card-icon {
   font-size: 6rem; }
+
+.checkbox-col {
+  padding-top: 2rem !important; }
+
+.active-dropdown {
+  background-color: #424242 !important; }

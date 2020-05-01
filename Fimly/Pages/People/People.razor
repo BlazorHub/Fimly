@@ -6,51 +6,67 @@
 }
 else
 {
-    <div class="container-fluid fade fadein">
+    <div class="jumbotron jumbotron-fluid shadow-sm pt-4">
+        <div class="container-fluid">
 
-        <h2 class="dark-font">People</h2>
-        <p class="dark-font">Manage people in your household.</p>
+            <div class="row h-100">
+                <div class="col">
+                    <h2 class="dark-font">People</h2>
+                    <p class="dark-font">Manage the people in your household.</p>
+                </div>
 
-        <hr class="mb-4" />
+                <div class="col my-auto">
+                    <div class="float-right">
+                        <a href="/people/new" class="btn btn-success primary-font shadow-sm">
+                            New Person
+                            <i class="fas fa-plus ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
 
-        <CascadingValue Value="CurrentUser">
-            <CascadingValue Value="UserConfig">
-                <CascadingValue Value="PersonList">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <NavLink class="breadcrumb-item" href="/">Home</NavLink>
+                    <NavLink class="breadcrumb-item" aria-current="page">People</NavLink>
+                </ol>
+            </nav>
 
-                    @if (PersonList.Count == 0)
-                    {
-                        <div class="text-center">
-                            <p class="lead dark-font mb-4">Get started by adding a person. Add more people to see total household income.</p>
-                        </div>
+            <hr class="mb-4" />
 
-                        <div class="text-center">
-                            <a href="/people/new" class="btn btn-success primary-font shadow-sm">
-                                New Person
-                                <span class="ml-1 oi oi-plus" aria-hidden="true"></span>
-                            </a>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="text-center">
-                            <a href="/people/new" class="btn btn-success primary-font shadow-sm">
-                                New Person
-                                <span class="ml-1 oi oi-plus" aria-hidden="true"></span>
-                            </a>
-                        </div>
+            <CascadingValue Value="CurrentUser">
+                <CascadingValue Value="UserConfig">
+                    <CascadingValue Value="PersonList">
 
-                        <div class="row">
+                        @if (PersonList.Count == 0)
+                        {
+                            <div class="text-center mt-5">
+                                <p class="lead dark-font mb-4">Get started by <a href="people/new">adding a person</a>. Add more people to see total household income.</p>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="row">
 
-                            @foreach (Person person in PersonList)
-                            {
-                                <PersonCard Person="person" StateChanged="StateChanged" />
-                            }
+                                @foreach (Person person in PersonList)
+                                {
+                                    <div class="@CardColSizeCssClass mx-auto mt-4" style="max-width:60rem">
 
-                        </div>
-                    }
+                                        <Animate Delay="TimeSpan.FromSeconds(AnimationDelay)">
+                                            <PersonCard Person="person" StateChanged="StateChanged" />
+                                        </Animate>
 
+                                    </div>
+
+                                    AnimationDelay += 0.4;
+                                }
+
+                            </div>
+                        }
+
+                    </CascadingValue>
                 </CascadingValue>
             </CascadingValue>
-        </CascadingValue>
+        </div>
     </div>
 }

@@ -32,9 +32,13 @@
     padding-bottom: 1rem;
 }
 
+.middle-last-nav-item {
+    flex-grow: 1; // assuming none of the other have flex-grow set
+}
+
 .sidebar .nav-item a {
     color: black;
-    border-radius: 4px;
+    border-radius: 2rem;
     height: 3rem;
     display: flex;
     align-items: center;
@@ -43,10 +47,16 @@
 
 .sidebar .nav-item a.active {
     background-color: rgba(255,255,255,0.35);
-    color: black;
+    color: rgba(0,0,0,0.85) !important;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
 }
 
 .sidebar .nav-item a:hover {
     background-color: rgba(255,255,255,0.1);
-    color: black;
+    color: rgba(255,255,255,0.90) !important;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
+}
+
+.nav-icon {
+    font-size: 1.3rem;
 }

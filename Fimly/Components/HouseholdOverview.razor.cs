@@ -10,11 +10,11 @@ namespace Fimly.Components
 {
     public partial class HouseholdOverview : ComponentBase
     {
-        [Inject] AuthenticationStateProvider AuthenticationStateProvider { get; set; }
-        [Inject] UserManager<AppUser> UserManager { get; set; }
-        [Inject] ConfigService ConfigService { get; set; }
-        [Inject] ExpenseService ExpenseService { get; set; }
-        [Inject] PersonService PersonService { get; set; }
+        [Inject] private AuthenticationStateProvider AuthenticationStateProvider { get; set; }
+        [Inject] private UserManager<AppUser> UserManager { get; set; }
+        [Inject] private ConfigService ConfigService { get; set; }
+        [Inject] private ExpenseService ExpenseService { get; set; }
+        [Inject] private PersonService PersonService { get; set; }
 
         private AppUser CurrentUser;
         private Config UserConfig;
@@ -36,7 +36,7 @@ namespace Fimly.Components
             CurrentUser = await UserManager.GetUserAsync(user);
             UserConfig = await ConfigService.GetUserConfigAsync(CurrentUser.Id);
             Expenses = await ExpenseService.GetAllExpensesAsync(CurrentUser.Id);
-            People = await PersonService.GetPeopleAsync(CurrentUser.Id);
+            People = await PersonService.GetPeopleAndSharedAsync(CurrentUser.Id);
 
             MonthlyIncome = FinanceService.GetTotalMonthlyIncome(People);
             MonthlyExpenditure = FinanceService.GetTotalMonthlyExpenditure(Expenses);

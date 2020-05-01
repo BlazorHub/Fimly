@@ -1,0 +1,117 @@
+﻿<div class="mx-auto mt-4">
+    <div class="card shadow zoom">
+
+        <div class="card-header">
+            <h5 class="dark-font mt-2 ml-2">
+                @if (Person.IsSharedPerson)
+                {
+                    <span>Shared Expenses</span>
+                }
+                else
+                {
+                    <span>@Person.Name's Expenses</span>
+                }
+            </h5>
+        </div>
+
+        <div class="card-body">
+            <div class="mb-4 dark-font">
+                <div class="card-text mt-4">
+                    @if (Expenses is null)
+                    {
+                        <p><em>Loading...</em></p>
+                    }
+                    else
+                    {
+                        @if (Expenses.Count == 0)
+                        {
+                            <div class="text-center">
+                                @if (Person.IsSharedPerson)
+                                {
+                                    <p>There are no shared expenses for @SelectedMonth.</p>
+                                }
+                                else
+                                {
+                                    <p>@Person.Name dosen't have any individual expenses for @SelectedMonth.</p>
+                                }
+
+                                <a href="/expenses/new" class="btn btn-success primary-font shadow-sm mt-3">
+                                    New Expense
+                                    <i class="fas fa-plus ml-1"></i>
+                                </a>
+
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="text-center dark-font mt-4 mb-4">
+                                @if (Person.IsSharedPerson)
+                                {
+                                    <p>There are <strong>@FinanceService.FormatToConfigCurrency(UserConfig, Person.Expenses.Sum(e => e.Cost))</strong> shared expenses in @SelectedMonth.</p>
+                                }
+                                else
+                                {
+                                    <p>@Person.Name will spend <strong>@FinanceService.FormatToConfigCurrency(UserConfig, Person.Expenses.Sum(e => e.Cost))</strong> in @SelectedMonth.</p>
+                                }
+                            </div>
+
+                            <div class="mb-4">
+                                <TabControl>
+                                    <TabPage Text="Expenses">
+                                        <table class="table expense-table">
+                                            <tbody>
+                                                @foreach (Expense expense in Expenses)
+                                                {
+                                                    <tr class="expense-row" @onmouseover="(() => ShowButtons(expense.Id))" @onmouseout="(() => HideButtons())">
+                                                        <td>
+                                                            <p class="text-center dark-font mb-0">
+                                                                <i class="@expense.Icon expense-icon"></i>
+                                                            </p>
+                                                        </td>
+                                                        <td>@expense.Name</td>
+                                                        <td>@FinanceService.FormatToConfigCurrency(UserConfig, expense.Cost)</td>
+                                                        <td class="@HidePercentage(expense.Id)">@FinanceService.GetPercentageOfMonthlyExpenditure(expense, Expenses)</td>
+
+                                                        <td class="@GetButtonCss(expense.Id)">
+                                                            <div class="float-right">
+                                                                <button type="submit" class="edit-button mr-2" @onclick="(() => EditExpense(expense.Id))">
+                                                                    <i class="far fa-edit edit-icon dark-font"></i>
+                                                                </button>
+                                                                <button type="submit" class="delete-button" @onclick="(async () => await DeleteExpenseAsync(expense))">
+                                                                    <i class="far fa-trash-alt delete-icon"></i>
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </TabPage>
+                                    <TabPage Text="Categories">
+                                        <table class="table">
+                                            <tbody>
+                                                @foreach (Expense expense in ExpensesByCategory)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            <p class="text-center dark-font mb-0">
+                                                                <i class="@expense.Icon expense-icon"></i>
+                                                            </p>
+                                                        </td>
+                                                        <td>@expense.Name</td>
+                                                        <td>@FinanceService.FormatToConfigCurrency(UserConfig, expense.Cost)</td>
+                                                        <td>@FinanceService.GetPercentageOfMonthlyExpenditure(expense, Expenses)</td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </TabPage>
+                                </TabControl>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

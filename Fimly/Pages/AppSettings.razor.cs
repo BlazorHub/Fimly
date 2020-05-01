@@ -13,11 +13,11 @@ namespace Fimly.Pages
     [Authorize]
     public partial class AppSettings : ComponentBase
     {
-        [Inject] AuthenticationStateProvider AuthenticationStateProvider { get; set; }
-        [Inject] UserManager<AppUser> UserManager { get; set; }
-        [Inject] ConfigService ConfigService { get; set; }
-        [Inject] CurrencyService CurrencyService { get; set; }
-        [Inject] IToastService ToastService { get; set; }
+        [Inject] private AuthenticationStateProvider AuthenticationStateProvider { get; set; }
+        [Inject] private UserManager<AppUser> UserManager { get; set; }
+        [Inject] private ConfigService ConfigService { get; set; }
+        [Inject] private CurrencyService CurrencyService { get; set; }
+        [Inject] private IToastService ToastService { get; set; }
 
         private AppUser CurrentUser;
         private Config UserConfig;

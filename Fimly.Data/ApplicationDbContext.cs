@@ -25,20 +25,6 @@ namespace Fimly.Data
                 new Currency { Id = 8, Symbol = "R", Name = "ZAR" }
             );
 
-            modelBuilder.Entity<ExpenseType>().HasData(
-                new ExpenseType { Id = Guid.NewGuid(), Name = "Bills & Services" },
-                new ExpenseType { Id = Guid.NewGuid(), Name = "Entertainment" },
-                new ExpenseType { Id = Guid.NewGuid(), Name = "Transport" },
-                new ExpenseType { Id = Guid.NewGuid(), Name = "Groceries" },
-                new ExpenseType { Id = Guid.NewGuid(), Name = "Home" },
-                new ExpenseType { Id = Guid.NewGuid(), Name = "Eating Out" },
-                new ExpenseType { Id = Guid.NewGuid(), Name = "Family" },
-                new ExpenseType { Id = Guid.NewGuid(), Name = "General" },
-                new ExpenseType { Id = Guid.NewGuid(), Name = "Lifestyle" },
-                new ExpenseType { Id = Guid.NewGuid(), Name = "Shopping" },
-                new ExpenseType { Id = Guid.NewGuid(), Name = "Holidays" }
-            );
-
             base.OnModelCreating(modelBuilder);
         }
 

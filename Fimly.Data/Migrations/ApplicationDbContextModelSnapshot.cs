@@ -205,10 +205,11 @@ namespace Fimly.Data.Migrations
                     b.Property<Guid>("ExpenseTypeId")
                         .HasColumnType("char(36)");
 
-                    b.Property<bool>("IsRecurring")
-                        .HasColumnType("tinyint(1)");
+                    b.Property<string>("Icon")
+                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
+                        .HasMaxLength(50);
 
-                    b.Property<bool>("IsShared")
+                    b.Property<bool>("IsRecurring")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Name")
@@ -238,71 +239,23 @@ namespace Fimly.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
+                    b.Property<string>("Icon")
+                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
+                        .HasMaxLength(50);
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("varchar(100) CHARACTER SET utf8mb4")
                         .HasMaxLength(100);
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("varchar(200) CHARACTER SET utf8mb4")
+                        .HasMaxLength(200);
+
                     b.HasKey("Id");
 
                     b.ToTable("ExpenseTypes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("6fd1aa9a-2fc4-445b-b41a-747e4a0d7d4e"),
-                            Name = "Bills & Services"
-                        },
-                        new
-                        {
-                            Id = new Guid("c8ed231c-f712-46af-a5cd-2df3a6c25439"),
-                            Name = "Entertainment"
-                        },
-                        new
-                        {
-                            Id = new Guid("ed70f89a-0c4f-43af-ae56-841bf68bb90d"),
-                            Name = "Transport"
-                        },
-                        new
-                        {
-                            Id = new Guid("e2ea119f-e312-4f93-88ad-9d9c404c8d25"),
-                            Name = "Groceries"
-                        },
-                        new
-                        {
-                            Id = new Guid("ab993559-3226-46a7-9e5e-9e3617b09c20"),
-                            Name = "Home"
-                        },
-                        new
-                        {
-                            Id = new Guid("911d21d9-00a6-4296-ba5d-9bf2b93d4881"),
-                            Name = "Eating Out"
-                        },
-                        new
-                        {
-                            Id = new Guid("d4a9ce3f-6492-41fd-a166-58e3f50a5f56"),
-                            Name = "Family"
-                        },
-                        new
-                        {
-                            Id = new Guid("acc1f8f2-8494-4b58-9e5f-6ba31b4a333c"),
-                            Name = "General"
-                        },
-                        new
-                        {
-                            Id = new Guid("9e5c02bd-967c-43e4-98f8-7b26c1703951"),
-                            Name = "Lifestyle"
-                        },
-                        new
-                        {
-                            Id = new Guid("13da399c-6a9b-4ca6-87b4-3f1c2378de91"),
-                            Name = "Shopping"
-                        },
-                        new
-                        {
-                            Id = new Guid("6a1c2d39-55f0-4bf8-bd58-4eefdd5e279c"),
-                            Name = "Holidays"
-                        });
                 });
 
             modelBuilder.Entity("Fimly.Data.Models.Person", b =>
@@ -313,6 +266,9 @@ namespace Fimly.Data.Migrations
 
                     b.Property<decimal>("Income")
                         .HasColumnType("decimal(18, 2)");
+
+                    b.Property<bool>("IsSharedPerson")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Name")
                         .IsRequired()

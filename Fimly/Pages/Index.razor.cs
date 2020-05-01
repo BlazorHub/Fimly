@@ -9,9 +9,9 @@ namespace Fimly.Pages
 {
     public partial class Index : ComponentBase
     {
-        [Inject] AuthenticationStateProvider AuthenticationStateProvider { get; set; }
-        [Inject] UserManager<AppUser> UserManager { get; set; }
-        [Inject] PersonService PersonService { get; set; }
+        [Inject] private AuthenticationStateProvider AuthenticationStateProvider { get; set; }
+        [Inject] private UserManager<AppUser> UserManager { get; set; }
+        [Inject] private PersonService PersonService { get; set; }
 
         private AppUser CurrentUser;
         private int peopleCount;

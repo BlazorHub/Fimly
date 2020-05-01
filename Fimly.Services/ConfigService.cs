@@ -1,7 +1,9 @@
 ﻿using Fimly.Data;
 using Fimly.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,22 +11,25 @@ namespace Fimly.Services
 {
     public class ConfigService
     {
-        private readonly ApplicationDbContext _db;
         private readonly ILogger<ConfigService> _logger;
+        private readonly IServiceProvider _serviceProvider;
 
-        public ConfigService(ApplicationDbContext db,
-            ILogger<ConfigService> logger)
+        public ConfigService(ILogger<ConfigService> logger,
+            IServiceProvider serviceProvider)
         {
-            _db = db;
             _logger = logger;
+            _serviceProvider = serviceProvider;
         }
 
         public async Task<Config> GetUserConfigAsync(string userId)
         {
-            return await _db.Configs
-                .Include(c => c.Currency)
-                .Where(u => u.UserId == userId)
-                .FirstOrDefaultAsync();
+            using (var context = _serviceProvider.GetRequiredService<ApplicationDbContext>())
+            {
+                return await context.Configs
+                    .Include(c => c.Currency)
+                    .Where(u => u.UserId == userId)
+                    .FirstOrDefaultAsync();
+            }
         }
 
         public async Task CreateDefaultConfigAsync(string userId)
@@ -35,25 +40,31 @@ namespace Fimly.Services
                 CurrencyId = 1
             };
 
-            _db.Configs.Add(userConfig);
-            await _db.SaveChangesAsync();
+            using (var context = _serviceProvider.GetRequiredService<ApplicationDbContext>())
+            {
+                context.Configs.Add(userConfig);
+                await context.SaveChangesAsync();
 
-            _logger.LogInformation("Created default config for a user account.");
+                _logger.LogInformation("Created default config for a user account.");
+            }
         }
 
         public async Task UpdateConfigAsync(Config config)
         {
-            _db.Entry(config).State = EntityState.Modified;
-
-            try
+            using (var context = _serviceProvider.GetRequiredService<ApplicationDbContext>())
             {
-                await _db.SaveChangesAsync();
+                context.Entry(config).State = EntityState.Modified;
 
-                _logger.LogInformation("Config settings updated.");
-            }
-            catch (DbUpdateConcurrencyException e)
-            {
-                _logger.LogError($"An error has occurred whilst trying to update app config: {e}");
+                try
+                {
+                    await context.SaveChangesAsync();
+
+                    _logger.LogInformation("Config settings updated.");
+                }
+                catch (DbUpdateConcurrencyException e)
+                {
+                    _logger.LogError($"An error has occurred whilst trying to update app config: {e}");
+                }
             }
         }
     }
